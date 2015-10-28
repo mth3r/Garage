@@ -50,8 +50,20 @@ $$('.panel-left').on('opened', function () {
     		$$('#val1').html(results.result);
 	    });
 	$$('.swipeout-hide').on('click', function() {
-		
-		
+		 var loc=$$('.swipeout-hide').attr('location')
+		  myApp.confirm('Are you sure?', 'Hide', 
+      function () {
+        if(loc=='Temperature1'){
+			//$$('.Temperature1').hide();
+		}
+		if(loc=='Temperature2'){
+			//$$('.Temperature2').hide();
+		}
+      },
+      function () {
+        myApp.alert('You clicked Cancel button');
+      }
+	);	 
 	});
 });
 
