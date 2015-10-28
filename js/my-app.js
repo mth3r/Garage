@@ -36,6 +36,7 @@ if(storedData) {
    getPhotons();
    
 }
+var elementNum=0;
 
 
 $$('.close').on('click', function () {
@@ -49,21 +50,8 @@ $$('.panel-left').on('opened', function () {
             results = JSON.parse(results);
     		$$('#val1').html(results.result);
 	    });
-	$$('.swipeout-hide').on('click', function() {
-		 var loc=$$('.swipeout-hide').attr('location')
-		  myApp.confirm('Are you sure?', 'Hide', 
-      function () {
-        if(loc=='Temperature1'){
-			//$$('.Temperature1').hide();
-		}
-		if(loc=='Temperature2'){
-			//$$('.Temperature2').hide();
-		}
-      },
-      function () {
-        myApp.alert('You clicked Cancel button');
-      }
-	);	 
+	$$('.element-add-location').on('click', function() {
+		appendLocation('test');
 	});
 });
 
@@ -184,10 +172,20 @@ var mainView = myApp.addView('.view-main', {
 
 // Callbacks to run specific code for specific pages, for example for About page:
 myApp.onPageInit('about', function (page) {
-    // run createContentPage func after link was clicked
+    var formname="toby";
+	// run createContentPage func after link was clicked
     $$('.create-page').on('click', function () {
         createContentPage();
     });
+	$$('.dynamicForm').on('click', function() {
+		//myApp.alert('got here');
+		appendForm(formname);
+			$$('.save-storage-data-dynamic').on('click', function(){
+			myApp.alert('submit');
+			//var storedData = myApp.formStoreData(formname);
+		});
+	});
+	
 });
 
 myApp.onPageInit('form', function (page) {
@@ -253,4 +251,22 @@ var q = 'https://api.particle.io/v1/devices/?access_token=' + storedData.token;
             results = JSON.parse(results);
     		
 	    });
+}
+function appendLocation(a){
+ 	var newDiv = $$('#SomeClassTemplate').html();
+	$$('.tempReadout').append(newDiv); // depends on where in DOM you want to insert it
+	$$('.dynamic').html(a);
+	elementNum=elementNum+1 
+	
+	
+}
+function appendForm(a){
+ 	var newDiv = $$('#dynForm').html();
+	$$('.formSpot').append(newDiv); // depends on where in DOM you want to insert it
+	$$('.my-form3').attr('id','toby');
+	
+	elementNum=elementNum+1 
+}
+function SubmitDynamicForm(a){
+ 	
 }
