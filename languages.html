@@ -1,0 +1,21 @@
+<div class="page" data-page="languages">
+  <div class="page-content">
+    <div class="content-block-title">Details</div>
+    <div class="list-block">
+      <ul>
+        <!-- Iterate through frontend languages -->
+        {{#each this.details}}
+        <li>
+          <!-- As a context name for this link we pass context path from template7Data root -->
+          <a href="language-details.html" class="item-link item-content" data-context-name="languages.details.{{@index}}">
+              <div class="item-inner">
+                <div class="item-title">{{this.name}}</div>
+              </div>
+          </a>
+        </li>
+        {{/each}}
+      </ul>
+	  
+    </div>
+  </div>
+</div> 
