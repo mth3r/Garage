@@ -25,6 +25,7 @@ template7Data: {
  
 // Export selectors engine
 var $$ = Dom7;
+var photons;
 var storedData = myApp.formGetData('my-form2');
 if(storedData) {
   
@@ -36,8 +37,6 @@ if(storedData) {
    getPhotons();
    
 }
-var elementNum=0;
-
 
 $$('.close').on('click', function () {
   myApp.sortableClose('.sortable');
@@ -172,17 +171,44 @@ var mainView = myApp.addView('.view-main', {
 
 // Callbacks to run specific code for specific pages, for example for About page:
 myApp.onPageInit('about', function (page) {
-    var formname="toby";
+    
+	var formname=String(photons[1].name);
+	
 	// run createContentPage func after link was clicked
     $$('.create-page').on('click', function () {
         createContentPage();
     });
 	$$('.dynamicForm').on('click', function() {
 		//myApp.alert('got here');
+	
 		appendForm(formname);
+		
+		//console.log(str_1);
 			$$('.save-storage-data-dynamic').on('click', function(){
-			myApp.alert('submit');
-			//var storedData = myApp.formStoreData(formname);
+			
+			var text = '{' + 
+				'"DeviceID_'+ 	formname +'":"'+ $$('#ParticleID').val()	+'",'+
+				'"token_'+ 		formname +'":"'+ $$('#ParticleToken').val()	+'",'+
+				'"Rpin_'+ 		formname +'":"'+ $$('#Rpin').val()			+ '",'+
+				'"Lpin_'+ 		formname +'":"'+ $$('#Lpin').val()			+ '",'+
+				'"S1pin_'+ 		formname +'":"'+ $$('#S1pin').val()			+ '",'+
+				'"S1pinName_'+ 	formname +'":"'+ $$('#S1pinName').val()		+ '",'+
+				'"S2pin_'+ 		formname +'":"'+ $$('#S2pin').val()			+ '",'+
+				'"S2pinName_'+ 	formname +'":"'+ $$('#S2pinName').val()		+ '",'+
+				'"S3pin_'+ 		formname +'":"'+ $$('#S3pin').val()			+ '",'+
+				'"S3pinName_'+ 	formname +'":"'+ $$('#S3pinName').val()		+ '",'+
+				'"S4pin_'+ 		formname +'":"'+ $$('#S4pin').val()			+ '",'+
+				'"S4pinName_'+ 	formname +'":"'+ $$('#S4pinName').val()		+ '",'+
+				'"S5pin_'+ 		formname +'":"'+ $$('#S5pin').val()			+ '",'+
+				'"S5pinName_'+ 	formname +'":"'+ $$('#S5pinName').val()		+'"}';
+				
+				
+			console.log(text);	
+			var obj = JSON.parse(text);
+			var storedData = myApp.formStoreData(formname,obj);
+			
+			//myApp.alert($$('#ParticleID').val()) //works
+			
 		});
 	});
 	
@@ -249,24 +275,65 @@ function getPhotons(){
 var q = 'https://api.particle.io/v1/devices/?access_token=' + storedData.token;
 	    $$.get(q, function (results) {
             results = JSON.parse(results);
-    		
+    	photons= results;	
 	    });
+		
 }
 function appendLocation(a){
  	var newDiv = $$('#SomeClassTemplate').html();
-	$$('.tempReadout').append(newDiv); // depends on where in DOM you want to insert it
-	$$('.dynamic').html(a);
-	elementNum=elementNum+1 
-	
-	
+	$$('.tempReadout').append(newDiv); 
+	$$('.dynamic').html(a);	
 }
 function appendForm(a){
- 	var newDiv = $$('#dynForm').html();
-	$$('.formSpot').append(newDiv); // depends on where in DOM you want to insert it
-	$$('.my-form3').attr('id','toby');
+ 	console.log(a);
 	
-	elementNum=elementNum+1 
+	$$('#my-form3').attr('id',a);
+	$$('#ParticleID').attr('name', 'DeviceID_'+ a);
+	$$('#ParticleToken').attr('name', 'token_' + a);
+	$$('#Lpin').attr('name', 'Lpin_' + a);
+	$$('#Rpin').attr('name', 'Rpin_' + a);
+	$$('#S1pin').attr('name', 'S1pin_' + a);
+	$$('#S1pinName').attr('name', 'S1pinName_' + a);
+	$$('#S2pin').attr('name', 'S2pin_' + a);
+	$$('#S2pinName').attr('name', 'S2pinName_' + a);
+	$$('#S3pin').attr('name', 'S3pin_' + a);
+	$$('#S3pinName').attr('name', 'S3pinName_' + a);
+	$$('#S4pin').attr('name', 'S4pin_' + a);
+	$$('#S4pinName').attr('name', 'S4pinName_' + a);	
+	$$('#S5pin').attr('name', 'S5pin_' + a);
+	$$('#S5pinName').attr('name', 'S5pinName_' + a);
+	
+	var newDiv = $$('#dynForm').html();
+	$$('.formSpot').append(newDiv); 
+	try {
+	var DynData = myApp.formGetData(a);
+	}
+	catch(err){
+	var DynData='false';
+	}
+	
+	if (DynData){
+		$$('input#ParticleID').val(eval('DynData.DeviceID_'+a));
+		$$('input#ParticleToken').val(eval('DynData.token_'+a));
+		$$('input#Lpin').val(eval('DynData.Lpin_'+a));
+		$$('input#Rpin').val(eval('DynData.Rpin_'+a));
+		$$('#S1pin').val(eval('DynData.S1pin_' + a));
+		$$('#S1pinName').val(eval('DynData.S1pinName_' + a));
+		$$('#S2pin').val(eval('DynData.S2pin_' + a));
+		$$('#S2pinName').val(eval('DynData.S2pinName_' + a));
+		$$('#S3pin').val(eval('DynData.S3pin_' + a));
+		$$('#S3pinName').val(eval('DynData.S3pinName_' + a));
+		$$('#S4pin').val(eval('DynData.S4pin_' + a));
+		$$('#S4pinName').val(eval('DynData.S4pinName_' + a));	
+		$$('#S5pin').val(eval('DynData.S5pin_' + a));
+		$$('#S5pinName').val(eval('DynData.S5pinName_' + a));
+	}
+		
 }
 function SubmitDynamicForm(a){
  	
+}
+function buildDynamicForm(formname){
+	
+
 }
