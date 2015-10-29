@@ -177,7 +177,7 @@ myApp.onPageInit('about', function (page) {
 	console.log($$('Phonton-List').html());
 	
 	
-	var formname=String(photons[1].name);
+	var formname=String(photons[1].id);
 	
 	// run createContentPage func after link was clicked
     $$('.create-page').on('click', function () {
