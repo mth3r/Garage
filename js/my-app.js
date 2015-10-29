@@ -171,7 +171,12 @@ var mainView = myApp.addView('.view-main', {
 
 // Callbacks to run specific code for specific pages, for example for About page:
 myApp.onPageInit('about', function (page) {
-    
+    var newDiv = $$('#Photon-Detail').html();
+	
+	$$('.Phonton-List').append(newDiv); 
+	console.log($$('Phonton-List').html());
+	
+	
 	var formname=String(photons[1].name);
 	
 	// run createContentPage func after link was clicked
