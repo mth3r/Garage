@@ -17,12 +17,17 @@ $$('.close').on('click', function () {
   myApp.sortableClose('.sortable');
 });
 $$('.panel-left').on('opened', function () {
-    var storedData = myApp.formGetData('my-form2');
-	var q = 'https://api.particle.io/v1/devices/' + storedData.DeviceID + '/tempf/?access_token=' + storedData.token;
+    var q = 'https://api.particle.io/v1/devices/' + photons[0].id + '/tempf/?access_token=' + storedData.token;
 	    $$.get(q, function (results) {
             results = JSON.parse(results);
     		$$('#val1').html(results.result);
 	    });
+	var q = 'https://api.particle.io/v1/devices/' + photons[1].id + '/tempf/?access_token=' + storedData.token;
+	    $$.get(q, function (results) {
+            results = JSON.parse(results);
+    		$$('#val2').html(results.result);
+	    });
+	
 	$$('.element-add-location').on('click', function() {
 		appendLocation('test');
 	});
