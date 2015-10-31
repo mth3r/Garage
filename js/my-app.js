@@ -170,8 +170,9 @@ myApp.onPageInit('about', function (page) {
 	
 	$$('.dynamicForm').on('click', function() {
 		var formname= $$(this).data('val');
+		var id= $$(this).data('id');
 		$$('.formSpot').html('');
-		appendForm(formname);
+		appendForm(formname,id);
 		
 			$$('.save-storage-data-dynamic').on('click', function(){
 			var text = '{' + 
@@ -257,6 +258,7 @@ function drawPhotons(){
 		$$('#dynamicPhotonLink').text(photons[i].name);
 		$$('#dynamicPhotonLink').addClass('dynamicForm');
 		$$('#dynamicPhotonLink').attr('data-val',photons[i].name)
+		$$('#dynamicPhotonLink').attr('data-id',photons[i].id)
 		$$('#dynamicPhotonLink').attr('id',photons[i].name);	
 		
 	}	
@@ -266,12 +268,17 @@ function appendLocation(a){
 	$$('.tempReadout').append(newDiv); 
 	$$('.dynamic').html(a);	
 }
-function appendForm(a){
+function appendForm(a,b){
  	console.log(a);
+ 	console.log(b);
 	
 	$$('#my-form3').attr('id',a);
+	
 	$$('#ParticleID').attr('name', 'DeviceID_'+ a);
+	
+	console.log($$('input#ParticleID').html());
 	$$('#ParticleToken').attr('name', 'token_' + a);
+	$$('input#ParticleToken').val(storedData.token);
 	$$('#Lpin').attr('name', 'Lpin_' + a);
 	$$('#Rpin').attr('name', 'Rpin_' + a);
 	$$('#S1pin').attr('name', 'S1pin_' + a);
@@ -293,6 +300,8 @@ function appendForm(a){
 	catch(err){
 	var DynData='false';
 	}
+	$$('input#ParticleID').val(b);
+	$$('input#ParticleToken').val(storedData.token);
 	
 	if (DynData){
 		$$('input#ParticleID').val(eval('DynData.DeviceID_'+a));
@@ -319,6 +328,7 @@ function drawSwitches(dest){
 var newDiv = $$('#SwitchDetail').html();
 	for (i=0; i< photons.length; i++){
 	var DynData = myApp.formGetData(photons[i].name);	
+		if (DynData){
 		for(j=0; j<5; j++){
 			dest.append(newDiv);
 			$$('#DynamicSwitchID').text(eval('DynData.S' + (j+1) + 'pinName_' + photons[i].name));
@@ -326,6 +336,7 @@ var newDiv = $$('#SwitchDetail').html();
 			$$('#DynamicSwitchID').attr('data-val',eval('DynData.S' + (j+1) + 'pin_' + photons[i].name));
 			$$('#DynamicSwitchID').attr('data-device',photons[i].id)
 			$$('#DynamicSwitchID').attr('id',photons[i].name + '_Switch_' + (j+1));	
+		}
 		}
 	}
 
