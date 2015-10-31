@@ -68,78 +68,8 @@
       <div class="content-block">
       <p><a href="#" data-sortable=".sortable" class="toggle-sortable">Toggle sortable</a></p>
         <div class="content-block-title">Switch Controls</div>
-        			<div class="list-block sortable">
-				<ul>
-				  <li class="swipeout">
-					<div class="item-content">
-					  <div class="item-media"><i class="icon icon-f7"></i></div>
-					  <div class="item-inner">
-						<a href="#" class="button button-big button-fill color-green Switch-1" >Switch 1</a>
-					  </div>
-					</div>
-					<div class="swipeout-actions-right">
-					<!-- We add data-confirm and data-confirm-title attributes -->
-					<a href="#" class="swipeout-delete" data-confirm="Are you sure want to delete this item?" data-confirm-title="Delete?">Delete</a>
-					</div>
-					<!-- Sortable handler  -->
-					<div class="sortable-handler"></div>
-				  </li>
-				  <li class="swipeout">
-					<div class="item-content">
-					  <div class="item-media"><i class="icon icon-f7"></i></div>
-					  <div class="item-inner">
-						<a href="#" class="button button-big button-fill color-green Switch-2" >Switch 2</a>
-					  </div>
-					</div>
-					<div class="swipeout-actions-right">
-					<!-- We add data-confirm and data-confirm-title attributes -->
-					<a href="#" class="swipeout-delete" data-confirm="Are you sure want to delete this item?" data-confirm-title="Delete?">Delete</a>
-					</div>
-					<!-- Sortable handler  -->
-					<div class="sortable-handler"></div>
-				  </li>
-				  <li class="swipeout">
-					<div class="item-content">
-					  <div class="item-media"><i class="icon icon-f7"></i></div>
-					  <div class="item-inner">
-						<a href="#" class="button button-big button-fill color-green Switch-3" >Switch 3</a>
-					  </div>
-					</div>
-					<div class="swipeout-actions-right">
-					<!-- We add data-confirm and data-confirm-title attributes -->
-					<a href="#" class="swipeout-delete" data-confirm="Are you sure want to delete this item?" data-confirm-title="Delete?">Delete</a>
-					</div>
-					<!-- Sortable handler  -->
-					<div class="sortable-handler"></div>
-				  </li>
-				  <li class="swipeout">
-					<div class="item-content">
-					  <div class="item-media"><i class="icon icon-f7"></i></div>
-					  <div class="item-inner">
-						<a href="#" class="button button-big button-fill color-green Switch-4" >Switch 4</a>
-					  </div>
-					</div>
-					<div class="swipeout-actions-right">
-					<!-- We add data-confirm and data-confirm-title attributes -->
-					<a href="#" class="swipeout-delete" data-confirm="Are you sure want to delete this item?" data-confirm-title="Delete?">Delete</a>
-					</div>
-					<!-- Sortable handler  -->
-					<div class="sortable-handler"></div>
-				  </li>
-				  <li class="swipeout">
-					<div class="item-content">
-					  <div class="item-media"><i class="icon icon-f7"></i></div>
-					  <div class="item-inner">
-						<a href="#" class="button button-big button-fill color-green Switch-5" >Switch 5</a>
-					  </div>
-					</div>
-					<div class="swipeout-actions-right">
-					<!-- We add data-confirm and data-confirm-title attributes -->
-					<a href="#" class="swipeout-delete" data-confirm="Are you sure want to delete this item?" data-confirm-title="Delete?">Delete</a>
-					</div>
-					<!-- Sortable handler  -->
-					<div class="sortable-handler"></div>
-				  </li>	  
+        	<div class="list-block sortable">
+				<ul id="SwitchList">
 				</ul>
 			</div>
     	  </div>
@@ -174,16 +104,22 @@
               <div class="content-block-title">Photon Settings</div>
               <div class="list-block">
                 <ul>
-                  <li><a href="about1.html" class="item-link">
+                  <li><a href="about.html" class="item-link">
                       <div class="item-content">
                         <div class="item-inner"> 
-                          <div class="item-title">About</div>
+                          <div class="item-title">Set Photon Details</div>
                         </div>
                       </div></a></li>
                   <li><a href="form.html" class="item-link">
                       <div class="item-content"> 
                         <div class="item-inner">
-                          <div class="item-title">Set Photon Details</div>
+                          <div class="item-title">Set Access Code</div>
+                        </div>
+                      </div></a></li>
+				  <li><a href="setDisplay.html" class="item-link">
+                      <div class="item-content"> 
+                        <div class="item-inner">
+                          <div class="item-title">Set Display options</div>
                         </div>
                       </div></a></li>
                 </ul>
@@ -372,18 +308,33 @@
 	  </div>
 	  </form>
     </div>
-
 	</div>
 	
-	<div class="Photon-Detail" id='Photon-Detail' style='display:none'>
+	<div class="PhotonDetail" id='PhotonDetail' style='display:none'>
 		<li>
 			<div class="item-content">
 			  <div class="item-media"><i class="icon icon-form-Token"></i></div>
 				  <div class="item-inner"> 
-					<div class="item-title label">Photon NAme</div>
+					<div class="item-title label" id="dynamicPhoton"><a href="#" id="dynamicPhotonLink" data-val="test">Photon Name</a></div>
 				  </div>
 			</div>
 		</li>	
+	</div>
+	<div class="SwitchDetail" id='SwitchDetail' style='display:none'>
+		<li class="swipeout">
+			<div class="item-content">
+				<div class="item-media"><i class="icon icon-f7"></i></div>
+				<div class="item-inner">
+					<a href="#" class="button button-big button-fill color-green" id="DynamicSwitchID" data-device="deviceID" data-val="PinNum" >Switch Num</a>
+				</div>
+			</div>
+			<div class="swipeout-actions-right">
+				<!-- We add data-confirm and data-confirm-title attributes -->
+				<a href="#" class="swipeout-delete" data-confirm="Are you sure want to delete this item?" data-confirm-title="Delete?">Delete</a>
+			</div>
+			<!-- Sortable handler  -->
+			<div class="sortable-handler"></div>
+		</li>
 	</div>
 	
 	

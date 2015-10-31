@@ -4,23 +4,6 @@ var myApp = new Framework7({
 swipePanel: 'right',
 precompileTemplates: true, //
 template7Pages: true,
-template7Data: {
-        // This context will applied for page/template with "about.html" URL
-        'Photons': {
-            'details': [
-                {
-                    name:'JavaScript',
-                    description: 'Dynamic computer programming language[5]. It is most commonly used as part of web browsers, whose implementations allow...',
-					PhotonName: 'Testing name'
-                },
-                {
-                    name:'CSS',
-                    description: 'Style sheet language used for describing the look and formatting of a document written in a markup language...'
-                },
-            ]            
-        }
-	}
-
 });
  
 // Export selectors engine
@@ -28,20 +11,11 @@ var $$ = Dom7;
 var photons;
 var storedData = myApp.formGetData('my-form2');
 if(storedData) {
-  
-  $$('.Switch-1').html(storedData.S1pinName);
-  $$('.Switch-2').html(storedData.S2pinName);
-  $$('.Switch-3').html(storedData.S3pinName);
-  $$('.Switch-4').html(storedData.S4pinName);
-  $$('.Switch-5').html(storedData.S5pinName);
    getPhotons();
-   
 }
-
 $$('.close').on('click', function () {
   myApp.sortableClose('.sortable');
 });
-
 $$('.panel-left').on('opened', function () {
     var storedData = myApp.formGetData('my-form2');
 	var q = 'https://api.particle.io/v1/devices/' + storedData.DeviceID + '/tempf/?access_token=' + storedData.token;
@@ -53,7 +27,28 @@ $$('.panel-left').on('opened', function () {
 		appendLocation('test');
 	});
 });
-
+$$('.panel-right').on('opened', function () {
+    $$('.DynaSwitch').on('click', function() {
+    
+	var PinNum= $$(this).data('val');
+	var DeviceID= $$(this).data('device');
+	var obj =$$(this);
+	var q = 'https://api.particle.io/v1/devices/' + DeviceID + '/switchRelay/';
+    
+	$$.post(q, {access_token: storedData.token, val: PinNum}, function (data) {
+		if (obj.hasClass('color-red')){
+			obj.removeClass('color-red');
+			obj.addClass('color-green');
+			
+		}else{
+			obj.removeClass('color-green');
+			obj.addClass('color-red');
+			
+		}
+	});
+});
+	
+});
 $$('.garage-left').on('click', function() {
     var storedData = myApp.formGetData('my-form2');	
 	var q = 'https://api.particle.io/v1/devices/' + storedData.DeviceID + '/toggleRelay/';
@@ -161,36 +156,24 @@ $$('.Switch-5').on('click', function() {
 		}
 	});
 });
-	
-// Add view
+
+
+
+
 var mainView = myApp.addView('.view-main', {
     // Because we use fixed-through navbar we can enable dynamic navbar
     dynamicNavbar: true
 	
 });
-
-// Callbacks to run specific code for specific pages, for example for About page:
 myApp.onPageInit('about', function (page) {
-    var newDiv = $$('#Photon-Detail').html();
+	drawPhotons();
 	
-	$$('.Phonton-List').append(newDiv); 
-	console.log($$('Phonton-List').html());
-	
-	
-	var formname=String(photons[1].id);
-	
-	// run createContentPage func after link was clicked
-    $$('.create-page').on('click', function () {
-        createContentPage();
-    });
 	$$('.dynamicForm').on('click', function() {
-		//myApp.alert('got here');
-	
+		var formname= $$(this).data('val');
+		$$('.formSpot').html('');
 		appendForm(formname);
 		
-		//console.log(str_1);
 			$$('.save-storage-data-dynamic').on('click', function(){
-			
 			var text = '{' + 
 				'"DeviceID_'+ 	formname +'":"'+ $$('#ParticleID').val()	+'",'+
 				'"token_'+ 		formname +'":"'+ $$('#ParticleToken').val()	+'",'+
@@ -206,17 +189,10 @@ myApp.onPageInit('about', function (page) {
 				'"S4pinName_'+ 	formname +'":"'+ $$('#S4pinName').val()		+ '",'+
 				'"S5pin_'+ 		formname +'":"'+ $$('#S5pin').val()			+ '",'+
 				'"S5pinName_'+ 	formname +'":"'+ $$('#S5pinName').val()		+'"}';
-				
-				
-			console.log(text);	
 			var obj = JSON.parse(text);
-			var storedData = myApp.formStoreData(formname,obj);
-			
-			//myApp.alert($$('#ParticleID').val()) //works
-			
+			var DynamicFormData = myApp.formStoreData(formname,obj);
 		});
-	});
-	
+	});	
 });
 
 myApp.onPageInit('form', function (page) {
@@ -228,6 +204,7 @@ myApp.onPageInit('form', function (page) {
     		$$('#photon-name').html('Device Name: ' + results.name);
 	    });
 }
+
 
  
 $$('.delete-storage-data').on('click', function() {
@@ -258,31 +235,31 @@ $$('.save-storage-data').on('click', function() {
 });
 });
 
-// Generate dynamic page
-var dynamicPageIndex = 0;
-function createContentPage() {
-var q = 'https://api.particle.io/v1/devices/?access_token=' + storedData.token;
-	    $$.get(q, function (results) {
-            results = JSON.parse(results);
-    		mainView.router.load({
-				template: Template7.templates.PhotonsTemplate,
-				url: 'language-details.html',
-				context: {
-					name:results[0].name,
-                    description: results[0].id					
-				}
-			});
-	   });
+myApp.onPageInit('setDisplay', function(page){
+	drawSwitches($$('#SwitchSettings'));
 
-	return;
-}
+});
+
 function getPhotons(){
 var q = 'https://api.particle.io/v1/devices/?access_token=' + storedData.token;
 	    $$.get(q, function (results) {
             results = JSON.parse(results);
     	photons= results;	
+		drawRightPanel();
 	    });
 		
+}
+function drawPhotons(){
+	var newDiv = $$('#PhotonDetail').html();
+	
+	for (i=0; i< photons.length; i++){
+		$$('.PhotonList').append(newDiv);
+		$$('#dynamicPhotonLink').text(photons[i].name);
+		$$('#dynamicPhotonLink').addClass('dynamicForm');
+		$$('#dynamicPhotonLink').attr('data-val',photons[i].name)
+		$$('#dynamicPhotonLink').attr('id',photons[i].name);	
+		
+	}	
 }
 function appendLocation(a){
  	var newDiv = $$('#SomeClassTemplate').html();
@@ -335,10 +312,21 @@ function appendForm(a){
 	}
 		
 }
-function SubmitDynamicForm(a){
- 	
+function drawRightPanel(){
+	drawSwitches($$('#SwitchList'));
 }
-function buildDynamicForm(formname){
-	
+function drawSwitches(dest){
+var newDiv = $$('#SwitchDetail').html();
+	for (i=0; i< photons.length; i++){
+	var DynData = myApp.formGetData(photons[i].name);	
+		for(j=0; j<5; j++){
+			dest.append(newDiv);
+			$$('#DynamicSwitchID').text(eval('DynData.S' + (j+1) + 'pinName_' + photons[i].name));
+			$$('#DynamicSwitchID').addClass('DynaSwitch');
+			$$('#DynamicSwitchID').attr('data-val',eval('DynData.S' + (j+1) + 'pin_' + photons[i].name));
+			$$('#DynamicSwitchID').attr('data-device',photons[i].id)
+			$$('#DynamicSwitchID').attr('id',photons[i].name + '_Switch_' + (j+1));	
+		}
+	}
 
 }
