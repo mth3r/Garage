@@ -56,10 +56,8 @@ $$('.panel-right').on('opened', function () {
 });
 	
 });
-$$('.dyna-garage-button').on('click', function() {
-    myApp.alert('ghere');
-    //var storedData = myApp.formGetData('my-form2');	
-     console.log('garage clicked');
+$$('.garageDoorButton').on('click', function() {
+      console.log('garage clicked');
 //     var deviceID= $$(this).data('device');
 //     var pin= $$(this).data('pinNum');
 //     
@@ -189,6 +187,7 @@ var q = 'https://api.particle.io/v1/devices/?access_token=' + storedData.token;
 		drawRightPanel();
 		for (i=0; i<photons.length; i++){
 		drawGarage(photons[i].name);
+		
 	    }
 	    });
 		
@@ -215,7 +214,8 @@ function drawGarage(a){
 	}
 	
 	if(eval(eval('DynData.LpinVis_'+a)) || eval(eval('DynData.RpinVis_'+a))){
-		var newDiv = $$('#GarageDetail').html();
+		
+		
 		$$('#dynacol1').hide();
 		$$('#dynacol2').hide();
 		$$('#dynacol1img').hide();
@@ -230,19 +230,18 @@ function drawGarage(a){
 			$$('#dynacol2img').show();
 		}
 		$$('#dynacol1Button').attr('data-device',eval('DynData.DeviceID_'+a));
-		$$('#dynacol2Button').attr('data-device',eval('DynData.DeviceID_'+a));
-		
+		$$('#dynacol2Button').attr('data-device',eval('DynData.DeviceID_'+a));		
 		$$('#dynacol1Button').attr('data-pinNum',eval('DynData.Lpin_'+a));
 		$$('#dynacolRButton').attr('data-pinNum',eval('DynData.Rpin_'+a));
-		
 		$$('#dynacol1').attr('id', a + '_Lpin');
 		$$('#dynacol1Button').attr('id', a + '_Lbut');
 		$$('#dynacol2Button').attr('id', a + '_Rbut');
 		$$('#dynacol2').attr('id', a + '_Rpin');
 		$$('#dynacol1img').attr('id', a + '_LpinImg');
 		$$('#dynacol2img').attr('id', a + '_RpinImg');
-		
+		var newDiv = $$('#GarageDetail').html();
 		$$('#GarageControls').append(newDiv); 
+	
 	}
 	
 }
