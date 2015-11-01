@@ -36,59 +36,51 @@ $$('.panel-left').on('opened', function () {
 $$('.panel-right').on('opened', function () {
     $$('.DynaSwitch').on('click', function() {
     
-	var PinNum= $$(this).data('val');
-	var DeviceID= $$(this).data('device');
-	var obj =$$(this);
-	var q = 'https://api.particle.io/v1/devices/' + DeviceID + '/switchRelay/';
-    
-	$$.post(q, {access_token: storedData.token, val: PinNum}, function (data) {
-		if (obj.hasClass('color-red')){
-			obj.removeClass('color-red');
-			obj.addClass('color-green');
+		var PinNum= $$(this).data('val');
+		var DeviceID= $$(this).data('device');
+		var obj =$$(this);
+		var q = 'https://api.particle.io/v1/devices/' + DeviceID + '/switchRelay/';
+	
+			$$.post(q, {access_token: storedData.token, val: PinNum}, function (data) {
+				if (obj.hasClass('color-red')){
+					obj.removeClass('color-red');
+					obj.addClass('color-green');
 			
-		}else{
-			obj.removeClass('color-green');
-			obj.addClass('color-red');
+				}else{
+					obj.removeClass('color-green');
+					obj.addClass('color-red');
 			
-		}
+				}
+			});
+	
 	});
 	
 });
-	
-});
-$$('.garageDoorButton').on('click', function() {
-      console.log('garage clicked');
-//     var deviceID= $$(this).data('device');
-//     var pin= $$(this).data('pinNum');
-//     
-// 	var q = 'https://api.particle.io/v1/devices/' + deviceID + '/toggleRelay/';
-//     $$.post(q, {access_token: storedData.token, val: pin}, function (data) {
-// 		console.log('Load was performed:' + storedData.Lpin);
-// 		
-// 	});
 
-});
-$$('.garage-right').on('click', function() {
-    var storedData = myApp.formGetData('my-form2');	
-	
-	
-	var q = 'https://api.particle.io/v1/devices/' + storedData.DeviceID + '/toggleRelay/';
-    $$.post(q, {access_token: storedData.token, val: storedData.Rpin}, function (data) {
-		
-		if($$('.rightdoor').hasClass('garage-closed')){
-			$$('.rightdoor').removeClass('garage-closed');
-			$$('.rightdoor').addClass('garage-open');
-			$$('.rightdoor').html('<img src=\'img/garage_open_r.gif\' alt=\'closed\' height=\'45\' width=\'45\'>');
-			console.log('Door Open:');
-		}else {
-			$$('.rightdoor').removeClass('garage-open');
-			$$('.rightdoor').addClass('garage-closed');
-			$$('.rightdoor').html('<img src=\'img/garage_close_r.gif\' alt=\'closed\' height=\'45\' width=\'45\'>');
-			console.log('Door Closed:');
-		}
-		console.log('Load was performed:' + storedData.Rpin);
-	});
-});
+
+
+
+// $$('.garage-right').on('click', function() {
+//     var storedData = myApp.formGetData('my-form2');	
+// 	
+// 	
+// 	var q = 'https://api.particle.io/v1/devices/' + storedData.DeviceID + '/toggleRelay/';
+//     $$.post(q, {access_token: storedData.token, val: storedData.Rpin}, function (data) {
+// 		
+// 		if($$('.rightdoor').hasClass('garage-closed')){
+// 			$$('.rightdoor').removeClass('garage-closed');
+// 			$$('.rightdoor').addClass('garage-open');
+// 			$$('.rightdoor').html('<img src=\'img/garage_open_r.gif\' alt=\'closed\' height=\'45\' width=\'45\'>');
+// 			console.log('Door Open:');
+// 		}else {
+// 			$$('.rightdoor').removeClass('garage-open');
+// 			$$('.rightdoor').addClass('garage-closed');
+// 			$$('.rightdoor').html('<img src=\'img/garage_close_r.gif\' alt=\'closed\' height=\'45\' width=\'45\'>');
+// 			console.log('Door Closed:');
+// 		}
+// 		console.log('Load was performed:' + storedData.Rpin);
+// 	});
+// });
 
 var mainView = myApp.addView('.view-main', {
     // Because we use fixed-through navbar we can enable dynamic navbar
@@ -163,13 +155,6 @@ $$('.delete-storage-data').on('click', function() {
 $$('.save-storage-data').on('click', function() {
   
   var storedData = myApp.formStoreData('my-form2');
-  storedData = myApp.formGetData('my-form2');
-  
-  $$('.Switch-1').html(storedData.S1pinName);
-  $$('.Switch-2').html(storedData.S2pinName);
-  $$('.Switch-3').html(storedData.S3pinName);
-  $$('.Switch-4').html(storedData.S4pinName);
-  $$('.Switch-5').html(storedData.S5pinName);
   
 });
 });
@@ -188,7 +173,20 @@ var q = 'https://api.particle.io/v1/devices/?access_token=' + storedData.token;
 		for (i=0; i<photons.length; i++){
 		drawGarage(photons[i].name);
 		
+		
 	    }
+	    $$('.garageDoorButton').on('click', function() {
+		  
+		    var deviceID= $$(this).data('device');
+		    var pin= $$(this).data('pinNum');
+		    
+			var q = 'https://api.particle.io/v1/devices/' + deviceID + '/toggleRelay/';
+		    $$.post(q, {access_token: storedData.token, val: pin}, function (data) {
+				console.log('Load was performed:' + storedData.Lpin);
+				
+			});
+
+	});
 	    });
 		
 }
@@ -232,7 +230,7 @@ function drawGarage(a){
 		$$('#dynacol1Button').attr('data-device',eval('DynData.DeviceID_'+a));
 		$$('#dynacol2Button').attr('data-device',eval('DynData.DeviceID_'+a));		
 		$$('#dynacol1Button').attr('data-pinNum',eval('DynData.Lpin_'+a));
-		$$('#dynacolRButton').attr('data-pinNum',eval('DynData.Rpin_'+a));
+		$$('#dynacol2Button').attr('data-pinNum',eval('DynData.Rpin_'+a));
 		$$('#dynacol1').attr('id', a + '_Lpin');
 		$$('#dynacol1Button').attr('id', a + '_Lbut');
 		$$('#dynacol2Button').attr('id', a + '_Rbut');
@@ -244,11 +242,8 @@ function drawGarage(a){
 	
 	}
 	
+	
 }
-
-	
-	
-	
 function appendLocation(a){
  	var newDiv = $$('#SomeClassTemplate').html();
 	$$('.tempReadout').append(newDiv); 
