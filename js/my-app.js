@@ -12,6 +12,7 @@ var photons;
 var storedData = myApp.formGetData('my-form2');
 if(storedData) {
    getPhotons();
+  
 }
 $$('.close').on('click', function () {
   myApp.sortableClose('.sortable');
@@ -51,29 +52,23 @@ $$('.panel-right').on('opened', function () {
 			
 		}
 	});
+	
 });
 	
 });
-$$('.garage-left').on('click', function() {
-    var storedData = myApp.formGetData('my-form2');	
-	var q = 'https://api.particle.io/v1/devices/' + storedData.DeviceID + '/toggleRelay/';
-    $$.post(q, {access_token: storedData.token, val: storedData.Lpin}, function (data) {
-		if($$('.leftdoor').hasClass('garage-closed')){
-			$$('.leftdoor').removeClass('garage-closed');
-			$$('.leftdoor').addClass('garage-open');
-			$$('.leftdoor').html('<img src=\'img/garage_open_l.gif\' alt=\'closed\' height=\'45\' width=\'45\'>');
-			console.log('Door Open:');
-		}else {
-			$$('.leftdoor').removeClass('garage-open');
-			$$('.leftdoor').addClass('garage-closed');
-			$$('.leftdoor').html('<img src=\'img/garage_close_l.gif\' alt=\'closed\' height=\'45\' width=\'45\'>');
-			console.log('Door Closed:');
-		}
-		
-		
-		console.log('Load was performed:' + storedData.Lpin);
-		
-	});
+$$('.dyna-garage-button').on('click', function() {
+    myApp.alert('ghere');
+    //var storedData = myApp.formGetData('my-form2');	
+     console.log('garage clicked');
+//     var deviceID= $$(this).data('device');
+//     var pin= $$(this).data('pinNum');
+//     
+// 	var q = 'https://api.particle.io/v1/devices/' + deviceID + '/toggleRelay/';
+//     $$.post(q, {access_token: storedData.token, val: pin}, function (data) {
+// 		console.log('Load was performed:' + storedData.Lpin);
+// 		
+// 	});
+
 });
 $$('.garage-right').on('click', function() {
     var storedData = myApp.formGetData('my-form2');	
@@ -96,74 +91,6 @@ $$('.garage-right').on('click', function() {
 		console.log('Load was performed:' + storedData.Rpin);
 	});
 });
-$$('.Switch-1').on('click', function() {
-    var storedData = myApp.formGetData('my-form2');	
-	var q = 'https://api.particle.io/v1/devices/' + storedData.DeviceID + '/switchRelay/';
-    $$.post(q, {access_token: storedData.token, val: storedData.S1pin}, function (data) {
-		if ($$('.Switch-1').hasClass('color-red')){
-		$$('.Switch-1').removeClass('color-red');
-		$$('.Switch-1').addClass('color-green');
-		}else{
-		$$('.Switch-1').removeClass('color-green');
-		$$('.Switch-1').addClass('color-red');
-		}
-	});
-});
-$$('.Switch-2').on('click', function() {
-    var storedData = myApp.formGetData('my-form2');	
-	var q = 'https://api.particle.io/v1/devices/' + storedData.DeviceID + '/switchRelay/';
-    $$.post(q, {access_token: storedData.token, val: storedData.S2pin}, function (data) {
-		if ($$('.Switch-2').hasClass('color-red')){
-		$$('.Switch-2').removeClass('color-red');
-		$$('.Switch-2').addClass('color-green');
-		}else{
-		$$('.Switch-2').removeClass('color-green');
-		$$('.Switch-2').addClass('color-red');
-		}
-	});
-});
-$$('.Switch-3').on('click', function() {
-    var storedData = myApp.formGetData('my-form2');	
-	var q = 'https://api.particle.io/v1/devices/' + storedData.DeviceID + '/switchRelay/';
-    $$.post(q, {access_token: storedData.token, val: storedData.S3pin}, function (data) {
-		if ($$('.Switch-3').hasClass('color-red')){
-		$$('.Switch-3').removeClass('color-red');
-		$$('.Switch-3').addClass('color-green');
-		}else{
-		$$('.Switch-3').removeClass('color-green');
-		$$('.Switch-3').addClass('color-red');
-		}
-	});
-});
-$$('.Switch-4').on('click', function() {
-    var storedData = myApp.formGetData('my-form2');	
-	var q = 'https://api.particle.io/v1/devices/' + storedData.DeviceID + '/switchRelay/';
-    $$.post(q, {access_token: storedData.token, val: storedData.S4pin}, function (data) {
-		if ($$('.Switch-4').hasClass('color-red')){
-		$$('.Switch-4').removeClass('color-red');
-		$$('.Switch-4').addClass('color-green');
-		}else{
-		$$('.Switch-4').removeClass('color-green');
-		$$('.Switch-4').addClass('color-red');
-		}
-	});
-});
-$$('.Switch-5').on('click', function() {
-    var storedData = myApp.formGetData('my-form2');	
-	var q = 'https://api.particle.io/v1/devices/' + storedData.DeviceID + '/switchRelay/';
-    $$.post(q, {access_token: storedData.token, val: storedData.S5pin}, function (data) {
-		if ($$('.Switch-5').hasClass('color-red')){
-		$$('.Switch-5').removeClass('color-red');
-		$$('.Switch-5').addClass('color-green');
-		}else{
-		$$('.Switch-5').removeClass('color-green');
-		$$('.Switch-5').addClass('color-red');
-		}
-	});
-});
-
-
-
 
 var mainView = myApp.addView('.view-main', {
     // Because we use fixed-through navbar we can enable dynamic navbar
@@ -171,7 +98,12 @@ var mainView = myApp.addView('.view-main', {
 	
 });
 myApp.onPageInit('about', function (page) {
-	drawPhotons();
+	try{
+		drawPhotons();
+	}catch(err){
+		console.log('error on drawPhotons function call');
+	}
+	
 	
 	$$('.dynamicForm').on('click', function() {
 		var formname= $$(this).data('val');
@@ -184,7 +116,9 @@ myApp.onPageInit('about', function (page) {
 				'"DeviceID_'+ 	formname +'":"'+ $$('#ParticleID').val()	+'",'+
 				'"token_'+ 		formname +'":"'+ $$('#ParticleToken').val()	+'",'+
 				'"Rpin_'+ 		formname +'":"'+ $$('#Rpin').val()			+ '",'+
+				'"RpinVis_'+ 	formname +'":"'+ $$('#RpinVis').prop('checked')	+ '",'+
 				'"Lpin_'+ 		formname +'":"'+ $$('#Lpin').val()			+ '",'+
+				'"LpinVis_'+ 	formname +'":"'+ $$('#LpinVis').prop('checked')		+ '",'+
 				'"S1pin_'+ 		formname +'":"'+ $$('#S1pin').val()			+ '",'+
 				'"S1pinName_'+ 	formname +'":"'+ $$('#S1pinName').val()		+ '",'+
 				'"S2pin_'+ 		formname +'":"'+ $$('#S2pin').val()			+ '",'+
@@ -197,9 +131,10 @@ myApp.onPageInit('about', function (page) {
 				'"S5pinName_'+ 	formname +'":"'+ $$('#S5pinName').val()		+'"}';
 			var obj = JSON.parse(text);
 			var DynamicFormData = myApp.formStoreData(formname,obj);
-		});
-	});	
+			});
+		});	
 });
+
 
 myApp.onPageInit('form', function (page) {
     // run createContentPage func after link was clicked
@@ -252,6 +187,9 @@ var q = 'https://api.particle.io/v1/devices/?access_token=' + storedData.token;
             results = JSON.parse(results);
     	photons= results;	
 		drawRightPanel();
+		for (i=0; i<photons.length; i++){
+		drawGarage(photons[i].name);
+	    }
 	    });
 		
 }
@@ -268,6 +206,50 @@ function drawPhotons(){
 		
 	}	
 }
+function drawGarage(a){
+	try {
+	var DynData = myApp.formGetData(a);
+	}
+	catch(err){
+	var DynData='false';
+	}
+	
+	if(eval(eval('DynData.LpinVis_'+a)) || eval(eval('DynData.RpinVis_'+a))){
+		var newDiv = $$('#GarageDetail').html();
+		$$('#dynacol1').hide();
+		$$('#dynacol2').hide();
+		$$('#dynacol1img').hide();
+		$$('#dynacol2img').hide();
+		
+		if(eval(eval('DynData.LpinVis_'+a))){
+			$$('#dynacol1').show();
+			$$('#dynacol1img').show();
+		}
+		if(eval(eval('DynData.RpinVis_'+a))){
+			$$('#dynacol2').show();
+			$$('#dynacol2img').show();
+		}
+		$$('#dynacol1Button').attr('data-device',eval('DynData.DeviceID_'+a));
+		$$('#dynacol2Button').attr('data-device',eval('DynData.DeviceID_'+a));
+		
+		$$('#dynacol1Button').attr('data-pinNum',eval('DynData.Lpin_'+a));
+		$$('#dynacolRButton').attr('data-pinNum',eval('DynData.Rpin_'+a));
+		
+		$$('#dynacol1').attr('id', a + '_Lpin');
+		$$('#dynacol1Button').attr('id', a + '_Lbut');
+		$$('#dynacol2Button').attr('id', a + '_Rbut');
+		$$('#dynacol2').attr('id', a + '_Rpin');
+		$$('#dynacol1img').attr('id', a + '_LpinImg');
+		$$('#dynacol2img').attr('id', a + '_RpinImg');
+		
+		$$('#GarageControls').append(newDiv); 
+	}
+	
+}
+
+	
+	
+	
 function appendLocation(a){
  	var newDiv = $$('#SomeClassTemplate').html();
 	$$('.tempReadout').append(newDiv); 
@@ -276,16 +258,17 @@ function appendLocation(a){
 function appendForm(a,b){
  	console.log(a);
  	console.log(b);
+	console.log($$('#DynPhotonName').html());
+	$$('#photon-name').html('Device Settings:   ' + a);
 	
 	$$('#my-form3').attr('id',a);
-	
 	$$('#ParticleID').attr('name', 'DeviceID_'+ a);
-	
-	console.log($$('input#ParticleID').html());
 	$$('#ParticleToken').attr('name', 'token_' + a);
 	$$('input#ParticleToken').val(storedData.token);
 	$$('#Lpin').attr('name', 'Lpin_' + a);
+	$$('#LpinVis').attr('name', 'LpinVis' + a);
 	$$('#Rpin').attr('name', 'Rpin_' + a);
+	$$('#RpinVis').attr('name', 'RpinVis' + a);
 	$$('#S1pin').attr('name', 'S1pin_' + a);
 	$$('#S1pinName').attr('name', 'S1pinName_' + a);
 	$$('#S2pin').attr('name', 'S2pin_' + a);
@@ -307,22 +290,27 @@ function appendForm(a,b){
 	}
 	$$('input#ParticleID').val(b);
 	$$('input#ParticleToken').val(storedData.token);
-	
-	if (DynData){
-		$$('input#ParticleID').val(eval('DynData.DeviceID_'+a));
-		$$('input#ParticleToken').val(eval('DynData.token_'+a));
-		$$('input#Lpin').val(eval('DynData.Lpin_'+a));
-		$$('input#Rpin').val(eval('DynData.Rpin_'+a));
-		$$('#S1pin').val(eval('DynData.S1pin_' + a));
-		$$('#S1pinName').val(eval('DynData.S1pinName_' + a));
-		$$('#S2pin').val(eval('DynData.S2pin_' + a));
-		$$('#S2pinName').val(eval('DynData.S2pinName_' + a));
-		$$('#S3pin').val(eval('DynData.S3pin_' + a));
-		$$('#S3pinName').val(eval('DynData.S3pinName_' + a));
-		$$('#S4pin').val(eval('DynData.S4pin_' + a));
-		$$('#S4pinName').val(eval('DynData.S4pinName_' + a));	
-		$$('#S5pin').val(eval('DynData.S5pin_' + a));
-		$$('#S5pinName').val(eval('DynData.S5pinName_' + a));
+	try{
+		if (DynData){
+			$$('input#ParticleID').val(eval('DynData.DeviceID_'+a));
+			$$('input#ParticleToken').val(eval('DynData.token_'+a));
+			$$('input#Lpin').val(eval('DynData.Lpin_'+a));
+			$$('#LpinVis').prop('checked', eval(eval('DynData.LpinVis_'+a)));
+			$$('input#Rpin').val(eval('DynData.Rpin_'+a));
+			$$('input#RpinVis').prop('checked', eval(eval('DynData.RpinVis_'+a)));
+			$$('#S1pin').val(eval('DynData.S1pin_' + a));
+			$$('#S1pinName').val(eval('DynData.S1pinName_' + a));
+			$$('#S2pin').val(eval('DynData.S2pin_' + a));
+			$$('#S2pinName').val(eval('DynData.S2pinName_' + a));
+			$$('#S3pin').val(eval('DynData.S3pin_' + a));
+			$$('#S3pinName').val(eval('DynData.S3pinName_' + a));
+			$$('#S4pin').val(eval('DynData.S4pin_' + a));
+			$$('#S4pinName').val(eval('DynData.S4pinName_' + a));	
+			$$('#S5pin').val(eval('DynData.S5pin_' + a));
+			$$('#S5pinName').val(eval('DynData.S5pinName_' + a));
+		}
+	}catch(err){
+		console.log('error on form fill out')
 	}
 		
 }
