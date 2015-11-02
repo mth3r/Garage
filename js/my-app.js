@@ -119,12 +119,6 @@ myApp.onPageInit('form', function (page) {
 
 }
 
-
- 
-$$('.delete-storage-data').on('click', function() {
-  
-  
-});
  
 $$('.save-storage-data').on('click', function() {
   
@@ -227,6 +221,7 @@ function appendLocation(a){
 }
 function appendForm(a,b){
  	$$('#photon-name').html('Device Settings:   ' + a);
+	
 	$$('#my-form3').attr('id',a);
 	$$('#ParticleID').attr('name', 'DeviceID_'+ a);
 	$$('#ParticleToken').attr('name', 'token_' + a);
