@@ -105,9 +105,11 @@ myApp.onPageInit('about', function (page) {
 			var text = '{' + 
 				'"DeviceID_'+ 	formname +'":"'+ $$('#ParticleID').val()	+'",'+
 				'"token_'+ 		formname +'":"'+ $$('#ParticleToken').val()	+'",'+
+				'"RToggle_'+ 		formname +'":"'+ $$('#RToggle').val()	+ '",'+
 				'"Rpin_'+ 		formname +'":"'+ $$('#Rpin').val()			+ '",'+
 				'"RpinVis_'+ 	formname +'":"'+ $$('#RpinVis').prop('checked')	+ '",'+
 				'"Lpin_'+ 		formname +'":"'+ $$('#Lpin').val()			+ '",'+
+				'"LToggle_'+ 		formname +'":"'+ $$('#LToggle').val()	+ '",'+
 				'"LpinVis_'+ 	formname +'":"'+ $$('#LpinVis').prop('checked')		+ '",'+
 				'"S1pin_'+ 		formname +'":"'+ $$('#S1pin').val()			+ '",'+
 				'"S1pinName_'+ 	formname +'":"'+ $$('#S1pinName').val()		+ '",'+
@@ -134,6 +136,7 @@ myApp.onPageInit('form', function (page) {
             results = JSON.parse(results);
     		$$('#photon-name').html('Device Name: ' + results.name);
 	    });
+
 }
 
 
@@ -155,7 +158,7 @@ $$('.delete-storage-data').on('click', function() {
 $$('.save-storage-data').on('click', function() {
   
   var storedData = myApp.formStoreData('my-form2');
-  
+	storedData = myApp.formGetData('my-form2');
 });
 });
 
@@ -229,7 +232,9 @@ function drawGarage(a){
 		}
 		$$('#dynacol1Button').attr('data-device',eval('DynData.DeviceID_'+a));
 		$$('#dynacol2Button').attr('data-device',eval('DynData.DeviceID_'+a));		
+		$$('#dynacol1Button').html(eval('DynData.LToggle_'+a))
 		$$('#dynacol1Button').attr('data-pinNum',eval('DynData.Lpin_'+a));
+		$$('#dynacol2Button').html(eval('DynData.RToggle_'+a))
 		$$('#dynacol2Button').attr('data-pinNum',eval('DynData.Rpin_'+a));
 		$$('#dynacol1').attr('id', a + '_Lpin');
 		$$('#dynacol1Button').attr('id', a + '_Lbut');
@@ -259,8 +264,10 @@ function appendForm(a,b){
 	$$('#ParticleID').attr('name', 'DeviceID_'+ a);
 	$$('#ParticleToken').attr('name', 'token_' + a);
 	$$('input#ParticleToken').val(storedData.token);
+	$$('#LToggle').attr('name', 'LToggle_' + a);
 	$$('#Lpin').attr('name', 'Lpin_' + a);
 	$$('#LpinVis').attr('name', 'LpinVis' + a);
+	$$('#RToggle').attr('name', 'RToggle_' + a);
 	$$('#Rpin').attr('name', 'Rpin_' + a);
 	$$('#RpinVis').attr('name', 'RpinVis' + a);
 	$$('#S1pin').attr('name', 'S1pin_' + a);
@@ -288,8 +295,10 @@ function appendForm(a,b){
 		if (DynData){
 			$$('input#ParticleID').val(eval('DynData.DeviceID_'+a));
 			$$('input#ParticleToken').val(eval('DynData.token_'+a));
+			$$('input#LToggle').val(eval('DynData.LToggle_'+a));
 			$$('input#Lpin').val(eval('DynData.Lpin_'+a));
 			$$('#LpinVis').prop('checked', eval(eval('DynData.LpinVis_'+a)));
+			$$('input#RToggle').val(eval('DynData.RToggle_'+a));
 			$$('input#Rpin').val(eval('DynData.Rpin_'+a));
 			$$('input#RpinVis').prop('checked', eval(eval('DynData.RpinVis_'+a)));
 			$$('#S1pin').val(eval('DynData.S1pin_' + a));
