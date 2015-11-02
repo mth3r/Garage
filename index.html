@@ -115,13 +115,7 @@
                         <div class="item-inner">
                           <div class="item-title">Set Access Code</div>
                         </div>
-                      </div></a></li>
-				  <li><a href="setDisplay.html" class="item-link">
-                      <div class="item-content"> 
-                        <div class="item-inner">
-                          <div class="item-title">Set Display options</div>
-                        </div>
-                      </div></a></li>
+                      </div></a></li>				  
                 </ul>
               </div>
 			  <div class="content-block-title" id="GarageControls">Garage Controls</div>
@@ -198,6 +192,9 @@
 					</div>
 					<div class="item-input">
 					  <input type="checkbox" id="LpinVis" name= "LpinVis" />
+					  <div class="item-media">
+						<i class="icon icon-form-checkbox"></i>
+					  </div>
 					</div>
 				  </div>
 				</div>
@@ -212,6 +209,9 @@
 					</div>
 					<div class="item-input">
 					  <input type="checkbox" id="RpinVis" name= "RpinVis" />
+					  <div class="item-media">
+						<i class="icon icon-form-checkbox"></i>
+					  </div>
 					</div>
 				  </div>
 				</div>
@@ -219,76 +219,111 @@
 		
 			  <li>
 			  <div class="row">
-				  <div class="col-50">
+				  <div class="col-33">
 					<p> Display Name</p>
 				  </div>
-				  <div class="col-50">
+				  <div class="col-33">
 					<div class="item-input">
 					  <p>Output Pin</p>
-					</div>
+					</div>					
 				 </div>
-			  </div>
+				 <div class="col-33">
+					<div class="item-input">
+					  <p>Visible</p>
+					</div>
+				</div>
 			  </li>
 			  <div class="row">
-				  <div class="col-50">
+				  <div class="col-33">
 					<input type="text" placeholder="PinName" id="S1pinName" name="S1pinName"/>
 				  </div>
-				  <div class="col-50">
+				  <div class="col-33">
 					<div class="item-input">
 					  <input type="number" placeholder="2" id="S1pin" name= "S1pin"/>
 					</div>
 				 </div>
+				 <div class="col-33">
+					<input type="checkbox" id="S1pinVis" name="S1pinVis">
+					<div class="item-media">
+						<i class="icon icon-form-checkbox"></i>
+					</div>
+				</div>
+				
 			  </div>
 			  </li>
 			  <li>
 			  <div class="row">
-				  <div class="col-50">
+				  <div class="col-33">
 					<input type="text" placeholder="PinName" id="S2pinName" name="S2pinName"/>
 				  </div>
-				  <div class="col-50">
+				  <div class="col-33">
 					<div class="item-input">
 					  <input type="number" placeholder="2" id="S2pin" name= "S2pin"/>
 					</div>
 				 </div>
+				 <div class="col-33">
+					<input type="checkbox" id="S2pinVis" name="S1pinVis">
+					<div class="item-media">
+						<i class="icon icon-form-checkbox"></i>
+					</div>
+				</div>				 
 			  </div>
 			  </li>
 			  <li>
 			  <div class="row">
 				  
-				  <div class="col-50">
+				  <div class="col-33">
 					<input type="text" placeholder="PinName" id="S3pinName" name="S3pinName"/>
 				  </div>
-				  <div class="col-50">
+				  <div class="col-33">
 					<div class="item-input">
 					  <input type="number" placeholder="2" id="S3pin" name= "S3pin"/>
 					</div>
 				 </div>
+				 <div class="col-33">
+					<input type="checkbox" id="S3pinVis" name="S3pinVis">
+					<div class="item-media">
+						<i class="icon icon-form-checkbox"></i>
+					</div>
+				</div
 			  </div>
 			  </li>
 			  <li>
 			  <div class="row">
 				 
-				  <div class="col-50">
+				  <div class="col-33">
 					<input type="text" placeholder="PinName" id="S4pinName" name="S4pinName"/>
 				  </div>
-				  <div class="col-50">
+				  <div class="col-33">
 					<div class="item-input">
 					  <input type="number" placeholder="2" id="S4pin" name= "S4pin"/>
 					</div>
 				 </div>
+				 <div class="col-33">
+					<input type="checkbox"  id="S4pinVis" name="S4pinVis">
+					<div class="item-media">
+						<i class="icon icon-form-checkbox"></i>
+					</div>
+				</div
 			  </div>
 			  </li>
 			  <li>
 			  <div class="row">
 				 
-				  <div class="col-50">
+				  <div class="col-33">
 					<input type="text" placeholder="PinName" id="S5pinName" name="S5pinName"/>
 				  </div>
-				  <div class="col-50">
+				  <div class="col-33">
 					<div class="item-input">
 					  <input type="number" placeholder="2" id="S5pin" name= "S5pin"/>
 					</div>
 				 </div>
+				 <div class="col-33">
+					<input type="checkbox" id="S5pinVis" name="S5pinVis">
+					<div class="item-media">
+						<i class="icon icon-form-checkbox"></i>
+					</div>
+				</div
 			  </div>
 			  </li>
 		
@@ -317,16 +352,12 @@
 		</li>	
 	</div>
 	<div class="SwitchDetail" id='SwitchDetail' style='display:none'>
-		<li class="swipeout">
+		<li>
 			<div class="item-content">
 				<div class="item-media"><i class="icon icon-f7"></i></div>
 				<div class="item-inner">
 					<a href="#" class="button button-big button-fill color-green" id="DynamicSwitchID" data-device="deviceID" data-val="PinNum" >Switch Num</a>
 				</div>
-			</div>
-			<div class="swipeout-actions-right">
-				<!-- We add data-confirm and data-confirm-title attributes -->
-				<a href="#" class="swipeout-delete" data-confirm="Are you sure want to delete this item?" data-confirm-title="Delete?">Delete</a>
 			</div>
 			<!-- Sortable handler  -->
 			<div class="sortable-handler"></div>

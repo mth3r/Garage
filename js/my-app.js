@@ -57,31 +57,6 @@ $$('.panel-right').on('opened', function () {
 	
 });
 
-
-
-
-// $$('.garage-right').on('click', function() {
-//     var storedData = myApp.formGetData('my-form2');	
-// 	
-// 	
-// 	var q = 'https://api.particle.io/v1/devices/' + storedData.DeviceID + '/toggleRelay/';
-//     $$.post(q, {access_token: storedData.token, val: storedData.Rpin}, function (data) {
-// 		
-// 		if($$('.rightdoor').hasClass('garage-closed')){
-// 			$$('.rightdoor').removeClass('garage-closed');
-// 			$$('.rightdoor').addClass('garage-open');
-// 			$$('.rightdoor').html('<img src=\'img/garage_open_r.gif\' alt=\'closed\' height=\'45\' width=\'45\'>');
-// 			console.log('Door Open:');
-// 		}else {
-// 			$$('.rightdoor').removeClass('garage-open');
-// 			$$('.rightdoor').addClass('garage-closed');
-// 			$$('.rightdoor').html('<img src=\'img/garage_close_r.gif\' alt=\'closed\' height=\'45\' width=\'45\'>');
-// 			console.log('Door Closed:');
-// 		}
-// 		console.log('Load was performed:' + storedData.Rpin);
-// 	});
-// });
-
 var mainView = myApp.addView('.view-main', {
     // Because we use fixed-through navbar we can enable dynamic navbar
     dynamicNavbar: true
@@ -113,14 +88,19 @@ myApp.onPageInit('about', function (page) {
 				'"LpinVis_'+ 	formname +'":"'+ $$('#LpinVis').prop('checked')		+ '",'+
 				'"S1pin_'+ 		formname +'":"'+ $$('#S1pin').val()			+ '",'+
 				'"S1pinName_'+ 	formname +'":"'+ $$('#S1pinName').val()		+ '",'+
+				'"S1pinVis_'+ 	formname +'":"'+ $$('#S1pinVis').prop('checked')		+ '",'+
 				'"S2pin_'+ 		formname +'":"'+ $$('#S2pin').val()			+ '",'+
 				'"S2pinName_'+ 	formname +'":"'+ $$('#S2pinName').val()		+ '",'+
+				'"S2pinVis_'+ 	formname +'":"'+ $$('#S2pinVis').prop('checked')		+ '",'+
 				'"S3pin_'+ 		formname +'":"'+ $$('#S3pin').val()			+ '",'+
 				'"S3pinName_'+ 	formname +'":"'+ $$('#S3pinName').val()		+ '",'+
+				'"S3pinVis_'+ 	formname +'":"'+ $$('#S3pinVis').prop('checked')		+ '",'+
 				'"S4pin_'+ 		formname +'":"'+ $$('#S4pin').val()			+ '",'+
 				'"S4pinName_'+ 	formname +'":"'+ $$('#S4pinName').val()		+ '",'+
+				'"S4pinVis_'+ 	formname +'":"'+ $$('#S4pinVis').prop('checked')		+ '",'+
 				'"S5pin_'+ 		formname +'":"'+ $$('#S5pin').val()			+ '",'+
-				'"S5pinName_'+ 	formname +'":"'+ $$('#S5pinName').val()		+'"}';
+				'"S5pinName_'+ 	formname +'":"'+ $$('#S5pinName').val()		+ '",'+
+				'"S5pinVis_'+ 	formname +'":"'+ $$('#S5pinVis').prop('checked')		 +'"}';
 			var obj = JSON.parse(text);
 			var DynamicFormData = myApp.formStoreData(formname,obj);
 			});
@@ -142,16 +122,7 @@ myApp.onPageInit('form', function (page) {
 
  
 $$('.delete-storage-data').on('click', function() {
-  //$$('#my-form2').attr('id', 'my-form3');
-   //var storedData1 = myApp.formStoreData('my-form3');
-   //storedData = myApp.formGetData('my-form2');
   
-  //$$('input#ParticleToken').val('');
-  //$$('input#ParticleID').val('');
-  //myApp.alert(storedData1)
-  //storedData1 = myApp.formGetData('#my-form3');
-  //myApp.alert($$('#my-form3').attr('class'))
-  //myApp.alert(storedData1)
   
 });
  
@@ -255,11 +226,7 @@ function appendLocation(a){
 	$$('.dynamic').html(a);	
 }
 function appendForm(a,b){
- 	console.log(a);
- 	console.log(b);
-	console.log($$('#DynPhotonName').html());
-	$$('#photon-name').html('Device Settings:   ' + a);
-	
+ 	$$('#photon-name').html('Device Settings:   ' + a);
 	$$('#my-form3').attr('id',a);
 	$$('#ParticleID').attr('name', 'DeviceID_'+ a);
 	$$('#ParticleToken').attr('name', 'token_' + a);
@@ -272,15 +239,19 @@ function appendForm(a,b){
 	$$('#RpinVis').attr('name', 'RpinVis' + a);
 	$$('#S1pin').attr('name', 'S1pin_' + a);
 	$$('#S1pinName').attr('name', 'S1pinName_' + a);
+	$$('#S1pinVis').attr('name', 'S1pinVis' + a);
 	$$('#S2pin').attr('name', 'S2pin_' + a);
 	$$('#S2pinName').attr('name', 'S2pinName_' + a);
+	$$('#S2pinVis').attr('name', 'S2pinVis' + a);
 	$$('#S3pin').attr('name', 'S3pin_' + a);
 	$$('#S3pinName').attr('name', 'S3pinName_' + a);
+	$$('#S3pinVis').attr('name', 'S3pinVis' + a);
 	$$('#S4pin').attr('name', 'S4pin_' + a);
 	$$('#S4pinName').attr('name', 'S4pinName_' + a);	
+	$$('#S4pinVis').attr('name', 'S4pinVis' + a);
 	$$('#S5pin').attr('name', 'S5pin_' + a);
 	$$('#S5pinName').attr('name', 'S5pinName_' + a);
-	
+	$$('#S5pinVis').attr('name', 'S5pinVis' + a);
 	var newDiv = $$('#dynForm').html();
 	$$('.formSpot').append(newDiv); 
 	try {
@@ -303,14 +274,19 @@ function appendForm(a,b){
 			$$('input#RpinVis').prop('checked', eval(eval('DynData.RpinVis_'+a)));
 			$$('#S1pin').val(eval('DynData.S1pin_' + a));
 			$$('#S1pinName').val(eval('DynData.S1pinName_' + a));
+			$$('input#S1pinVis').prop('checked', eval(eval('DynData.S1pinVis_'+a)));
 			$$('#S2pin').val(eval('DynData.S2pin_' + a));
 			$$('#S2pinName').val(eval('DynData.S2pinName_' + a));
+			$$('input#S2pinVis').prop('checked', eval(eval('DynData.S2pinVis_'+a)));
 			$$('#S3pin').val(eval('DynData.S3pin_' + a));
 			$$('#S3pinName').val(eval('DynData.S3pinName_' + a));
+			$$('input#S3pinVis').prop('checked', eval(eval('DynData.S3pinVis_'+a)));
 			$$('#S4pin').val(eval('DynData.S4pin_' + a));
 			$$('#S4pinName').val(eval('DynData.S4pinName_' + a));	
+			$$('input#S4pinVis').prop('checked', eval(eval('DynData.S4pinVis_'+a)));
 			$$('#S5pin').val(eval('DynData.S5pin_' + a));
 			$$('#S5pinName').val(eval('DynData.S5pinName_' + a));
+			$$('input#S5pinVis').prop('checked', eval(eval('DynData.S5pinVis_'+a)));
 		}
 	}catch(err){
 		console.log('error on form fill out')
@@ -326,12 +302,14 @@ var newDiv = $$('#SwitchDetail').html();
 	var DynData = myApp.formGetData(photons[i].name);	
 		if (DynData){
 		for(j=0; j<5; j++){
-			dest.append(newDiv);
-			$$('#DynamicSwitchID').text(eval('DynData.S' + (j+1) + 'pinName_' + photons[i].name));
-			$$('#DynamicSwitchID').addClass('DynaSwitch');
-			$$('#DynamicSwitchID').attr('data-val',eval('DynData.S' + (j+1) + 'pin_' + photons[i].name));
-			$$('#DynamicSwitchID').attr('data-device',photons[i].id)
-			$$('#DynamicSwitchID').attr('id',photons[i].name + '_Switch_' + (j+1));	
+			if (eval('DynData.S' + (j+1) + 'pinName_' + photons[i].name)){
+				dest.append(newDiv);
+				$$('#DynamicSwitchID').text(eval('DynData.S' + (j+1) + 'pinName_' + photons[i].name));
+				$$('#DynamicSwitchID').addClass('DynaSwitch');
+				$$('#DynamicSwitchID').attr('data-val',eval('DynData.S' + (j+1) + 'pin_' + photons[i].name));
+				$$('#DynamicSwitchID').attr('data-device',photons[i].id)
+				$$('#DynamicSwitchID').attr('id',photons[i].name + '_Switch_' + (j+1));	
+			}
 		}
 		}
 	}
