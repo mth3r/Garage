@@ -297,7 +297,8 @@ var newDiv = $$('#SwitchDetail').html();
 	var DynData = myApp.formGetData(photons[i].name);	
 		if (DynData){
 		for(j=0; j<5; j++){
-			if (eval('DynData.S' + (j+1) + 'pinName_' + photons[i].name)){
+		console.log(eval('DynData.S' + (j+1) + 'pinVis_' + photons[i].name));
+			if (eval(eval('DynData.S' + (j+1) + 'pinVis_' + photons[i].name))){
 				dest.append(newDiv);
 				$$('#DynamicSwitchID').text(eval('DynData.S' + (j+1) + 'pinName_' + photons[i].name));
 				$$('#DynamicSwitchID').addClass('DynaSwitch');
