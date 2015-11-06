@@ -62,6 +62,10 @@ var mainView = myApp.addView('.view-main', {
     dynamicNavbar: true
 	
 });
+myApp.onPageInit('camera', function (page) {
+	console.log('init');
+	drawCamera();
+});
 myApp.onPageInit('about', function (page) {
 	try{
 		drawPhotons();
@@ -310,4 +314,56 @@ var newDiv = $$('#SwitchDetail').html();
 		}
 	}
 
+}
+function drawCamera(){
+	var newDiv = $$('#cameraDetail').html();
+	var url = 'http://mth3r.ddns.net:';
+	var port = storedData.CameraPort+'/';
+	var action='videostream.cgi?'
+	var user = '&user=' + storedData.FoscamUser;
+	var password = '&pwd=' +storedData.FoscamPass
+	var timer;
+	
+	var src=url+port+action+user+password;
+	$$('#controls').append(newDiv); 
+	$$('#foscam').attr('alt', 'This is the camera spot');
+	$$('#foscam').attr('width', '640');
+	$$('#foscam').attr('hieght', '480');
+	$$('#foscam').attr('src',src);
+	
+	
+	$$('.CameraControl').on('mousedown', function() {
+		var cmd= '&command='+ $$(this).data('cmd');
+		
+		action="decoder_control.cgi?";
+		var src=url+port+action+cmd+user+password;
+		timer=setInterval(function() {
+			$$('#foscam').attr('src',src);
+			console.log(src);
+				}, 100);
+	});
+	
+	$$('.CameraControl').on('mouseup', function() {
+		clearInterval(timer);
+		var cmdStop= '&command='+ $$(this).data('cmdStop');	
+		action="decoder_control.cgi?";
+		var src=url+port+action+cmdStop+user+password;
+		$$('#foscam').attr('src',src);
+		console.log(src);
+	});
+	
+	$$('.CameraSnapShot').on('click', function() {
+		action="snapshot.cgi?";
+		var src=url+port+action+user+password;
+		$$('#foscam').attr('src',src);
+		console.log(src);
+	});
+	$$('.CameraAlarm').on('click', function() {
+		action="set_alarm.cgi?";
+		cmd='&motion_armed=1&motion_sensitivity=5';
+		var src=url+port+action+cmd+user+password;
+		$$('#foscam').attr('src',src);
+		console.log(src);
+	});
+	
 }

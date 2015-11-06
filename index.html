@@ -116,6 +116,12 @@
                           <div class="item-title">Set Access Code</div>
                         </div>
                       </div></a></li>				  
+					  <li><a href="camera.html" class="item-link">
+                      <div class="item-content"> 
+                        <div class="item-inner">
+                          <div class="item-title">View camera</div>
+                        </div>
+                      </div></a></li>				  
                 </ul>
               </div>
 			  <div class="content-block-title" id="GarageControls">Garage Controls</div>
@@ -372,6 +378,46 @@
 				<div id="dynacol2img" class="rightdoor garage-closed" id="dynaright" data-device="deviceID"> <img src="img/Closed_Garage.gif" alt="closed" height="45" width="45"> </div>
 			</div>
 	</div>
+	<div class="cameraDetail" id="cameraDetail" style='display:none'>
+		<div class ="row">
+			<div class = "col-50">
+				<div class="row">
+					<div class = "col-33"><a href="#" class="button button-round button-raised">    </a></div>
+					<div class = "col-33"><a href="#" class="button button-round button-raised CameraControl" data-cmd="0" data-cmdStop="1">up</a></div>
+					<div class = "col-33"><a href="#" class="button button-round button-raised">    </a></div>
+				</div>
+			</div>
+		</div>
+		<div class ="row">
+			<div class = "col-50">
+				<div class="row">
+					<div class = "col-33"><a href="#" class="button button-round button-raised CameraControl" data-cmd="4" data-cmdStop="5">left</a></div>
+					<div class = "col-33"><a href="#" class="button button-round button-raised">    </a></div>
+					<div class = "col-33"><a href="#" class="button button-round button-raised CameraControl" data-cmd="6" data-cmdStop="7">right</a></div>
+				</div>
+			</div>
+		</div>
+		<div class ="row">
+			<div class = "col-50">
+				<div class="row">
+					<div class = "col-33"><a href="#" class="button button-round button-raised">    </a></div>
+					<div class = "col-33"><a href="#" class="button button-round button-raised CameraControl" data-cmd="2" data-cmdStop="3">down</a></div>
+					<div class = "col-33"><a href="#" class="button button-round button-raised">    </a></div>
+				</div>
+			</div>
+		</div>
+		<div class ="row">
+			<div class = "col-50">
+				<div class="row">
+					<div class = "col-50"><a href="#" class="button button-round button-raised CameraSnapShot" id="CameraSnapShot">Snap Pict</a></div>
+					<div class = "col-50"><a href="#" class="button button-round button-raised CameraAlarm" id="CameraAlarm">Arm Alarm</a></div>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
 	
 	<!-- Path to Framework7 Library JS-->
     <script type="text/javascript" src="js/framework7.min.js"></script>
