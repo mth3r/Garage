@@ -325,6 +325,7 @@ function drawCamera(){
 	var timer;
 	
 	var src=url+port+action+user+password;
+	console.log(src);
 	$$('#controls').append(newDiv); 
 	$$('#foscam').attr('alt', 'This is the camera spot');
 	$$('#foscam').attr('width', '640');
@@ -333,37 +334,48 @@ function drawCamera(){
 	
 	
 	$$('.CameraControl').on('mousedown', function() {
+		console.log($$(this).html());
 		var cmd= '&command='+ $$(this).data('cmd');
 		
 		action="decoder_control.cgi?";
-		var src=url+port+action+cmd+user+password;
+		//var src=url+port+action+cmd+user+password;
+		var src=url+port+action;
+		var cmd= $$(this).data('cmd');
+		//var q = url+port+action;
 		timer=setInterval(function() {
-			$$('#foscam').attr('src',src);
-			console.log(src);
+			//$$('#foscam').attr('src',src);
+			$$.get(src, {command: cmd, user: storedData.FoscamUser, pwd:storedData.FoscamPass}, function (data) {
+				console.log('mouse down: ' + cmd);
+			});
+			
 				}, 100);
 	});
 	
 	$$('.CameraControl').on('mouseup', function() {
 		clearInterval(timer);
-		var cmdStop= '&command='+ $$(this).data('cmdStop');	
+		var cmd= $$(this).data('cmdStop');	
 		action="decoder_control.cgi?";
-		var src=url+port+action+cmdStop+user+password;
-		$$('#foscam').attr('src',src);
-		console.log(src);
+		var src=url+port+action
+		$$.get(src, {command: cmd, user: storedData.FoscamUser, pwd:storedData.FoscamPass}, function (data) {
+				console.log('mouseup: '+ cmd);
+			});
 	});
 	
 	$$('.CameraSnapShot').on('click', function() {
 		action="snapshot.cgi?";
-		var src=url+port+action+user+password;
-		$$('#foscam').attr('src',src);
-		console.log(src);
+		var src=url+port+action;
+		$$.get(src, {user: storedData.FoscamUser, pwd:storedData.FoscamPass}, function (data) {
+				console.log('snapshot');
+			});
+		
 	});
 	$$('.CameraAlarm').on('click', function() {
 		action="set_alarm.cgi?";
 		cmd='&motion_armed=1&motion_sensitivity=5';
-		var src=url+port+action+cmd+user+password;
-		$$('#foscam').attr('src',src);
-		console.log(src);
+		var src=url+port+action;
+		$$.get(src, {command: cmd, user: storedData.FoscamUser, pwd:storedData.FoscamPass}, function (data) {
+				console.log('Alarm');
+			});
 	});
 	
 }
