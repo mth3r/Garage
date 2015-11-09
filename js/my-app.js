@@ -1,10 +1,12 @@
 
 // Initialize your app
 var myApp = new Framework7({
-swipePanel: 'right',
-precompileTemplates: true, //
-template7Pages: true,
- tapHold: true //enable tap hold events
+	swipePanel: 'right',
+	precompileTemplates: true, //
+	template7Pages: true,
+	tapHold: true, //enable tap hold events
+	tapHoldDelay: 500,
+	tapHoldPreventClicks: false	
 });
  
 // Export selectors engine
@@ -337,7 +339,8 @@ function drawCamera( timeInterval){
 	$$('#foscam').attr('src',src);
 	
 	
-	$$('.CameraControl').on('mousedown', function() {
+	$$('.CameraControl').on('taphold', function() {
+		
 		console.log($$(this).html());
 		var cmd= '&command='+ $$(this).data('cmd');
 		
@@ -355,12 +358,12 @@ function drawCamera( timeInterval){
 				console.log('mouse down: ' + cmd);
 			});
 			console.log('mouse down: ' + cmd);
- 		}, 500, 'cameraTimer');
+ 		}, 100, 'cameraTimer');
 			
 			
 	});
 	
-	$$('.CameraControl').on('mouseup', function() {
+	$$('.CameraControl').on('click', function() {
 		clearTimeout(cameraTimer);
 		
 		console.log('mouseup');
