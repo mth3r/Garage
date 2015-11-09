@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="generator"
+    content="HTML Tidy for HTML5 (experimental) for Windows https://github.com/w3c/tidy-html5/tree/c63cc39" />
+    <meta charset="utf-8" />
+    <meta name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <title>My App</title>
     <!-- Path to Framework7 Library CSS-->
-    <link rel="stylesheet" href="css/framework7.ios.min.css">
-    <link rel="stylesheet" href="css/framework7.ios.colors.min.css">
+    <link rel="stylesheet" href="css/framework7.ios.min.css" />
+    <link rel="stylesheet" href="css/framework7.ios.colors.min.css" />
     <!-- Path to your custom app styles-->
-    <link rel="stylesheet" href="css/my-app.css">
+    <link rel="stylesheet" href="css/my-app.css" />
   </head>
   <body>
     <!-- Status bar overlay for fullscreen mode-->
@@ -18,63 +21,67 @@
     <!-- Panels overlay-->
     <div class="panel-overlay"></div>
     <!-- Left panel with reveal effect-->
-    <div class="panel panel-left panel-reveal" >
+    <div class="panel panel-left panel-reveal">
       <div class="content-block">
-					<div class="content-block">
-				<!-- We specify target sortable list in data-sortable attribute  -->
-				<p><a href="#" data-sortable=".sortable" class="toggle-sortable">Toggle sortable</a></p>
-				<p><a href="#" class="element-add-location">Add Elements</a></p>
-			</div>
-			<!-- Sortable list  -->
-			<div class="list-block sortable">
-				<ul class="tempReadout">
-				  <li class="swipeout Temperature1">
-					<div class="item-content">
-					  <div class="item-media"><i class="icon icon-f7"></i></div>
-					  <div class="item-inner">
-						<div class="item-title location">Office Temp</div>
-						<div class="item-after" id ="val1"></div>
-					  </div>
-					</div>
-					<div class="swipeout-actions-right">
-					<!-- We add data-confirm and data-confirm-title attributes -->
-					<a href="#" class="swipeout-delete" data-confirm="Are you sure want to delete this item?" data-confirm-title="Delete?" data-close-on-cancel="true">Delete</a>
-					</div>
-					<!-- Sortable handler  -->
-					
-					<div class="sortable-handler"></div>
-					
-				  </li>
-				  <li class="swipeout Temperature2">
-					<div class="item-content">
-					  <div class="item-media"><i class="icon icon-f7"></i></div>
-					  <div class="item-inner">
-						<div class="item-title location">Garage Temp</div>
-						<div class="item-after" id="val2"></div>
-					  </div>
-					</div>
-					<div class="swipeout-actions-right">
-					<!-- We add data-confirm and data-confirm-title attributes -->
-					<a href="#" class="swipeout-delete" data-confirm="Are you sure want to delete this item?" data-confirm-title="Delete?" data-close-on-cancel="true">Delete</a>
-					</div>
-					<div class="sortable-handler"></div>
-				  </li>				  
-				</ul>
-			</div>
+        <div class="content-block">
+          <!-- We specify target sortable list in data-sortable attribute  -->
+          <p>
+            <a href="#" data-sortable=".sortable" class="toggle-sortable">Toggle sortable</a>
+          </p>
+          <p>
+            <a href="#" class="element-add-location">Add Elements</a>
+          </p>
+        </div>
+        <!-- Sortable list  -->
+        <div class="list-block sortable">
+          <ul class="tempReadout">
+            <li class="swipeout Temperature1">
+              <div class="item-content">
+                <div class="item-media"></div>
+                <div class="item-inner">
+                  <div class="item-title location">Office Temp</div>
+                  <div class="item-after" id="val1"></div>
+                </div>
+              </div>
+              <div class="swipeout-actions-right">
+                <!-- We add data-confirm and data-confirm-title attributes -->
+                <a href="#" class="swipeout-delete" data-confirm="Are you sure want to delete this item?"
+                data-confirm-title="Delete?" data-close-on-cancel="true">Delete</a>
+              </div>
+              <!-- Sortable handler  -->
+              <div class="sortable-handler"></div>
+            </li>
+            <li class="swipeout Temperature2">
+              <div class="item-content">
+                <div class="item-media"></div>
+                <div class="item-inner">
+                  <div class="item-title location">Garage Temp</div>
+                  <div class="item-after" id="val2"></div>
+                </div>
+              </div>
+              <div class="swipeout-actions-right">
+                <!-- We add data-confirm and data-confirm-title attributes -->
+                <a href="#" class="swipeout-delete" data-confirm="Are you sure want to delete this item?"
+                data-confirm-title="Delete?" data-close-on-cancel="true">Delete</a>
+              </div>
+              <div class="sortable-handler"></div>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
     <!-- Right panel with cover effect-->
     <div class="panel panel-right panel-cover">
       <div class="content-block">
-      <p><a href="#" data-sortable=".sortable" class="toggle-sortable">Toggle sortable</a></p>
+        <p>
+          <a href="#" data-sortable=".sortable" class="toggle-sortable">Toggle sortable</a>
+        </p>
         <div class="content-block-title">Switch Controls</div>
-        	<div class="list-block sortable">
-				<ul id="SwitchList">
-				</ul>
-			</div>
-    	  </div>
+        <div class="list-block sortable">
+          <ul id="SwitchList"></ul>
+        </div>
       </div>
-    
+    </div>
     <!-- Views-->
     <div class="views">
       <!-- Your main view, should have "view-main" class-->
@@ -85,7 +92,8 @@
             <!-- We have home navbar without left link-->
             <div class="center sliding">Home Automation</div>
             <div class="right">
-              <!-- Right link contains only icon - additional "icon-only" class--><a href="#" class="link icon-only open-panel"> <i class="icon icon-bars"></i></a>
+              <!-- Right link contains only icon - additional "icon-only" class-->
+              <a href="#" class="link icon-only open-panel"></a>
             </div>
           </div>
         </div>
@@ -98,38 +106,51 @@
               <div class="content-block-title">Welcome To Hertz Home Automation</div>
               <div class="content-block">
                 <div class="content-block-inner">
-                  <p>Various controls for the Hertz Home Automation!!???!!</p>                  
+                  <p>Various controls for the Hertz Home Automation!!???!!</p>
                 </div>
               </div>
-              <div class="content-block-title" >Photon Settings:</div>
+              <div class="content-block-title">Photon Settings:</div>
               <div class="list-block">
                 <ul>
-                  <li><a href="about.html" class="item-link">
+                  <li>
+                    <a href="about.html" class="item-link">
                       <div class="item-content">
-                        <div class="item-inner"> 
+                        <div class="item-inner">
                           <div class="item-title">Set Photon Details</div>
                         </div>
-                      </div></a></li>
-                  <li><a href="form.html" class="item-link">
-                      <div class="item-content"> 
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="form.html" class="item-link">
+                      <div class="item-content">
                         <div class="item-inner">
                           <div class="item-title">Set Access Code</div>
                         </div>
-                      </div></a></li>				  
-					  <li><a href="camera.html" class="item-link">
-                      <div class="item-content"> 
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="camera.html" class="item-link">
+                      <div class="item-content">
                         <div class="item-inner">
                           <div class="item-title">View camera</div>
                         </div>
-                      </div></a></li>				  
+                      </div>
+                    </a>
+                  </li>
                 </ul>
               </div>
-			  <div class="content-block-title" id="GarageControls">Garage Controls</div>
+              <div class="content-block-title" id="GarageControls">Garage Controls</div>
               <div class="content-block-title">Side panels</div>
               <div class="content-block">
                 <div class="row">
-                  <div class="col-50"><a href="#" data-panel="left" class="button open-panel">Left Panel</a></div>
-                  <div class="col-50"><a href="#" data-panel="right" class="button open-panel">Right Panel</a></div>
+                  <div class="col-50">
+                    <a href="#" data-panel="left" class="button open-panel">Left Panel</a>
+                  </div>
+                  <div class="col-50">
+                    <a href="#" data-panel="right" class="button open-panel">Right Panel</a>
+                  </div>
                 </div>
               </div>
             </div>
@@ -141,292 +162,314 @@
         </div>
       </div>
     </div>
-    
-	
-	<div class="SomeClass" id='SomeClassTemplate' style='display:none'>
-		<li class="swipeout">
-			<div class="item-content">
-			  <div class="item-media"><i class="icon icon-f7"></i></div>
-			  <div class="item-inner">
-				<div class="item-title dynamic" >Location 2</div>
-				<div class="item-after" id ="val3"></div>
-			  </div>
-			</div>
-			<div class="swipeout-actions-right">
-				<a href="#" class="swipeout-delete" data-confirm="Are you sure want to delete this item?" data-confirm-title="Delete?" data-close-on-cancel="true">Delete</a>
-			</div>
-			<!-- Sortable handler  -->
-			<div class="sortable-handler"></div>
-		</li>
-	</div>
-	<div class="dynForm" id='dynForm' style='display:none'>
-	
-    <div class="page-content">
-	  <div class="content-block-title" id="photon-name">Photon Settings</div>	  
-	  <form id="my-form3" class="list-block store-data">      
-		  <div class="list-block">
-		   <ul>
-			  <li>
-				<div class="item-content">
-				  <div class="item-media"><i class="icon icon-form-DeviceID"></i></div>
-				  <div class="item-inner"> 
-					<div class="item-title label">DeviceID</div>
-					<div class="item-input">
-					  <input type="text" placeholder="asdfasdf54734asfdsd" id="ParticleID"name="DeviceID"/>
-					</div>
-				  </div>
-				</div>
-			  </li>
-			  <li>
-				<div class="item-content">
-				  <div class="item-media"><i class="icon icon-form-Token"></i></div>
-				  <div class="item-inner"> 
-					<div class="item-title label">Access Token</div>
-					<div class="item-input">
-					  <input type="text" placeholder="6182a52asdfasdfadsfasdf" id="ParticleToken" name= "token"/>
-					</div>
-				  </div>
-				</div>
-			  </li> 
-			  <li>
-				<div class="item-content">
-				  <div class="item-media"><i class="icon icon-form-Token"></i></div>
-				  <div class="item-inner"> 
-					<div class="item-title label"><input type="text" placeholder="LToggle" id="LToggle" name="LToggle"/></div>
-					<div class="item-input">
-					  <input type="number" placeholder="1" id="Lpin" name= "Lpin"/>
-					</div>
-					<div class="item-input">
-					  <input type="checkbox" id="LpinVis" name= "LpinVis" />
-					  <div class="item-media">
-						<i class="icon icon-form-checkbox"></i>
-					  </div>
-					</div>
-				  </div>
-				</div>
-			  </li> 		  
-			  <li>
-				<div class="item-content">
-				  <div class="item-media"><i class="icon icon-form-Token"></i></div>
-				  <div class="item-inner"> 
-					<div class="item-title label"><input type="text" placeholder="RToggle" id="RToggle" name="RToggle"/></div>
-					<div class="item-input">
-					  <input type="number" placeholder="2" id="Rpin" name= "Rpin"/>
-					</div>
-					<div class="item-input">
-					  <input type="checkbox" id="RpinVis" name= "RpinVis" />
-					  <div class="item-media">
-						<i class="icon icon-form-checkbox"></i>
-					  </div>
-					</div>
-				  </div>
-				</div>
-			  </li>
-		
-			  <li>
-			  <div class="row">
-				  <div class="col-33">
-					<p> Display Name</p>
-				  </div>
-				  <div class="col-33">
-					<div class="item-input">
-					  <p>Output Pin</p>
-					</div>					
-				 </div>
-				 <div class="col-33">
-					<div class="item-input">
-					  <p>Visible</p>
-					</div>
-				</div>
-			  </li>
-			  <div class="row">
-				  <div class="col-33">
-					<input type="text" placeholder="PinName" id="S1pinName" name="S1pinName"/>
-				  </div>
-				  <div class="col-33">
-					<div class="item-input">
-					  <input type="number" placeholder="2" id="S1pin" name= "S1pin"/>
-					</div>
-				 </div>
-				 <div class="col-33">
-					<input type="checkbox" id="S1pinVis" name="S1pinVis">
-					<div class="item-media">
-						<i class="icon icon-form-checkbox"></i>
-					</div>
-				</div>
-				
-			  </div>
-			  </li>
-			  <li>
-			  <div class="row">
-				  <div class="col-33">
-					<input type="text" placeholder="PinName" id="S2pinName" name="S2pinName"/>
-				  </div>
-				  <div class="col-33">
-					<div class="item-input">
-					  <input type="number" placeholder="2" id="S2pin" name= "S2pin"/>
-					</div>
-				 </div>
-				 <div class="col-33">
-					<input type="checkbox" id="S2pinVis" name="S1pinVis">
-					<div class="item-media">
-						<i class="icon icon-form-checkbox"></i>
-					</div>
-				</div>				 
-			  </div>
-			  </li>
-			  <li>
-			  <div class="row">
-				  
-				  <div class="col-33">
-					<input type="text" placeholder="PinName" id="S3pinName" name="S3pinName"/>
-				  </div>
-				  <div class="col-33">
-					<div class="item-input">
-					  <input type="number" placeholder="2" id="S3pin" name= "S3pin"/>
-					</div>
-				 </div>
-				 <div class="col-33">
-					<input type="checkbox" id="S3pinVis" name="S3pinVis">
-					<div class="item-media">
-						<i class="icon icon-form-checkbox"></i>
-					</div>
-				</div
-			  </div>
-			  </li>
-			  <li>
-			  <div class="row">
-				 
-				  <div class="col-33">
-					<input type="text" placeholder="PinName" id="S4pinName" name="S4pinName"/>
-				  </div>
-				  <div class="col-33">
-					<div class="item-input">
-					  <input type="number" placeholder="2" id="S4pin" name= "S4pin"/>
-					</div>
-				 </div>
-				 <div class="col-33">
-					<input type="checkbox"  id="S4pinVis" name="S4pinVis">
-					<div class="item-media">
-						<i class="icon icon-form-checkbox"></i>
-					</div>
-				</div
-			  </div>
-			  </li>
-			  <li>
-			  <div class="row">
-				 
-				  <div class="col-33">
-					<input type="text" placeholder="PinName" id="S5pinName" name="S5pinName"/>
-				  </div>
-				  <div class="col-33">
-					<div class="item-input">
-					  <input type="number" placeholder="2" id="S5pin" name= "S5pin"/>
-					</div>
-				 </div>
-				 <div class="col-33">
-					<input type="checkbox" id="S5pinVis" name="S5pinVis">
-					<div class="item-media">
-						<i class="icon icon-form-checkbox"></i>
-					</div>
-				</div
-			  </div>
-			  </li>
-		
-		  </ul>
-		  </div>
-		  <div class="content-block">
-        <div class="row">
-          <div class="col-50"><a href="#" class="button button-big button-fill color-red delete-storage-data-dynamic" >Cancel</a></div>
-          <div class="col-50">
-            <input type="submit" value="Submit" class="button button-big button-fill color-green save-storage-data-dynamic" id="Submit"/>
-			</div>
-		</div>
-	  </div>
-	  </form>
+    <div class="SomeClass" id='SomeClassTemplate' style='display:none'>
+      <ul>
+        <li class="swipeout">
+          <div class="item-content">
+            <div class="item-media"></div>
+            <div class="item-inner">
+              <div class="item-title dynamic">Location 2</div>
+              <div class="item-after" id="val3"></div>
+            </div>
+          </div>
+          <div class="swipeout-actions-right">
+            <a href="#" class="swipeout-delete" data-confirm="Are you sure want to delete this item?" data-confirm-title="Delete?"
+            data-close-on-cancel="true">Delete</a>
+          </div>
+          <!-- Sortable handler  -->
+          <div class="sortable-handler"></div>
+        </li>
+      </ul>
     </div>
-	</div>
-	
-	<div class="PhotonDetail" id='PhotonDetail' style='display:none'>
-		<li>
-			<div class="item-content">
-			  <div class="item-media"><i class="icon icon-form-Token"></i></div>
-				  <div class="item-inner"> 
-					<div class="item-title label" id="dynamicPhoton"><a href="#" id="dynamicPhotonLink" data-val="test">Photon Name</a></div>
-				  </div>
-			</div>
-		</li>	
-	</div>
-	<div class="SwitchDetail" id='SwitchDetail' style='display:none'>
-		<li>
-			<div class="item-content">
-				<div class="item-media"><i class="icon icon-f7"></i></div>
-				<div class="item-inner">
-					<a href="#" class="button button-big button-fill color-green" id="DynamicSwitchID" data-device="deviceID" data-val="PinNum" >Switch Num</a>
-				</div>
-			</div>
-			<!-- Sortable handler  -->
-			<div class="sortable-handler"></div>
-		</li>
-	</div>
-	<div class="GarageDetail" id='GarageDetail' style='display:none'>
-		<div class="content-block" >
-			<div class="row">
-				<div class="col-33" id="dynacol1" ><a href="#" class="button button-big button-fill color-green garageDoorButton" id="dynacol1Button" data-device="deviceID" data-pinNum="0" >Left Door</a></div>
-				<div id="dynacol1img" class= "leftdoor garage-closed" id="dynaleft"><img src="img/Closed_Garage.gif" alt="closed" height="45" width="45"></div>				
-				<div class="col-33" id="dynacol2"><a href="#" class="button button-big button-fill color-green garageDoorButton" id="dynacol2Button" data-device="deviceID" data-pinNum="0">Right Door</a></div>
-				<div id="dynacol2img" class="rightdoor garage-closed" id="dynaright" data-device="deviceID"> <img src="img/Closed_Garage.gif" alt="closed" height="45" width="45"> </div>
-			</div>
-	</div>
-	<div class="cameraDetail" id="cameraDetail" style='display:none'>
-		<div class ="row">
-			<div class = "col-75">
-				<div class="row">
-					<div class = "col-33"><a href="#" class="button button-round button-raised">    </a></div>
-					<div class = "col-33"><a href="#" class="button button-round button-raised CameraControl" data-cmd="0" data-cmdStop="1">up</a></div>
-					<div class = "col-33"><a href="#" class="button button-round button-raised">    </a></div>
-				</div>
-			</div>
-		</div>
-		<div class ="row">
-			<div class = "col-75">
-				<div class="row">
-					<div class = "col-33"><a href="#" class="button button-round button-raised CameraControl" data-cmd="4" data-cmdStop="5">left</a></div>
-					<div class = "col-33"><a href="#" class="button button-round button-raised CameraStop">    </a></div>
-					<div class = "col-33"><a href="#" class="button button-round button-raised CameraControl" data-cmd="6" data-cmdStop="7">right</a></div>
-				</div>
-			</div>
-		</div>
-		<div class ="row">
-			<div class = "col-75">
-				<div class="row">
-					<div class = "col-33"><a href="#" class="button button-round button-raised">    </a></div>
-					<div class = "col-33"><a href="#" class="button button-round button-raised CameraControl" data-cmd="2" data-cmdStop="3">down</a></div>
-					<div class = "col-33"><a href="#" class="button button-round button-raised">    </a></div>
-				</div>
-			</div>
-		</div>
-		<div class ="row">
-			<div class = "col-75">
-				<div class="row">
-					<div class = "col-50"><a href="#" class="button button-round button-raised CameraSnapShot" id="CameraSnapShot">Snap Pict</a></div>
-					<div class = "col-50"><a href="#" class="button button-round button-raised CameraAlarm" id="CameraAlarm">Arm Alarm</a></div>
-					
-				</div>
-			</div>
-		</div>
-	</div>
-	
-	
-	
-	<!-- Path to Framework7 Library JS-->
-    <script type="text/javascript" src="js/framework7.min.js"></script>
+    <div class="dynForm" id='dynForm' style='display:none'>
+      <div class="page-content">
+        <div class="content-block-title" id="photon-name">Photon Settings</div>
+        <form id="my-form3" class="list-block store-data">
+          <div class="list-block">
+            <ul>
+              <li>
+                <div class="item-content">
+                  <div class="item-media"></div>
+                  <div class="item-inner">
+                    <div class="item-title label">DeviceID</div>
+                    <div class="item-input">
+                      <input type="text" placeholder="asdfasdf54734asfdsd" id="ParticleID" name="DeviceID" />
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="item-content">
+                  <div class="item-media"></div>
+                  <div class="item-inner">
+                    <div class="item-title label">Access Token</div>
+                    <div class="item-input">
+                      <input type="text" placeholder="6182a52asdfasdfadsfasdf" id="ParticleToken" name="token" />
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="item-content">
+                  <div class="item-media"></div>
+                  <div class="item-inner">
+                    <div class="item-title label">
+                      <input type="text" placeholder="LToggle" id="LToggle" name="LToggle" />
+                    </div>
+                    <div class="item-input">
+                      <input type="number" placeholder="1" id="Lpin" name="Lpin" />
+                    </div>
+                    <div class="item-input">
+                      <input type="checkbox" id="LpinVis" name="LpinVis" />
+                      <div class="item-media"></div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="item-content">
+                  <div class="item-media"></div>
+                  <div class="item-inner">
+                    <div class="item-title label">
+                      <input type="text" placeholder="RToggle" id="RToggle" name="RToggle" />
+                    </div>
+                    <div class="item-input">
+                      <input type="number" placeholder="2" id="Rpin" name="Rpin" />
+                    </div>
+                    <div class="item-input">
+                      <input type="checkbox" id="RpinVis" name="RpinVis" />
+                      <div class="item-media"></div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="row">
+                  <div class="col-33">
+                    <p>Display Name</p>
+                  </div>
+                  <div class="col-33">
+                    <div class="item-input">
+                      <p>Output Pin</p>
+                    </div>
+                  </div>
+                  <div class="col-33">
+                    <div class="item-input">
+                      <p>Visible</p>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li style="list-style: none; display: inline">
+                <div class="row">
+                  <div class="col-33">
+                    <input type="text" placeholder="PinName" id="S1pinName" name="S1pinName" />
+                  </div>
+                  <div class="col-33">
+                    <div class="item-input">
+                      <input type="number" placeholder="2" id="S1pin" name="S1pin" />
+                    </div>
+                  </div>
+                  <div class="col-33">
+                    <input type="checkbox" id="S1pinVis" name="S1pinVis" />
+                    <div class="item-media"></div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="row">
+                  <div class="col-33">
+                    <input type="text" placeholder="PinName" id="S2pinName" name="S2pinName" />
+                  </div>
+                  <div class="col-33">
+                    <div class="item-input">
+                      <input type="number" placeholder="2" id="S2pin" name="S2pin" />
+                    </div>
+                  </div>
+                  <div class="col-33">
+                    <input type="checkbox" id="S2pinVis" name="S1pinVis" />
+                    <div class="item-media"></div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="row">
+                  <div class="col-33">
+                    <input type="text" placeholder="PinName" id="S3pinName" name="S3pinName" />
+                  </div>
+                  <div class="col-33">
+                    <div class="item-input">
+                      <input type="number" placeholder="2" id="S3pin" name="S3pin" />
+                    </div>
+                  </div>
+                  <div class="col-33">
+                    <input type="checkbox" id="S3pinVis" name="S3pinVis" />
+                    <div class="item-media"></div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="row">
+                  <div class="col-33">
+                    <input type="text" placeholder="PinName" id="S4pinName" name="S4pinName" />
+                  </div>
+                  <div class="col-33">
+                    <div class="item-input">
+                      <input type="number" placeholder="2" id="S4pin" name="S4pin" />
+                    </div>
+                  </div>
+                  <div class="col-33">
+                    <input type="checkbox" id="S4pinVis" name="S4pinVis" />
+                    <div class="item-media"></div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="row">
+                  <div class="col-33">
+                    <input type="text" placeholder="PinName" id="S5pinName" name="S5pinName" />
+                  </div>
+                  <div class="col-33">
+                    <div class="item-input">
+                      <input type="number" placeholder="2" id="S5pin" name="S5pin" />
+                    </div>
+                  </div>
+                  <div class="col-33">
+                    <input type="checkbox" id="S5pinVis" name="S5pinVis" />
+                    <div class="item-media"></div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="content-block">
+            <div class="row">
+              <div class="col-50">
+                <a href="#" class="button button-big button-fill color-red delete-storage-data-dynamic">Cancel</a>
+              </div>
+              <div class="col-50">
+                <input type="submit" value="Submit" class="button button-big button-fill color-green save-storage-data-dynamic"
+                id="Submit" />
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="PhotonDetail" id='PhotonDetail' style='display:none'>
+      <ul>
+        <li>
+          <div class="item-content">
+            <div class="item-media"></div>
+            <div class="item-inner">
+              <div class="item-title label" id="dynamicPhoton">
+                <a href="#" id="dynamicPhotonLink" data-val="test">Photon Name</a>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="SwitchDetail" id='SwitchDetail' style='display:none'>
+      <ul>
+        <li>
+          <div class="item-content">
+            <div class="item-media"></div>
+            <div class="item-inner">
+              <a href="#" class="button button-big button-fill color-green" id="DynamicSwitchID" data-device="deviceID"
+              data-val="PinNum">Switch Num</a>
+            </div>
+          </div>
+          <!-- Sortable handler  -->
+          <div class="sortable-handler"></div>
+        </li>
+      </ul>
+    </div>
+    <div class="GarageDetail" id='GarageDetail' style='display:none'>
+    <div class="content-block">
+      <div class="row">
+        <div class="col-33" id="dynacol1">
+          <a href="#" class="button button-big button-fill color-green garageDoorButton" id="dynacol1Button" data-device="deviceID"
+          data-pinnum="0">Left Door</a>
+        </div>
+        <div class="leftdoor garage-closed" id="dynaleft">
+          <img src="img/Closed_Garage.gif" alt="closed" height="45" width="45" />
+        </div>
+        <div class="col-33" id="dynacol2">
+          <a href="#" class="button button-big button-fill color-green garageDoorButton" id="dynacol2Button" data-device="deviceID"
+          data-pinnum="0">Right Door</a>
+        </div>
+        <div class="rightdoor garage-closed" id="dynaright" data-device="deviceID">
+          <img src="img/Closed_Garage.gif" alt="closed" height="45" width="45" />
+        </div>
+      </div>
+    </div>
+    <div class="cameraDetail" id="cameraDetail" style='display:none'>
+      <div class="row">
+        <div class="col-75">
+          <div class="row">
+            <div class="col-33">
+              <a href="#" class="button button-round"></a>
+            </div>
+            <div class="col-33">
+              <a href="#" class="button button-round CameraControl" data-cmd="0" data-cmdstop="1">up</a>
+            </div>
+            <div class="col-33">
+              <a href="#" class="button button-round"></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-75">
+          <div class="row">
+            <div class="col-33">
+              <a href="#" class="button button-round CameraControl" data-cmd="4" data-cmdstop="5">left</a>
+            </div>
+            <div class="col-33">
+              <a href="#" class="button button-round CameraStop"></a>
+            </div>
+            <div class="col-33">
+              <a href="#" class="button button-round CameraControl" data-cmd="6" data-cmdstop="7">right</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-75">
+          <div class="row">
+            <div class="col-33">
+              <a href="#" class="button button-round"></a>
+            </div>
+            <div class="col-33">
+              <a href="#" class="button button-round CameraControl" data-cmd="2" data-cmdstop="3">down</a>
+            </div>
+            <div class="col-33">
+              <a href="#" class="button button-round"></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-75">
+          <div class="row">
+            <div class="col-50">
+              <a href="#" class="button button-round CameraSnapShot" id="CameraSnapShot">Snap Pict</a>
+            </div>
+            <div class="col-50">
+              <a href="#" class="button button-round CameraAlarm" id="CameraAlarm">Arm Alarm</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Path to Framework7 Library JS-->
+    <script type="text/javascript" src="js/framework7.min.js"></script> 
     <!-- Path to timing app js-->
-    <script type="text/javascript" src="js/idangerous.timings.js"></script>
-    
+     
+    <script type="text/javascript" src="js/idangerous.timings.js"></script> 
     <!-- Path to your app js-->
-    <script type="text/javascript" src="js/my-app.js"></script>
-    
-	
+     
+    <script type="text/javascript" src="js/my-app.js"></script></div>
   </body>
 </html>
