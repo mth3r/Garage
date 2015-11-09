@@ -4,11 +4,13 @@ var myApp = new Framework7({
 swipePanel: 'right',
 precompileTemplates: true, //
 template7Pages: true,
+ tapHold: true //enable tap hold events
 });
  
 // Export selectors engine
 var $$ = Dom7;
 var photons;
+var cameraTimer;
 var storedData = myApp.formGetData('my-form2');
 if(storedData) {
    getPhotons();
@@ -316,22 +318,22 @@ var newDiv = $$('#SwitchDetail').html();
 
 }
 
-function drawCamera(){
+function drawCamera( timeInterval){
 	var newDiv = $$('#cameraDetail').html();
 	var url = 'http://mth3r.ddns.net:';
 	var port = storedData.CameraPort+'/';
 	var action='videostream.cgi?'
 	var user = '&user=' + storedData.FoscamUser;
 	var password = '&pwd=' +storedData.FoscamPass
-	var timer;
-	var IntervalTimer;
+	//var timer;
+	//var IntervalTimer;
 	
 	var src=url+port+action+user+password;
 	console.log(src);
 	$$('#controls').append(newDiv); 
 	$$('#foscam').attr('alt', 'This is the camera spot');
-	$$('#foscam').attr('width', '640');
-	$$('#foscam').attr('hieght', '480');
+	$$('#foscam').attr('width', '360');
+	$$('#foscam').attr('hieght', '380');
 	$$('#foscam').attr('src',src);
 	
 	
@@ -345,32 +347,26 @@ function drawCamera(){
 		var cmd= $$(this).data('cmd');
 		//var q = url+port+action;
 		$$('.test').html('mouse down before interval: '+ cmd);
-		
-		// timer=set_interval(function() {
-// 			//$$('#foscam').attr('src',src);
-// 			$$('.test').html('mouse down before get: '+ cmd);
-// 			$$.get(src, {command: cmd, user: storedData.FoscamUser, pwd:storedData.FoscamPass}, function (data) {
-// 				$$('.test').html('mouse down: '+ cmd);
-// 				console.log('mouse down: ' + cmd);
-// 			});
-// 			
-// 				}, 500);
-			timer=set_interval(move,500,timer,myApp);
+		clearTimeout(cameraTimer);
+		cameraTimer=set_interval(function() {
+			$$('.test').html('mouse down before get: '+ cmd);
+			$$.get(src, {command: cmd, user: storedData.FoscamUser, pwd:storedData.FoscamPass}, function (data) {
+				$$('.test').html('mouse down: '+ cmd);
+				console.log('mouse down: ' + cmd);
+			});
+			console.log('mouse down: ' + cmd);
+ 		}, 500, 'cameraTimer');
 			
 			
 	});
-	function move(){
-	console.log ('move');
-	}
+	
 	$$('.CameraControl').on('mouseup', function() {
+		clearTimeout(cameraTimer);
 		
-		clearTimeout(timer);
-		
+		console.log('mouseup');
 		var cmd= $$(this).data('cmdStop');	
 		action="decoder_control.cgi?";
 		$$('.test').html('up: '+ cmd);
-		clearTimeout(IntervalTimer);
-		//console.log(ugh);
 		var src=url+port+action
 		$$.get(src, {command: cmd, user: storedData.FoscamUser, pwd:storedData.FoscamPass}, function (data) {
 				$$('.test').html('mouseup: '+ cmd);

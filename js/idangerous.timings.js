@@ -12,6 +12,7 @@
 
 function set_timeout(func, time) {
 	//Get Document State
+	
 	var hidden, change, vis = {
 			hidden: "visibilitychange",
 			mozHidden: "mozvisibilitychange",
