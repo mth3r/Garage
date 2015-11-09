@@ -315,6 +315,7 @@ var newDiv = $$('#SwitchDetail').html();
 	}
 
 }
+
 function drawCamera(){
 	var newDiv = $$('#cameraDetail').html();
 	var url = 'http://mth3r.ddns.net:';
@@ -354,16 +355,17 @@ function drawCamera(){
 // 			});
 // 			
 // 				}, 500);
-			set_interval(function() {
-			console.log ('test');
-			},500,IntervalTimer);
-			clearTimeout(IntervalTimer);
+			timer=set_interval(move,500,timer,myApp);
+			
 			
 	});
-	
+	function move(){
+	console.log ('move');
+	}
 	$$('.CameraControl').on('mouseup', function() {
 		
 		clearTimeout(timer);
+		
 		var cmd= $$(this).data('cmdStop');	
 		action="decoder_control.cgi?";
 		$$('.test').html('up: '+ cmd);
@@ -372,7 +374,7 @@ function drawCamera(){
 		var src=url+port+action
 		$$.get(src, {command: cmd, user: storedData.FoscamUser, pwd:storedData.FoscamPass}, function (data) {
 				$$('.test').html('mouseup: '+ cmd);
-				//console.log('mouseup: '+ cmd);
+				console.log('mouseup: '+ cmd);
 			});
 	});
 	
@@ -391,6 +393,10 @@ function drawCamera(){
 		$$.get(src, {command: cmd, user: storedData.FoscamUser, pwd:storedData.FoscamPass}, function (data) {
 				console.log('Alarm');
 			});
+	});
+	$$('.CameraStop').on('click', function() {
+		clearTimeout(timer);
+		console.log('stop');
 	});
 	
 }
