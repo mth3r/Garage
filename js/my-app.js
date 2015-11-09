@@ -323,6 +323,7 @@ function drawCamera(){
 	var user = '&user=' + storedData.FoscamUser;
 	var password = '&pwd=' +storedData.FoscamPass
 	var timer;
+	var IntervalTimer;
 	
 	var src=url+port+action+user+password;
 	console.log(src);
@@ -342,22 +343,36 @@ function drawCamera(){
 		var src=url+port+action;
 		var cmd= $$(this).data('cmd');
 		//var q = url+port+action;
-		timer=setInterval(function() {
-			//$$('#foscam').attr('src',src);
-			$$.get(src, {command: cmd, user: storedData.FoscamUser, pwd:storedData.FoscamPass}, function (data) {
-				console.log('mouse down: ' + cmd);
-			});
+		$$('.test').html('mouse down before interval: '+ cmd);
+		
+		// timer=set_interval(function() {
+// 			//$$('#foscam').attr('src',src);
+// 			$$('.test').html('mouse down before get: '+ cmd);
+// 			$$.get(src, {command: cmd, user: storedData.FoscamUser, pwd:storedData.FoscamPass}, function (data) {
+// 				$$('.test').html('mouse down: '+ cmd);
+// 				console.log('mouse down: ' + cmd);
+// 			});
+// 			
+// 				}, 500);
+			set_interval(function() {
+			console.log ('test');
+			},500,IntervalTimer);
+			clearTimeout(IntervalTimer);
 			
-				}, 100);
 	});
 	
 	$$('.CameraControl').on('mouseup', function() {
-		clearInterval(timer);
+		
+		clearTimeout(timer);
 		var cmd= $$(this).data('cmdStop');	
 		action="decoder_control.cgi?";
+		$$('.test').html('up: '+ cmd);
+		clearTimeout(IntervalTimer);
+		//console.log(ugh);
 		var src=url+port+action
 		$$.get(src, {command: cmd, user: storedData.FoscamUser, pwd:storedData.FoscamPass}, function (data) {
-				console.log('mouseup: '+ cmd);
+				$$('.test').html('mouseup: '+ cmd);
+				//console.log('mouseup: '+ cmd);
 			});
 	});
 	
