@@ -2,13 +2,20 @@ div[class*="col-"] {
   background: #fff;
   text-align: center;
   color: #000;
-  border: 1px solid #ddd;
-  
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: auto;
+  margin-top: auto;
+  padding: 0px;
 }
 .row {
   /*margin-bottom: 15px;*/
   text-align: center;
-  
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: auto;
+  margin-top: auto;
+  padding: 0px;
 } 
 .taphold {
     -moz-user-select: none !important;
