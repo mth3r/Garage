@@ -1,0 +1,17 @@
+<img src="400px-Windrose-CTR.xcf" width="400" height="400" border="0" usemap="#map" />
+
+<map name="map">
+<!-- #$-:Image map file created by GIMP Image Map plug-in -->
+<!-- #$-:GIMP Image Map plug-in by Maurits Rijk -->
+<!-- #$-:Please do not edit lines starting with "#$" -->
+<!-- #$VERSION:2.3 -->
+<!-- #$AUTHOR:mhertz -->
+<area shape="poly" coords="200,52,222,178,199,199,178,178,199,53" href="#" />
+<area shape="poly" coords="219,156,277,122,243,181,223,179" target="northeast" href="#" />
+<area shape="poly" coords="222,178,200,199,223,222,347,200" target="east" href="#" />
+<area shape="poly" coords="243,219,222,223,219,244,277,277" target="southeast" href="#" />
+<area shape="poly" coords="199,200,222,222,200,346,178,222" target="south" href="#" />
+<area shape="poly" coords="156,219,176,222,180,244,123,277" target="southwest" href="#" />
+<area shape="poly" coords="176,177,199,200,176,222,53,200" target="west" href="#" />
+<area shape="poly" coords="177,176,180,156,122,122,156,180" target="northwest" href="#" />
+</map>

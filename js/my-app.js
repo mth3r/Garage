@@ -319,10 +319,10 @@ function drawSwitches(dest) {
 }
 
 function drawCamera(timeInterval) {
-	var newDiv = $$('#cameraDetail').html();
+	//var newDiv = $$('#cameraDetail').html();
 	var url = 'http://mth3r.ddns.net:';
 	var port = storedData.CameraPort + '/';
-	var action = 'videostream.cgi?'
+	var action = 'live.htm?'
 		var user = '&user=' + storedData.FoscamUser;
 	var password = '&pwd=' + storedData.FoscamPass
 		//var timer;
@@ -330,18 +330,19 @@ function drawCamera(timeInterval) {
 
 		var src = url + port + action + user + password;
 	console.log(src);
-	$$('#controls').append(newDiv);
+	//$$('#controls').append(newDiv);
 	$$('#foscam').attr('alt', 'This is the camera spot');
 	$$('#foscam').attr('width', '360');
 	$$('#foscam').attr('hieght', '380');
 	$$('#foscam').attr('src', src);
 
 	$$('.CameraControl').on('taphold', function () {
-
-		console.log($$(this).html());
 		var cmd = '&command=' + $$(this).data('cmd');
-
+		var touch= $$(this).attr('id');
+		console.log('touch : ' +touch);
+		$$('#windrose').attr('src', 'img/400px-Windrose-' + touch + '.png');
 		action = "decoder_control.cgi?";
+		
 		//var src=url+port+action+cmd+user+password;
 		var src = url + port + action;
 		var cmd = $$(this).data('cmd');
@@ -365,7 +366,7 @@ function drawCamera(timeInterval) {
 
 	$$('.CameraControl').on('click', function () {
 		clearTimeout(cameraTimer);
-
+		$$('#windrose').attr('src', 'img/400px-Windrose-CTR.png');
 		console.log('mouseup');
 		var cmd = $$(this).data('cmdStop');
 		action = "decoder_control.cgi?";
@@ -408,17 +409,6 @@ function drawCamera(timeInterval) {
 		clearTimeout(timer);
 		console.log('stop');
 	});
-	$$('#north').on('click', function () {
-		console.log('north');
-	});
-	$$('#east').on('click', function () {
-		console.log('east');
-	});
-	$$('#west').on('click', function () {
-		console.log('west');
-	});
-	$$('#south').on('click', function () {
-		console.log('south');
-	});
+	
 
 }

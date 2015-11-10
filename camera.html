@@ -41,16 +41,20 @@
           </div>
           <div class="controls" id="controls"></div>
           <div>
-          <img src="img/400px-Windrose.jpg" usemap="#Map" /> 
+          <img id="windrose" src="img/400px-Windrose-CTR.png" usemap="#Map" /> 
           <map name="Map" id="Map">
-            <area class = "CameraControl" alt="" id="north" title="" href="#" shape="poly" coords="200,52,224,178,201,200,178,175" data-cmd="0"
-            data-cmdstop="1" />
-            <area class = "CameraControl" alt="" id="east" title="" href="#" shape="poly" coords="351,201,225,222,200,199,225,177" data-cmd="4"
+            <area class="CameraControl" shape="poly" coords="200,52,222,178,199,199,178,178,199,53" id="north" href="#"
+            data-cmd="0" data-cmdstop="1" />
+            <area class="CameraControl" shape="poly" coords="219,156,277,122,243,181,223,179" id="northeast" href="#" />
+            <area class="CameraControl" shape="poly" coords="222,178,200,199,223,222,347,200" id="east" href="#" data-cmd="4"
             data-cmdstop="5" />
-            <area class = "CameraControl" alt="" id="south" title="" href="#" shape="poly" coords="200,348,224,224,201,202,177,222" data-cmd="2"
+            <area class="CameraControl" shape="poly" coords="243,219,222,223,219,244,277,277" id="southeast" href="#" />
+            <area class="CameraControl" shape="poly" coords="199,200,222,222,200,346,178,222" id="south" href="#" data-cmd="2"
             data-cmdstop="3" />
-            <area class = "CameraControl" alt="" id="west" title="" href="#" shape="poly" coords="55,200,175,179,198,200,177,222" data-cmd="6"
+            <area class="CameraControl" shape="poly" coords="156,219,176,222,180,244,123,277" id="southwest" href="#" />
+            <area class="CameraControl" shape="poly" coords="176,177,199,200,176,222,53,200" id="west" href="#" data-cmd="6"
             data-cmdstop="7" />
+            <area class="CameraControl" shape="poly" coords="177,176,180,156,122,122,156,180" id="northwest" href="#" />
           </map></div>
         </div>
       </div>
