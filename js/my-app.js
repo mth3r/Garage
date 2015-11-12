@@ -327,11 +327,15 @@ function drawSwitches(dest) {
 function drawVideo(){
 	var url = 'http://mth3r.ddns.net:';
 	var port = storedData.CameraPort + '/';
-	var action = 'snapshot.cgi?'
+	var action = 'live.htm?'
 	var user = '&user=' + storedData.FoscamUser;
 	var password = '&pwd=' + storedData.FoscamPass
 	var src = url + port + action + user + password;
-	videoTimer = set_interval(function () {
+	$$('#foscam').attr('type', "video/mp4");
+	
+	$$('#foscam').attr('src', src);
+	/*
+		videoTimer = set_interval(function () {
 				try{
 					$$('#foscam').attr('src', src);
 					console.log('new pict');
@@ -339,7 +343,7 @@ function drawVideo(){
 					console.log('error');
 				}
 			}, FPS, 'videoTimer');
-
+	*/
 }
 function stopVideo(){
 	clearTimeout(videoTimer);
@@ -362,7 +366,8 @@ function drawCamera(timeInterval) {
 	$$('#foscam').attr('alt', 'This is the camera spot');
 	$$('#foscam').attr('width', '360');
 	$$('#foscam').attr('hieght', '380');
-	
+    $$('#foscam').attr('src', src);
+    
 	//drawVideo();
 
 	$$('.CameraControl').on('taphold', function () {
