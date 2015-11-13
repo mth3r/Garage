@@ -326,15 +326,12 @@ function drawSwitches(dest) {
 
 function drawVideo(){
 	var snapshot;
-	var url = '@mth3r.ddns.net:';
+	var url = 'http://mth3r.ddns.net:';
+	var action = 'video.cgi?'
+	var user = '&user=' + storedData.FoscamUser;
+	var password = '&pwd=' + storedData.FoscamPass
 	var port = storedData.CameraPort + '/';
-	var action = 'videoMain'
-	//var url = 'http://mth3r.ddns.net:';
-	//var action = 'live.htm?'
-	//var user = '&user=' + storedData.FoscamUser;
-	//var password = '&pwd=' + storedData.FoscamPass
-	//var src = url + port + action + user + password;
-	var src = 'rtsp://' + storedData.FoscamUser +':' + storedData.FoscamPass + url + port + action;
+	var src = url + port + action + user + password;
 	console.log(src);
 	$$('#foscam').attr('src', src);
 	
