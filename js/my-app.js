@@ -359,7 +359,7 @@ function stopVideo(){
 }
 
 function drawCamera(timeInterval) {
-	var url = 'http://mth3r.ddns.net:';
+	var url = '//mth3r.ddns.net:';
 	var port = storedData.CameraPort + '/';
 	var action = 'snapshot.cgi?cmd=snapPicture2';
 	var user = '&user=' + storedData.FoscamUser;
