@@ -1,65 +1,83 @@
 <!-- We don't need full layout here, because this page will be parsed with Ajax-->
 <!-- Top Navbar-->
+<!DOCTYPE html>
 <html>
-  <head>
-    <meta name="generator"
-    content="HTML Tidy for HTML5 (experimental) for Windows https://github.com/w3c/tidy-html5/tree/c63cc39" />
+<head>
+    <meta content=
+    "HTML Tidy for HTML5 (experimental) for Windows https://github.com/w3c/tidy-html5/tree/c63cc39"
+    name="generator">
     <title></title>
-  </head>
-  <body>
+</head>
+<body>
     <div class="navbar">
-      <div class="navbar-inner">
-        <div class="left">
-          <a href="#" class="back link">
-            <span>Back</span>
-          </a>
+        <div class="navbar-inner">
+            <div class="left">
+                <a class="back link" href="#"><span>Back</span></a>
+            </div>
+            <div class="center sliding">
+                Camera
+            </div>
+            <div class="right">
+                <!-- Right link contains only icon - additional "icon-only" class-->
+                <a class="link icon-only open-panel" href="#"></a>
+            </div>
         </div>
-        <div class="center sliding">Camera</div>
-        <div class="right">
-          <!-- Right link contains only icon - additional "icon-only" class-->
-          <a href="#" class="link icon-only open-panel"></a>
-        </div>
-      </div>
     </div>
     <div class="pages">
-      <!-- Page, data-page contains page name-->
-      <div data-page="camera" class="page">
-        <!-- Scrollable page content-->
-        <div class="page-content">
-          <div class="content-block">
-            <div class="content-block-title">
-              <p>Here is Foscam (hopefully)!</p>
-            </div>
-            <div class="content-block">
-              <div class="cameraSpot">
-                <img class="foscam" id="foscam" src="">
-              
-              </div>
-            </div>
-          </div>
-          <div class="content-block">
-            <p class="test">test</p>
-          </div>
-          <div class="controls" id="controls"></div>
-          <div>
-			  <img id="windrose" src="img/400px-Windrose-CTR.png" usemap="#Map" /> 
-			  <map name="Map" id="Map">
-				<area class="CameraControl" shape="poly" coords="200,52,222,178,199,199,178,178,199,53" id="north" href="#"
-				data-cmd="0" data-cmdstop="1" />
-				<area class="CameraControl" shape="poly" coords="219,156,277,122,243,181,223,179" id="northeast" href="#" />
-				<area class="CameraControl" shape="poly" coords="222,178,200,199,223,222,347,200" id="east" href="#" data-cmd="4"
-				data-cmdstop="5" />
-				<area class="CameraControl" shape="poly" coords="243,219,222,223,219,244,277,277" id="southeast" href="#" />
-				<area class="CameraControl" shape="poly" coords="199,200,222,222,200,346,178,222" id="south" href="#" data-cmd="2"
-				data-cmdstop="3" />
-				<area class="CameraControl" shape="poly" coords="156,219,176,222,180,244,123,277" id="southwest" href="#" />
-				<area class="CameraControl" shape="poly" coords="176,177,199,200,176,222,53,200" id="west" href="#" data-cmd="6"
-				data-cmdstop="7" />
-				<area class="CameraControl" shape="poly" coords="177,176,180,156,122,122,156,180" id="northwest" href="#" />
-			  </map>
-		  </div>
-		  <div class="content-block">
-        <div class="col-auto">
+        <!-- Page, data-page contains page name-->
+        <div class="page" data-page="camera">
+            <!-- Scrollable page content-->
+            <div class="page-content">
+                <div class="content-block">
+                    <div class="content-block-title">
+                        <p>Here is Foscam (hopefully)!</p>
+                    </div>
+                    
+                    <div class="content-block">
+                    	<iframe id="cameraIframe">text
+                        <!-- 
+                        <div class="cameraSpot" id="cameraSpot"><img class=
+                        "foscam" id="foscam" src=""></div>
+                        -->
+                    	</iframe>
+                    </div>
+                    
+                    <div class="content-block">
+                        <p class="test">test</p>
+                    </div>
+                 <div class="controls" id="controls"></div>
+                    <div>
+                        <img id="windrose" src="img/400px-Windrose-CTR.png"
+                        usemap="#Map"> <map id="Map" name="Map">
+                            <area class="CameraControl" coords=
+                            "200,52,222,178,199,199,178,178,199,53" data-cmd=
+                            "0" data-cmdstop="1" href="#" id="north" shape=
+                            "poly">
+                            <area class="CameraControl" coords=
+                            "219,156,277,122,243,181,223,179" href="#" id=
+                            "northeast" shape="poly">
+                            <area class="CameraControl" coords=
+                            "222,178,200,199,223,222,347,200" data-cmd="4"
+                            data-cmdstop="5" href="#" id="east" shape="poly">
+                            <area class="CameraControl" coords=
+                            "243,219,222,223,219,244,277,277" href="#" id=
+                            "southeast" shape="poly">
+                            <area class="CameraControl" coords=
+                            "199,200,222,222,200,346,178,222" data-cmd="2"
+                            data-cmdstop="3" href="#" id="south" shape="poly">
+                            <area class="CameraControl" coords=
+                            "156,219,176,222,180,244,123,277" href="#" id=
+                            "southwest" shape="poly">
+                            <area class="CameraControl" coords=
+                            "176,177,199,200,176,222,53,200" data-cmd="6"
+                            data-cmdstop="7" href="#" id="west" shape="poly">
+                            <area class="CameraControl" coords=
+                            "177,176,180,156,122,122,156,180" href="#" id=
+                            "northwest" shape="poly">
+                        </map>
+                    </div>
+                <div class="row">
+			<div class="col-auto">
 			  <!-- Switch (Checkbox) -->
 			  <div class="row">
 				<div class="col-auto">
@@ -73,16 +91,18 @@
 				<div class="col-auto">			
 					<div class="item-input">
 						<label class="label-switch">
-							<input type="checkbox" id="videoSwitchData" name="videoSwitchData" >
-							<div class="checkbox" id="videoSwitch" name="videoSwitch" ></div>
+							<input id="videoSwitchData" class="videoSwitchData" type="checkbox">
+							<div id="videoSwitch" class="checkbox"></div>
 						</label>
 					</div>
 				</div>
 			  </div>
 			</div>
-			</div>
-		</div>
-      </div>
+			
+		 </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </body>
+</body>
 </html>
