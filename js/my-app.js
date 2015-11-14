@@ -326,25 +326,32 @@ function drawSwitches(dest) {
 
 function drawVideo(){
 	var snapshot;
-	var url = 'http://mth3r.ddns.net:';
-	var action = 'video.cgi?'
-	var user = '&user=' + storedData.FoscamUser;
-	var password = '&pwd=' + storedData.FoscamPass
+	var url = '//mth3r.ddns.net:';
 	var port = storedData.CameraPort + '/';
+	var action = 'snapshot.cgi?cmd=snapPicture2';
+	var user = '&user=' + storedData.FoscamUser;
+	var password = '&pwd=' + storedData.FoscamPass;
 	var src = url + port + action + user + password;
-	console.log(src);
-	$$('#foscam').attr('src', src);
+    console.log(src); 
+	//$$('#foscam').attr('src', src);
+	$$('#foscam').attr('alt', 'no dice');
+	var i=0;
 	
-	if (snapshot){
 	videoTimer = set_interval(function () {
 			try{
 				$$('#foscam').attr('src', src);
-				console.log('new pict');
+				$$.get(src, {}, function (data) {        
+        			//$$('#foscam').attr('src', 'data:image/jpeg;base64,\'' + data + '\'' );
+        			$$('#cameraIframe').attr('src',src);
+        			
+        		});  
+				
 			}catch(err){
 				console.log('error');
 			}
 		}, FPS, 'videoTimer');
-	}
+	
+				
 }
 function stopVideo(){
 	clearTimeout(videoTimer);
@@ -352,23 +359,23 @@ function stopVideo(){
 }
 
 function drawCamera(timeInterval) {
-	//var newDiv = $$('#cameraDetail').html();
 	var url = 'http://mth3r.ddns.net:';
 	var port = storedData.CameraPort + '/';
-	var action = 'live.htm?'
+	var action = 'snapshot.cgi?cmd=snapPicture2';
 	var user = '&user=' + storedData.FoscamUser;
-	var password = '&pwd=' + storedData.FoscamPass
+	var password = '&pwd=' + storedData.FoscamPass;
 	var src = url + port + action + user + password;
-	console.log(src);
+	$$('#cameraIframe').attr('src',src);
 	
-	$$('#foscam').attr('alt', 'This is the camera spot');
-	$$('#foscam').attr('width', '360');
-	$$('#foscam').attr('hieght', '380');
-    $$('#foscam').attr('src', src);
+	//$$('#foscam').attr('alt', 'This is the camera spot');
+	//$$('#foscam').attr('width', '360');
+	//$$('#foscam').attr('hieght', '380');
+    //$$('#foscam').attr('src', src);
     
 	//drawVideo();
 
 	$$('.CameraControl').on('taphold', function () {
+		var url = 'http://mth3r.ddns.net:';
 		var cmd = '&command=' + $$(this).data('cmd');
 		var touch= $$(this).attr('id');
 		$$('#windrose').attr('src', 'img/400px-Windrose-' + touch + '.png');
@@ -377,16 +384,18 @@ function drawCamera(timeInterval) {
 		var cmd = $$(this).data('cmd');
 		clearTimeout(cameraTimer);
 		cameraTimer = set_interval(function () {
-				$$('.test').html('mouse down before get: ' + cmd);
+				try{
 				$$.get(src, {
 					command : cmd,
 					user : storedData.FoscamUser,
 					pwd : storedData.FoscamPass
+                       
 				}, function (data) {
-					$$('.test').html('mouse down: ' + cmd);
-					console.log('Pass--mouse down: ' + cmd);
-				});
-				console.log('mouse down: ' + cmd);
+					
+					
+				});}
+				catch(err){console.log('error');}
+				
 			}, 100, 'cameraTimer');
 
 	});
@@ -396,16 +405,20 @@ function drawCamera(timeInterval) {
 		$$('#windrose').attr('src', 'img/400px-Windrose-CTR.png');
 		console.log('mouseup');
 		var cmd = $$(this).data('cmdStop');
-		action = "decoder_control.cgi?";
-		$$('.test').html('up: ' + cmd);
-		var src = url + port + action
+		var action = "decoder_control.cgi?";
+		var url = 'http://mth3r.ddns.net:';
+		var port = storedData.CameraPort + '/';
+		var src = url + port + action;
+		console.log(src);
+		
 			$$.get(src, {
 				command : cmd,
 				user : storedData.FoscamUser,
 				pwd : storedData.FoscamPass
 			}, function (data) {
-				$$('.test').html('mouseup: ' + cmd);
-				console.log('mouseup: ' + cmd);
+				
+				
+				
 			});
 	});
 
@@ -437,7 +450,6 @@ function drawCamera(timeInterval) {
 		console.log('stop');
 	});
 	$$('#videoSwitch').on('click', function () {
-		
 		if(!$$('#videoSwitchData').prop('checked')){
 			drawVideo();
 			}else{
