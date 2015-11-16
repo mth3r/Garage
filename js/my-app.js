@@ -142,16 +142,34 @@ myApp.onPageInit('setDisplay', function (page) {
 
 });
 myApp.onPageInit('lights', function (page) {
+	
+String.prototype.encodeHTML = function () {
+    return this.replace(/&/g, '&amp;')
+               .replace(/</g, '&lt;')
+               .replace(/>/g, '&gt;')
+               .replace(/"/g, '&quot;')
+               .replace(/'/g, '&apos;');
+  };
 	$$('#roomSwitch').on('click', function () {
+	var url= '<?xml version=/"1.0" encoding=/"utf-8/"?><s:Envelope xmlns:s=/"http://schemas.xmlsoap.org/soap/envelope//" s:encodingStyle=/"http://schemas.xmlsoap.org/soap/encoding//"><s:Body><u:GetBinaryState xmlns:u=/"urn:Belkin:service:basicevent:1/"><BinaryState>0</BinaryState></u:GetBinaryState></s:Body></s:Envelope>';
+	var packageBody = url.encodeHTML();
+	console.log(packageBody);	
 		if(!$$('#roomSwitchData').prop('checked')){
-			console.log('clicked'
+			console.log('clicked');
 			var q = 'http://192.168.1.15:49153/upnp/control/basicevent1';
-			$$.post(q, {
-				
-			
-			}, function (data) {
-				console.log('Load was performed:' + data);
-				
+			dataContent= 'test!<>';
+			//url=encodeURI
+			$$.ajax({
+				url: q,
+				body: url, 
+				type: 'POST',
+				contentType: 'text/xml',
+				dataType: 'xml',
+				success : console.log('success'),
+				error : function (xhr, ajaxOptions, thrownError){  
+					console.log(xhr.status);          
+					console.log(thrownError);
+				} 
 			});
 			}else{
 			//off

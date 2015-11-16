@@ -1,7 +1,7 @@
-var wemo = require('wemo-js');
-var http = require('http');
-var util = require('util');
-var xml2js = require('xml2js');
+//var wemo = require('wemo-js');
+//var http = require('http');
+//var util = require('util');
+//var xml2js = require('xml2js');
 
 var postbodyheader = [
   '<?xml version="1.0" encoding="utf-8"?>',
