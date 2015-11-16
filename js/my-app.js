@@ -155,16 +155,13 @@ String.prototype.encodeHTML = function () {
 	var packageBody = url.encodeHTML();
 	console.log(packageBody);	
 		if(!$$('#roomSwitchData').prop('checked')){
-			console.log('clicked');
 			var q = 'http://192.168.1.15:49153/upnp/control/basicevent1';
-			dataContent= 'test!<>';
-			//url=encodeURI
 			$$.ajax({
 				url: q,
-				body: url, 
+				data: { xml : escape("<xml version='1.0'><MyTasks><Search></Search></MyTasks>") },
 				type: 'POST',
-				contentType: 'text/xml',
-				dataType: 'xml',
+				contentType: 'text/xmlcharset=/"utf-8/"',
+				dataType: 'jsonp',
 				success : console.log('success'),
 				error : function (xhr, ajaxOptions, thrownError){  
 					console.log(xhr.status);          
