@@ -14,7 +14,7 @@ var $$ = Dom7;
 var photons;
 var cameraTimer;
 var videoTimer;
-var FPS=500;
+var FPS=33;
 var storedData = myApp.formGetData('my-form2');
 if (storedData) {
 	getPhotons();
@@ -326,9 +326,9 @@ function drawSwitches(dest) {
 
 function drawVideo(){
 	var snapshot;
-	var url = '//mth3r.ddns.net:';
+	var url = 'http://mth3r.ddns.net:';
 	var port = storedData.CameraPort + '/';
-	var action = 'snapshot.cgi?cmd=snapPicture2';
+	var action = 'snapshot.cgi?cmd=snapPicture';
 	var user = '&user=' + storedData.FoscamUser;
 	var password = '&pwd=' + storedData.FoscamPass;
 	var src = url + port + action + user + password;
@@ -339,9 +339,10 @@ function drawVideo(){
 	
 	videoTimer = set_interval(function () {
 			try{
-				$$('#foscam').attr('src', src);
+				//$$('#foscam').attr('src', src);
 				$$.get(src, {}, function (data) {        
         			//$$('#foscam').attr('src', 'data:image/jpeg;base64,\'' + data + '\'' );
+        			
         			$$('#cameraIframe').attr('src',src);
         			
         		});  
@@ -359,12 +360,13 @@ function stopVideo(){
 }
 
 function drawCamera(timeInterval) {
-	var url = '//mth3r.ddns.net:';
+	var url = 'http://mth3r.ddns.net:';
 	var port = storedData.CameraPort + '/';
-	var action = 'snapshot.cgi?cmd=snapPicture2';
+	var action = 'snapshot.cgi?cmd=snapPicture';
 	var user = '&user=' + storedData.FoscamUser;
 	var password = '&pwd=' + storedData.FoscamPass;
 	var src = url + port + action + user + password;
+	src = encodeURI(src);
 	$$('#cameraIframe').attr('src',src);
 	
 	//$$('#foscam').attr('alt', 'This is the camera spot');
@@ -453,7 +455,7 @@ function drawCamera(timeInterval) {
 		if(!$$('#videoSwitchData').prop('checked')){
 			drawVideo();
 			}else{
-			clearTimeout(videoTimer);
+			stopVideo();
 			}
 		
 	});
