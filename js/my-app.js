@@ -142,7 +142,47 @@ myApp.onPageInit('setDisplay', function (page) {
 
 });
 myApp.onPageInit('lights', function (page) {
+	var postbodyheader = '<?xml version=\"1.0\" encoding=\"utf-8\"?>'+
+  '<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\" s:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\">'+
+    '<s:Body>'
+
+
+var postbodyfooter = '</s:Body>'+
+  '</s:Envelope>'
+
+var getenddevs = {};
+getenddevs.path = '/upnp/control/bridge1';
+getenddevs.action = '"urn:Belkin:service:bridge:1#GetEndDevices"';
+getenddevs.body = [
+  postbodyheader, 
+  '<u:GetEndDevices xmlns:u="urn:Belkin:service:bridge:1">', 
+  '<DevUDN>%s</DevUDN>', 
+  '<ReqListType>PAIRED_LIST</ReqListType>',
+  '</u:GetEndDevices>',
+  postbodyfooter
+].join('\n');
 	
+	
+	
+	
+	
+	$$('#roomSwitch').on('click', function () {
+		if(!$$('#roomSwitchData').prop('checked')){
+			var q = 'http://192.168.1.15:49153/upnp/control/basicevent1';
+			$$.post(q, {
+				'SOAPACTION': '\"urn:Belkin:service:basicevent:1#GetBinaryState\"',
+          		'Content-Type': 'text/xml; charset=\"utf-8\"',
+          		'Accept': ''
+			
+			}, function (data) {
+				console.log('Load was performed:' + data);
+				
+			});
+			}else{
+			//off
+			}
+		
+	});
 
 });
 
