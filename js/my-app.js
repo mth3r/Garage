@@ -143,17 +143,18 @@ myApp.onPageInit('setDisplay', function (page) {
 });
 myApp.onPageInit('lights', function (page) {
 	
-String.prototype.encodeHTML = function () {
-    return this.replace(/&/g, '&amp;')
-               .replace(/</g, '&lt;')
-               .replace(/>/g, '&gt;')
-               .replace(/"/g, '&quot;')
-               .replace(/'/g, '&apos;');
-  };
+
+
+var url= '<?xml version=/"1.0" encoding=/"utf-8/"?><s:Envelope xmlns:s=/"http://schemas.xmlsoap.org/soap/envelope//" s:encodingStyle=/"http://schemas.xmlsoap.org/soap/encoding//"><s:Body><u:GetBinaryState xmlns:u=/"urn:Belkin:service:basicevent:1/"><BinaryState>0</BinaryState></u:GetBinaryState></s:Body></s:Envelope>';
+var xmlhttp;
+	 xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("POST", "http://192.168.1.15:49153/upnp/control/basicevent1", true);
+    xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xmlhttp.send(url);
+
 	$$('#roomSwitch').on('click', function () {
-	var url= '<?xml version=/"1.0" encoding=/"utf-8/"?><s:Envelope xmlns:s=/"http://schemas.xmlsoap.org/soap/envelope//" s:encodingStyle=/"http://schemas.xmlsoap.org/soap/encoding//"><s:Body><u:GetBinaryState xmlns:u=/"urn:Belkin:service:basicevent:1/"><BinaryState>0</BinaryState></u:GetBinaryState></s:Body></s:Envelope>';
-	var packageBody = url.encodeHTML();
-	console.log(packageBody);	
+	
+
 		if(!$$('#roomSwitchData').prop('checked')){
 			var q = 'http://192.168.1.15:49153/upnp/control/basicevent1';
 			$$.ajax({
