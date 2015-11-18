@@ -145,7 +145,7 @@ myApp.onPageInit('lights', function (page) {
 	
 
 
-var url= '<?xml version=/"1.0" encoding=/"utf-8/"?><s:Envelope xmlns:s=/"http://schemas.xmlsoap.org/soap/envelope//" s:encodingStyle=/"http://schemas.xmlsoap.org/soap/encoding//"><s:Body><u:GetBinaryState xmlns:u=/"urn:Belkin:service:basicevent:1/"><BinaryState>0</BinaryState></u:GetBinaryState></s:Body></s:Envelope>';
+var url= '<?xml version="1.0" encoding="utf-8"?><s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/" s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><s:Body><u:GetBinaryState xmlns:u="urn:Belkin:service:basicevent:1"><BinaryState>0</BinaryState></u:GetBinaryState></s:Body></s:Envelope>';
 var xmlhttp;
 	 xmlhttp = new XMLHttpRequest();
     xmlhttp.open("POST", "http://192.168.1.15:49153/upnp/control/basicevent1", true);
