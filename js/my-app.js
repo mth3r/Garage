@@ -142,26 +142,69 @@ myApp.onPageInit('setDisplay', function (page) {
 
 });
 myApp.onPageInit('lights', function (page) {
+	var HostIP=storedData.wemoIP;
+	var HostPort=storedData.wemoPort;
+	var URL= 'http://' + HostIP + ':' + HostPort;
+	var postbodyheader= '<?xml version="1.0" encoding="utf-8"?><s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/" s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><s:Body>';
+	var postbodyfooter= '</s:Body></s:Envelope>';
+ 
 	
 
+	var body = [
+	  postbodyheader, 
+	  '<u:GetEndDevices xmlns:u="urn:Belkin:service:bridge:1">', 
+	  '<DevUDN>%s</DevUDN>', 
+	  '<ReqListType>PAIRED_LIST</ReqListType>',
+	  '</u:GetEndDevices>',
+	  postbodyfooter
+	].join('\n');
 
-var url= '<?xml version="1.0" encoding="utf-8"?><s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/" s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><s:Body><u:GetBinaryState xmlns:u="urn:Belkin:service:basicevent:1"><BinaryState>0</BinaryState></u:GetBinaryState></s:Body></s:Envelope>';
-                var xmlhttp;
-	 xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("POST", "http://192.168.1.15:49153/upnp/control/basicevent1", true);
-    xmlhttp.setRequestHeader("Content-Type", "text/xml; charset=utf-8");
-    xmlhttp.setRequestHeader("SOAPAction", "urn:Belkin:service:basicevent:1#SetBinaryState");
-        xmlhttp.send(url);
+	var xmlhttp;
+	var cmd = '/upnp/control/bridge1';
+	xmlhttp = new XMLHttpRequest();
+	xmlhttp.open("POST", URL+cmd, true);
+	xmlhttp.setRequestHeader("Content-Type", "text/xml; charset=utf-8");
+	xmlhttp.setRequestHeader("SOAPAction", "urn:Belkin:service:bridge:1#GetEndDevices");
+	xmlhttp.setRequestHeader("Accept","");
+	xmlhttp.send(body);
+
+
 
                      
 	$$('#roomSwitch').on('click', function () {
+			
+	
+			var xmlhttp;
+			var cmd = '/upnp/control/basicevent1';
+			xmlhttp = new XMLHttpRequest();
+			xmlhttp.open("POST", URL+cmd, true);
+			xmlhttp.setRequestHeader("Content-Type", "text/xml; charset=utf-8");
+			xmlhttp.setRequestHeader("SOAPAction", "urn:Belkin:service:basicevent:1#SetBinaryState");
+			xmlhttp.setRequestHeader("Accept","");
 	
 
 		if(!$$('#roomSwitchData').prop('checked')){
 			console.log('on');
-			}
+			var body = [
+				postbodyheader,
+				'<u:GetBinaryState xmlns:u="urn:Belkin:service:basicevent:1">',
+				'<BinaryState>1</BinaryState>',
+				'</u:GetBinaryState>',
+				postbodyfooter
+			].join('\n');    		
+			
+			xmlhttp.send(body);
+		}
 			else{
 			console.log('off');
+			var body = [
+				postbodyheader,
+				'<u:GetBinaryState xmlns:u="urn:Belkin:service:basicevent:1">',
+				'<BinaryState>0</BinaryState>',
+				'</u:GetBinaryState>',
+				postbodyfooter
+			].join('\n');    		
+			xmlhttp.send(body);
 			}
 		
 	});
@@ -382,7 +425,7 @@ function stopVideo(){
 }
 
 function drawCamera(timeInterval) {
-	var url = 'http://mth3r.ddns.net:';
+	var url = storedData.DDNSurl + ':';
 	var port = storedData.CameraPort + '/';
 	var action = 'snapshot.cgi?cmd=snapPicture';
 	var user = '&user=' + storedData.FoscamUser;
@@ -399,7 +442,7 @@ function drawCamera(timeInterval) {
 	//drawVideo();
 
 	$$('.CameraControl').on('taphold', function () {
-		var url = 'http://mth3r.ddns.net:';
+		var url = storedData.DDNSurl + ':';
 		var cmd = '&command=' + $$(this).data('cmd');
 		var touch= $$(this).attr('id');
 		$$('#windrose').attr('src', 'img/400px-Windrose-' + touch + '.png');
