@@ -143,15 +143,42 @@ myApp.onPageInit('setDisplay', function (page) {
 });
 myApp.onPageInit('lights', function (page) {
 	
+	var URL= 'http://mth3r.ddns.net:49153'
+	var postbodyheader= '<?xml version="1.0" encoding="utf-8"?><s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/" s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><s:Body>';
+	var postbodyfooter= '</s:Body></s:Envelope>';
+ 
+	
 
-
-var url= '<?xml version="1.0" encoding="utf-8"?><s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/" s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><s:Body><u:GetBinaryState xmlns:u="urn:Belkin:service:basicevent:1"><BinaryState>0</BinaryState></u:GetBinaryState></s:Body></s:Envelope>';
-                var xmlhttp;
-	 xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("POST", "http://192.168.1.15:49153/upnp/control/basicevent1", true);
-    xmlhttp.setRequestHeader("Content-Type", "text/xml; charset=utf-8");
-    xmlhttp.setRequestHeader("SOAPAction", "urn:Belkin:service:basicevent:1#SetBinaryState");
-        xmlhttp.send(url);
+	var body = [
+	  postbodyheader, 
+	  '<u:GetEndDevices xmlns:u="urn:Belkin:service:bridge:1">', 
+	  '<DevUDN>uuid:Bridge-1_0-231445B0100742</DevUDN>', 
+	  '<ReqListType>PAIRED_LIST</ReqListType>',
+	  '</u:GetEndDevices>',
+	  postbodyfooter
+	].join('\n');
+	
+	var xmlhttp;
+	var cmd = '/upnp/control/bridge1';
+	xmlhttp = new XMLHttpRequest();
+	xmlhttp.open("POST", URL+cmd, false);
+	xmlhttp.setRequestHeader("Content-Type", "text/xml; charset=utf-8");
+	xmlhttp.setRequestHeader("SOAPAction", '"urn:Belkin:service:bridge:1#GetEndDevices"');
+	xmlhttp.setRequestHeader("Accept","");
+	//xmlhttp.setRequestHeader("User-Agent","QuickSwitch/507 CFNetwork/758.1.6 Darwin/15.0.0");
+	xmlhttp.send(body);
+	//var xmlDoc=xmlhttp.responseText;
+	var xmlResponse =xmlhttp.responseXML.documentElement;
+	var resultSet = xmlhttp.responseXML.getElementsByTagName("*");
+	
+	
+	var xmlstr= resultSet[3].childNodes[0].nodeValue;
+	
+	var foo = jQuery(xmlstr).find('friendlyname');
+	for (i=0; i< foo.length; i++){
+	console.log(foo[i].innerHTML);
+	}
+	
 
                      
 	$$('#roomSwitch').on('click', function () {
