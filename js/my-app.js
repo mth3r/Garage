@@ -118,7 +118,6 @@ myApp.onPageInit('about', function (page) {
 		});
 	});
 });
-
 myApp.onPageInit('form', function (page) {
 	// run createContentPage func after link was clicked
 	if (storedData) {
@@ -136,12 +135,12 @@ myApp.onPageInit('form', function (page) {
 		storedData = myApp.formGetData('my-form2');
 	});
 });
-
 myApp.onPageInit('setDisplay', function (page) {
 	drawSwitches($$('#SwitchSettings'));
 
 });
 myApp.onPageInit('lights', function (page) {
+	/*
 	var HostIP=storedData.wemoIP;
 	var HostPort=storedData.wemoPort;
 	var DDNS=storedData.DDNSurl
@@ -183,24 +182,26 @@ myApp.onPageInit('lights', function (page) {
 	var xmlstr= resultSet[3].childNodes[0].nodeValue;
 	
 	var foo = jQuery(xmlstr).find('friendlyname');
+	*/
 	
+	var foo = ["Saab", "Volvo", "BMW", "Honda"];
 	for (i=0; i< foo.length; i++){
-		var newDiv = $$('#wemoControls').html();
-		$$('#wemoSpot').append(newDiv);
+		//var newDiv = $$('#wemoControls').html();
+		//$$('#wemoSpot').append(newDiv);
 		//$$('#wemoControls').addClass('dynamicWemoControl');
 		//alert(foo[i].innerHTML);
-			$$('#WemoFriendlyName').html(i);
-			$$('#roomSwitchData').attr('data-id', foo[i].innerText)
-			$$('#roomSwitchData').attr('id', foo[i].innerText+'_SwitchData');
-			$$('#roomSwitch').attr('id', foo[i].innerText+'_Switch');
-			$$('#roomSwitch').attr('data-id', foo[i].innerText)
-			
-			//$$('.WemoFriendlyName').attr('id', foo[i].innerText);
+		//	$$('#WemoFriendlyName').html(foo[i]);
+		//	$$('#roomSwitchData').attr('data-id', foo[i]);
+		//	$$('#roomSwitchData').attr('id', foo[i]+'_SwitchData');
+		//	$$('#roomSwitch').attr('id', foo[i]+'_Switch');
+		//	$$('#roomSwitch').attr('data-id', foo[i]);
+		//Don't forget .innerText/////////////
+		//$$('.WemoFriendlyName').attr('id', foo[i].innerText);
+		drawWemoControls($$('.wemoSpot'),foo[i]);
 		
 		
 		
-		
-		console.log( i + ":" + foo[i].innerHTML);
+		//console.log( i + ":" + foo[i].innerHTML);
 	}
 	  
 	$$('#roomSwitch').on('click', function () {
@@ -375,6 +376,18 @@ function appendForm(a, b) {
 }
 function drawRightPanel() {
 	drawSwitches($$('#SwitchList'));
+}
+function drawWemoControls(dest, foo){
+	console.log(foo);
+	var newDiv = $$('.wemoControls').html();
+	$$('#WemoFriendlyName').html(foo);   						//Don't forget .innerText/////////////
+	$$('#roomSwitchData').attr('data-id', foo);					//Don't forget .innerText/////////////
+	$$('#roomSwitchData').attr('id', foo+'_SwitchData');			//Don't forget .innerText/////////////
+	$$('#roomSwitch').attr('id', foo+'_Switch');					//Don't forget .innerText/////////////
+	$$('#roomSwitch').attr('data-id', foo);	
+	$$('#WemoFriendlyName').addClass('test');	//Don't forget .innerText/////////////
+	$$('.WemoFriendlyName').attr('id', foo);
+	dest.append(newDiv);
 }
 function drawSwitches(dest) {
 	var newDiv = $$('#SwitchDetail').html();
