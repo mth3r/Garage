@@ -474,7 +474,52 @@
         </div>
       </div>
     </div>
-	
+	 <div class="wemoControls" id = "wemoControls" style='display:none'>
+          <div class="row">
+			<div class="col-auto">
+			  <!-- Switch (Checkbox) -->
+			  <div class="row">
+				<div class="col-auto">
+					<div class="item-content">
+						<div class="item-media"><i class="icon icon-form-toggle"></i></div>
+							<div class="item-inner">
+								<div class="item-title label">Switch</div>
+							</div>
+					</div>
+				</div>
+				<div class="col-auto">			
+					<div class="item-input">
+						<label class="label-switch">
+							<input class="roomSwitchData" id="roomSwitchData" type="checkbox">
+							<div id="roomSwitch" class="checkbox roomSwitch"></div>
+						</label>
+					</div>
+				</div>
+			  </div>
+			</div>
+			<!-- Slider (Range input) -->
+			<div class="col-auto">
+				<div class="item-content">
+				  <div class="item-media"></div>
+				  <div class="item-inner">
+					<div class="item-title label">Dimmer</div>
+					<div class="item-input">
+					  <div class="range-slider">
+						<input type="range" min="0" max="100" value="50" step="0.1" />
+					  </div>
+					</div>
+				  </div>
+				</div>
+			</div>
+		  <div class="col-auto">
+				<div class="row">
+					<div class="col-auto">
+						<p id="WemoFriendlyName" class="WemoFriendlyName"> Room 1 </p>
+					</div>
+				</div>
+		  </div>
+		 </div>
+		</div>
     <!-- Path to Framework7 Library JS-->
     <script src="js/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="js/framework7.min.js"></script> 
