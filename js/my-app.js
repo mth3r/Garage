@@ -29,14 +29,11 @@ $$('.panel-left').on('opened', function () {
 		var newDiv = $$('#TempPanel').html();
 		$$('#TempPanelSpot').append(newDiv);
 		$$('#val1').attr('id',photons[i].name+'_temp')
-		console.log(i);
 		$$.get(q, function (results) {
 			results = JSON.parse(results);
 			str=
 			$$('#'+photons[i].name+'_temp').html(results.result);
 		});
-		$$('#'+photons[i].name+'_temp').html('test');
-		
 	}
 	$$('.element-add-location').on('click', function () {
 		appendLocation('test');
@@ -75,8 +72,8 @@ var mainView = myApp.addView('.view-main', {
 
 	});
 myApp.onPageInit('camera', function (page) {
-	console.log('init');
 	drawCamera();
+	
 });
 myApp.onPageInit('about', function (page) {
 	try {
@@ -150,15 +147,10 @@ myApp.onPageInit('lights', function (page) {
 	var URL= 'http://' + DDNS + ':' + HostPort;
 	var postbodyheader= '<?xml version="1.0" encoding="utf-8"?><s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/" s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><s:Body>';
 	var postbodyfooter= '</s:Body></s:Envelope>';
- 
-	
 	var URL= 'http://mth3r.ddns.net:49153';
 	var postbodyheader= '<?xml version="1.0" encoding="utf-8"?><s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/" s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><s:Body>';
 	var postbodyfooter= '</s:Body></s:Envelope>';
-    console.log(storedData.wemoUDN);
-	
-
-	var body = [
+    var body = [
 	  postbodyheader, 
 	  '<u:GetEndDevices xmlns:u="urn:Belkin:service:bridge:1">', 
 	  '<DevUDN>' + storedData.wemoUDN + '</DevUDN>',
@@ -174,35 +166,62 @@ myApp.onPageInit('lights', function (page) {
 	xmlhttp.setRequestHeader("Content-Type", "text/xml; charset=utf-8");
 	xmlhttp.setRequestHeader("SOAPAction", '"urn:Belkin:service:bridge:1#GetEndDevices"');
 	xmlhttp.setRequestHeader("Accept","");
-	//xmlhttp.setRequestHeader("User-Agent","QuickSwitch/507 CFNetwork/758.1.6 Darwin/15.0.0");
-	//if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-		xmlhttp.send(body);
-		
-		var resultSet = xmlhttp.responseXML.getElementsByTagName("DeviceLists");
-		var xmlstr= resultSet[0].childNodes[0].nodeValue;
-		//console.log(xmlstr);
-		//var foo = jQuery(xmlstr).find('DeviceInfo');
-		var fName=jQuery(xmlstr).find("FriendlyName");
-		var wemoDeviceId = jQuery(xmlstr).find("DeviceID");
-		var currentState = jQuery(xmlstr).find("CurrentState");
-		
-	
-	
-	var foo = ["Saab", "Volvo", "BMW", "Honda"];
-	for (i=0; i< foo.length; i++){
+	xmlhttp.send(body);
+	var resultSet = xmlhttp.responseXML.getElementsByTagName("DeviceLists");
+	var xmlstr= resultSet[0].childNodes[0].nodeValue;
+	var fName=jQuery(xmlstr).find("FriendlyName");
+	var wemoDeviceId = jQuery(xmlstr).find("DeviceID");
+	var currentState = jQuery(xmlstr).find("CurrentState");
+	//var wemoCapabilityValue = jQuery(xmlstr).find("CapabilityValue");
+	var wemoCapabilityID = jQuery(xmlstr).find("CapabilityID");
+	for (i=0; i< fName.length; i++){
 		var wemoON_OFF= currentState[i].innerText.split(",");
-		drawWemoControls($$('.wemoSpot'),fName[i].innerText, wemoDeviceId[i].innerText, wemoON_OFF[0] );
+		drawWemoControls($$('.wemoSpot'),fName[i].innerText, wemoDeviceId[i].innerText, wemoON_OFF[0],wemoCapabilityID[i].innerText);
 	}
-
+	function setStatus(light, capability, value) {
+		var URL= 'http://mth3r.ddns.net:49153';
+		var postbodyheader= '<?xml version="1.0" encoding="utf-8"?><s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/" s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><s:Body>';
+		var postbodyfooter= '</s:Body></s:Envelope>';
+		var xmlhttp;
+		var cmd = '/upnp/control/bridge1';
+		
+		var deviceID=light;
+		var CapabilityID=capability;
+		var CapabilityValue=value;
+		
+		var body = [
+			postbodyheader,
+			'<u:SetDeviceStatus xmlns:u="urn:Belkin:service:bridge:1">',
+			'<DeviceStatusList>',
+			'&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;DeviceStatus&gt;&lt;IsGroupAction&gt;NO&lt;/IsGroupAction&gt;&lt;DeviceID available=&quot;YES&quot;&gt;'+ deviceID  +'&lt;/DeviceID&gt;&lt;CapabilityID&gt;'+ CapabilityID 
+			+ '&lt;/CapabilityID&gt;&lt;CapabilityValue&gt;'+ CapabilityValue + '&lt;/CapabilityValue&gt;&lt;/DeviceStatus&gt;',
+			'</DeviceStatusList>',
+			'</u:SetDeviceStatus>',
+			postbodyfooter
+		].join('\n');
+		
+		xmlhttp = new XMLHttpRequest();
+		xmlhttp.open("POST", URL+cmd, false);
+		xmlhttp.setRequestHeader("Content-Type", "text/xml; charset=utf-8");
+		xmlhttp.setRequestHeader("SOAPAction", '"urn:Belkin:service:bridge:1#SetDeviceStatus"');
+		xmlhttp.setRequestHeader("Accept","");
+		xmlhttp.send(body);
+	}
+	
+	
 	$$('.roomSwitch').on('click', function () {
 		var deviceID = $$(this).data('id');
+		var wemoCapabilityID=$$(this).data('wemoCapabilityID');
 		if(!$$('#' + deviceID + '_SwitchData').prop('checked')){
+			setStatus(deviceID,wemoCapabilityID,'1,0:0,0:0');
 			console.log('on :  ' + deviceID);
 		}
 		else{
+			setStatus(deviceID,wemoCapabilityID,'0,0:0,0:0');
 			console.log('off :  ' + deviceID);
 		}
 	});
+	
 
 });
 
@@ -363,7 +382,7 @@ function appendForm(a, b) {
 function drawRightPanel() {
 	drawSwitches($$('#SwitchList'));
 }
-function drawWemoControls(dest, fName, dID,status){
+function drawWemoControls(dest, fName, dID,status,wCID){
 	console.log(fName + "  :  " + status);
 	var newDiv = $$('#wemoControls').html();
 	dest.append(newDiv);
@@ -372,6 +391,7 @@ function drawWemoControls(dest, fName, dID,status){
 	$$('#roomSwitchData').prop('checked',eval(status));
 	$$('#roomSwitchData').attr('id', dID+'_SwitchData');			//Don't forget .innerText/////////////
 	$$('#roomSwitch').attr('data-id', dID);	
+	$$('#roomSwitch').attr('data-wemoCapabilityID', wCID);	
 	$$('#roomSwitch').attr('id', dID+'_Switch');					//Don't forget .innerText/////////////
 	$$('#WemoFriendlyName').attr('id', "wemo_" + dID);
 	
