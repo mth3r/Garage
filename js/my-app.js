@@ -14,7 +14,7 @@ var $$ = Dom7;
 var photons;
 var cameraTimer;
 var videoTimer;
-var FPS=33;
+var FPS=10000;
 var storedData = myApp.formGetData('my-form2');
 if (storedData) {
 	getPhotons();
@@ -143,7 +143,7 @@ myApp.onPageInit('setDisplay', function (page) {
 
 });
 myApp.onPageInit('lights', function (page) {
-	/*
+	
 	var HostIP=storedData.wemoIP;
 	var HostPort=storedData.wemoPort;
 	var DDNS=storedData.DDNSurl
@@ -152,10 +152,10 @@ myApp.onPageInit('lights', function (page) {
 	var postbodyfooter= '</s:Body></s:Envelope>';
  
 	
-	var URL= 'http://mth3r.ddns.net:49153'
+	var URL= 'http://mth3r.ddns.net:49153';
 	var postbodyheader= '<?xml version="1.0" encoding="utf-8"?><s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/" s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><s:Body>';
 	var postbodyfooter= '</s:Body></s:Envelope>';
- 
+    console.log(storedData.wemoUDN);
 	
 
 	var body = [
@@ -175,38 +175,25 @@ myApp.onPageInit('lights', function (page) {
 	xmlhttp.setRequestHeader("SOAPAction", '"urn:Belkin:service:bridge:1#GetEndDevices"');
 	xmlhttp.setRequestHeader("Accept","");
 	//xmlhttp.setRequestHeader("User-Agent","QuickSwitch/507 CFNetwork/758.1.6 Darwin/15.0.0");
-	xmlhttp.send(body);
-	//var xmlDoc=xmlhttp.responseText;
+	//if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+		xmlhttp.send(body);
+		
+		var resultSet = xmlhttp.responseXML.getElementsByTagName("DeviceLists");
+		var xmlstr= resultSet[0].childNodes[0].nodeValue;
+		//console.log(xmlstr);
+		//var foo = jQuery(xmlstr).find('DeviceInfo');
+		var fName=jQuery(xmlstr).find("FriendlyName");
+		var wemoDeviceId = jQuery(xmlstr).find("DeviceID");
+		var currentState = jQuery(xmlstr).find("CurrentState");
+		
 	
-	var xmlResponse =xmlhttp.responseXML.documentElement;
-	var resultSet = xmlhttp.responseXML.getElementsByTagName("*");
-	
-	
-	var xmlstr= resultSet[3].childNodes[0].nodeValue;
-	
-	var foo = jQuery(xmlstr).find('friendlyname');
-	*/
 	
 	var foo = ["Saab", "Volvo", "BMW", "Honda"];
 	for (i=0; i< foo.length; i++){
-		//var newDiv = $$('#wemoControls').html();
-		//$$('#wemoSpot').append(newDiv);
-		//$$('#wemoControls').addClass('dynamicWemoControl');
-		//alert(foo[i].innerHTML);
-		//	$$('#WemoFriendlyName').html(foo[i]);
-		//	$$('#roomSwitchData').attr('data-id', foo[i]);
-		//	$$('#roomSwitchData').attr('id', foo[i]+'_SwitchData');
-		//	$$('#roomSwitch').attr('id', foo[i]+'_Switch');
-		//	$$('#roomSwitch').attr('data-id', foo[i]);
-		//Don't forget .innerText/////////////
-		//$$('.WemoFriendlyName').attr('id', foo[i].innerText);
-		drawWemoControls($$('.wemoSpot'),foo[i]);
-		
-		
-		
-		//console.log( i + ":" + foo[i].innerHTML);
+		var wemoON_OFF= currentState[i].innerText.split(",");
+		drawWemoControls($$('.wemoSpot'),fName[i].innerText, wemoDeviceId[i].innerText, wemoON_OFF[0] );
 	}
-	  
+
 	$$('.roomSwitch').on('click', function () {
 		var deviceID = $$(this).data('id');
 		if(!$$('#' + deviceID + '_SwitchData').prop('checked')){
@@ -376,17 +363,18 @@ function appendForm(a, b) {
 function drawRightPanel() {
 	drawSwitches($$('#SwitchList'));
 }
-function drawWemoControls(dest, foo){
-	//console.log(foo);
+function drawWemoControls(dest, fName, dID,status){
+	console.log(fName + "  :  " + status);
 	var newDiv = $$('#wemoControls').html();
 	dest.append(newDiv);
-	$$('#WemoFriendlyName').html(foo);   							//Don't forget .innerText/////////////
-	$$('#roomSwitchData').attr('data-id', foo);						//Don't forget .innerText/////////////
-	$$('#roomSwitchData').attr('id', foo+'_SwitchData');			//Don't forget .innerText/////////////
-	$$('#roomSwitch').attr('data-id', foo);	
-	$$('#roomSwitch').attr('id', foo+'_Switch');					//Don't forget .innerText/////////////
-	$$('#WemoFriendlyName').addClass('test');						//Don't forget .innerText/////////////
-	$$('#WemoFriendlyName').attr('id', "wemo_" + foo);
+	$$('#WemoFriendlyName').html(fName);   							//Don't forget .innerText/////////////
+	$$('#roomSwitchData').attr('data-id', dID);						//Don't forget .innerText/////////////
+	$$('#roomSwitchData').prop('checked',eval(status));
+	$$('#roomSwitchData').attr('id', dID+'_SwitchData');			//Don't forget .innerText/////////////
+	$$('#roomSwitch').attr('data-id', dID);	
+	$$('#roomSwitch').attr('id', dID+'_Switch');					//Don't forget .innerText/////////////
+	$$('#WemoFriendlyName').attr('id', "wemo_" + dID);
+	
 	
 }
 function drawSwitches(dest) {
@@ -418,30 +406,43 @@ function drawVideo(){
 	var user = '&user=' + storedData.FoscamUser;
 	var password = '&pwd=' + storedData.FoscamPass;
 	var src = url + port + action + user + password;
-    console.log(src); 
+    //console.log(src); 
 	//$$('#foscam').attr('src', src);
 	$$('#foscam').attr('alt', 'no dice');
 	var i=0;
 	
-	videoTimer = set_interval(function () {
+	//videoTimer = set_interval(function () {
 			try{
 				//$$('#foscam').attr('src', src);
+				/*
 				$$.get(src, {}, function (data) {        
         			//$$('#foscam').attr('src', 'data:image/jpeg;base64,\'' + data + '\'' );
         			
         			$$('#cameraIframe').attr('src',src);
         			
-        		});  
-				
+        		});
+        		*/  
+        		var t = "&t=" + new Date().getTime();
+        		t = "&t="
+        		console.log(src+t);
+        		$$('#cameraIMG').attr('src', src+t);
+        		$$('#cameraIMG').attr('onload','setTimeout(function() {src = src.substring(0, (src.lastIndexOf("t=")+2))+(new Date()).getTime()}, 1000)');
+        		$$('#cameraIMG').attr('onerror','setTimeout(function() {src = src.substring(0, (src.lastIndexOf("t=")+2))+(new Date()).getTime()}, 250)');
 			}catch(err){
 				console.log('error');
 			}
-		}, FPS, 'videoTimer');
+			
+	//	}, FPS, 'videoTimer');
 	
 				
 }
 function stopVideo(){
-	clearTimeout(videoTimer);
+	//clearTimeout(videoTimer);
+	
+	$$('#cameraIMG').removeAttr('onload');
+	$$('#cameraIMG').removeAttr('onerror');
+	//$$('#cameraIMG').attr('src', src);
+	
 
 }
 
