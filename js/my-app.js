@@ -159,25 +159,36 @@ myApp.onPageInit('lights', function (page) {
 	  postbodyfooter
 	].join('\n');
 	console.log(body);
+                 
 	var xmlhttp;
 	var cmd = '/upnp/control/bridge1';
 	xmlhttp = new XMLHttpRequest();
 	xmlhttp.open("POST", URL+cmd, false);
 	xmlhttp.setRequestHeader("Content-Type", "text/xml; charset=utf-8");
 	xmlhttp.setRequestHeader("SOAPAction", '"urn:Belkin:service:bridge:1#GetEndDevices"');
+	xmlhttp.setRequestHeader("User-Agent",'"QuickSwitch/507 CFNetwork/758.1.6 Darwin/15.0.0"');
 	xmlhttp.setRequestHeader("Accept","");
-	xmlhttp.send(body);
+    try{
+                 xmlhttp.send(body);
+   
+                 
 	var resultSet = xmlhttp.responseXML.getElementsByTagName("DeviceLists");
 	var xmlstr= resultSet[0].childNodes[0].nodeValue;
+     }catch(e){console.log(e);}
+	console.log(xmlstr);
+	try{
 	var fName=jQuery(xmlstr).find("FriendlyName");
 	var wemoDeviceId = jQuery(xmlstr).find("DeviceID");
 	var currentState = jQuery(xmlstr).find("CurrentState");
-	//var wemoCapabilityValue = jQuery(xmlstr).find("CapabilityValue");
-	var wemoCapabilityID = jQuery(xmlstr).find("CapabilityID");
+	var wemoCapabilityValue = jQuery(xmlstr).find("CapabilityValue");
+	var wemoCapabilityID = jQuery(xmlstr).find("CapabilityIDs");
 	for (i=0; i< fName.length; i++){
+		console.log(fName.length[i].innerText);
 		var wemoON_OFF= currentState[i].innerText.split(",");
 		drawWemoControls($$('.wemoSpot'),fName[i].innerText, wemoDeviceId[i].innerText, wemoON_OFF[0],wemoCapabilityID[i].innerText);
 	}
+	
+	}catch(e){console.log(e)}
 	function setStatus(light, capability, value) {
 		var URL= 'http://mth3r.ddns.net:49153';
 		var postbodyheader= '<?xml version="1.0" encoding="utf-8"?><s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/" s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><s:Body>';
@@ -188,6 +199,8 @@ myApp.onPageInit('lights', function (page) {
 		var deviceID=light;
 		var CapabilityID=capability;
 		var CapabilityValue=value;
+	
+
 		
 		var body = [
 			postbodyheader,
@@ -209,11 +222,21 @@ myApp.onPageInit('lights', function (page) {
 	}
 	
 	
+
+
+	
+	for (i=0; i< fName.length; i++){
+		var wemoON_OFF= currentState[i].innerText.split(",");
+		drawWemoControls($$('.wemoSpot'),fName[i].innerText, wemoDeviceId[i].innerText, wemoON_OFF[0] );
+	}
+	
+
+
 	$$('.roomSwitch').on('click', function () {
 		var deviceID = $$(this).data('id');
 		var wemoCapabilityID=$$(this).data('wemoCapabilityID');
 		if(!$$('#' + deviceID + '_SwitchData').prop('checked')){
-			setStatus(deviceID,wemoCapabilityID,'1,0:0,0:0');
+			setStatus(deviceID,wemoCapabilityID,'1,255:0,0:0');
 			console.log('on :  ' + deviceID);
 		}
 		else{
