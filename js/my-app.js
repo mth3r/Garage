@@ -16,6 +16,7 @@ var cameraTimer;
 var videoTimer;
 var FPS=10000;
 var storedData = myApp.formGetData('my-form2');
+
 if (storedData) {
 	getPhotons();
 
@@ -81,6 +82,9 @@ myApp.onPageInit('about', function (page) {
 	} catch (err) {
 		console.log('error on drawPhotons function call');
 	}
+	var numpad = myApp.keypad({
+        input: '#demo-numpad'
+      });
 
 	$$('.dynamicForm').on('click', function () {
 		var formname = $$(this).data('val');
