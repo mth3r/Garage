@@ -253,11 +253,14 @@ function getPhotons() {
 	$$.get(q, function (results) {
 		results = JSON.parse(results);
 		photons = results;
+		console.log(photons);
 		drawRightPanel();
+		try{
 		for (i = 0; i < photons.length; i++) {
 			drawGarage(photons[i].name);
 
 		}
+		}catch(e){}
 		$$('.garageDoorButton').on('click', function () {
 
 			var deviceID = $$(this).data('device');
@@ -277,16 +280,17 @@ function getPhotons() {
 
 }
 function drawPhotons() {
+	
 	var newDiv = $$('#PhotonDetail').html();
 
 	for (i = 0; i < photons.length; i++) {
-		
+		$$('.PhotonList').append(newDiv);
 		$$('#dynamicPhotonLink').text(photons[i].name);
 		$$('#dynamicPhotonLink').addClass('dynamicForm');
-		$$('#dynamicPhotonLink').attr('data-val', photons[i].name)
-		$$('#dynamicPhotonLink').attr('data-id', photons[i].id)
+		$$('#dynamicPhotonLink').attr('data-val', photons[i].name);
+		$$('#dynamicPhotonLink').attr('data-id', photons[i].id);
 		$$('#dynamicPhotonLink').attr('id', photons[i].name);
-
+			
 	}
 }
 function drawGarage(a) {
