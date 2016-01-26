@@ -103,7 +103,7 @@
                     <a href="lights.html" class="item-link">
                       <div class="item-content">
 						<div class="item-media">
-							<i class="fa fa-lightbulb-o fa-fw fa-2x" style="color:blue"></i>
+							<i class="fa fa-lightbulb-o fa-fw fa-2x" style="color:#f1c232"></i>
 						</div>
                         <div class="item-inner">
                           <div class="item-title">Lights</div>
@@ -114,15 +114,13 @@
                 </ul>
               </div>
               <div class="content-block-title" id="GarageControls">Garage Controls</div>
-              <div class="content-block-title">Side panels</div>
+              <div class="content-block-title" align="center">Temperature and Water Sensors</div>
               <div class="content-block">
                 <div class="row">
-                  <div class="col-50">
-                    <a href="#" data-panel="left" class="button open-panel">Left Panel</a>
+                  <div class="col-100">
+                    <a href="#" data-panel="left" class="button open-panel">Sensor Data</a>
                   </div>
-                  <div class="col-50">
-                    <a href="#" data-panel="right" class="button open-panel">Right Panel</a>
-                  </div>
+                  
                 </div>
               </div>
             </div>
@@ -163,7 +161,7 @@
       </ul>
     </div>
     <div class="dynForm" 			id='dynForm' 			style='display:none'>
-      <div class="page-content">
+    
         <div class="content-block-title" id="photon-name">Photon Settings</div>
 		
         <form id="my-form3" class="list-block store-data">
@@ -201,11 +199,13 @@
                     <div class="item-input">
                       <input type="text" placeholder="1" id="Lpin" name="Lpin" readonly="readonly"/>
                     </div>
-                    <div class="item-input">
+                    
+					<label class="label-checkbox item-content text-center">
                       <input type="checkbox" id="LpinVis" name="LpinVis" />
-                      <div class="item-media"></div>
-                    </div>
-                  </div>
+                      <div class="item-media"> <i class="icon icon-form-checkbox"></i></div>
+                    </label>
+                  
+				  </div>
                 </div>
               </li>
               <li>
@@ -218,10 +218,12 @@
                     <div class="item-input">
                       <input type="text" placeholder="2" id="Rpin" name="Rpin"readonly="readonly" />
                     </div>
-                    <div class="item-input">
+					
+                     <label class="label-checkbox item-content text-center" >
                       <input type="checkbox" id="RpinVis" name="RpinVis" />
-                      <div class="item-media"></div>
-                    </div>
+                      <div class="item-media"> <i class="icon icon-form-checkbox"></i></div>
+                    </label>
+					
                   </div>
                 </div>
               </li>
@@ -253,8 +255,10 @@
                     </div>
                   </div>
                   <div class="col-33">
+				   <label class="label-checkbox item-content">
                     <input type="checkbox" id="S1pinVis" name="S1pinVis" />
-                    <div class="item-media"></div>
+                    <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+					</label>
                   </div>
                 </div>
               </li>
@@ -269,8 +273,10 @@
                     </div>
                   </div>
                   <div class="col-33">
+				  <label class="label-checkbox item-content">
                     <input type="checkbox" id="S2pinVis" name="S1pinVis" />
-                    <div class="item-media"></div>
+                     <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+					</label>
                   </div>
                 </div>
               </li>
@@ -284,9 +290,11 @@
                       <input type="text" placeholder="3" id="S3pin" name="S3pin" readonly="readonly" />
                     </div>
                   </div>
-                  <div class="col-33">
+                  <div class="col-33" >
+				  <label class="label-checkbox item-content">
                     <input type="checkbox" id="S3pinVis" name="S3pinVis" />
-                    <div class="item-media"></div>
+                    <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+					</label>
                   </div>
                 </div>
               </li>
@@ -301,8 +309,10 @@
                     </div>
                   </div>
                   <div class="col-33">
+				  <label class="label-checkbox item-content">
                     <input type="checkbox" id="S4pinVis" name="S4pinVis" />
-                    <div class="item-media"></div>
+                     <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+					</label>
                   </div>
                 </div>
               </li>
@@ -317,8 +327,10 @@
                     </div>
                   </div>
                   <div class="col-33">
+				  <label class="label-checkbox item-content">
                     <input type="checkbox" id="S5pinVis" name="S5pinVis" />
-                    <div class="item-media"></div>
+                     <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+					</label>
                   </div>
                 </div>
               </li>
@@ -336,7 +348,7 @@
             </div>
           </div>
         </form>
-      </div>
+      
     </div>
     <div class="PhotonDetail" 		id='PhotonDetail' 		style='display:none'>
       <ul>

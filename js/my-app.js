@@ -27,15 +27,21 @@ $$('.close').on('click', function () {
 });
 $$('.panel-left').on('opened', function () {
 	for (i=0; i<photons.length; i++){
-		var q = 'https://api.particle.io/v1/devices/' + photons[i].id + '/tempf/?access_token=' + storedData.token;
-		var newDiv = $$('#TempPanel').html();
-		$$('#TempPanelSpot').append(newDiv);
-		$$('#val1').attr('id',photons[i].name+'_temp')
-		$$.get(q, function (results) {
-			results = JSON.parse(results);
-			str=
-			$$('#'+photons[i].name+'_temp').html(results.result);
-		});
+		try{
+			var q = 'https://api.particle.io/v1/devices/' + photons[i].id + '/tempf/?access_token=' + storedData.token;
+			var newDiv = $$('#TempPanel').html();
+			$$('#TempPanelSpot').append(newDiv);
+			$$('#val1').attr('id',photons[i].name+'_temp')
+			
+			$$.get(q, function (results) {
+			try{
+				results = JSON.parse(results);
+				str=
+				$$('#'+photons[i].name+'_temp').html(results.result);
+			}catch(err){console.log(err)}
+			});
+			
+		}catch(err){console.log(err)}
 	}
 	$$('.element-add-location').on('click', function () {
 		appendLocation('test');
