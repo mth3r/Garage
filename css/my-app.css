@@ -16,6 +16,7 @@ div[class*="col-"] {
   margin-bottom: auto;
   margin-top: auto;
   padding: 0px;
+  
 } 
 .taphold {
     -moz-user-select: none !important;
@@ -28,4 +29,10 @@ div[class*="col-"] {
     -webkit-user-select: none !important;
     user-select: none !important; 	
 	
+}
+.button.button-huge {
+  font-size: 17px;
+  height: 150px;
+  line-height: 150px;
+  text-align: center;
 }

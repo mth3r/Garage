@@ -13,7 +13,8 @@
     <!-- Path to Framework7 Library CSS-->
     <link rel="stylesheet" href="css/framework7.ios.min.css" />
     <link rel="stylesheet" href="css/framework7.ios.colors.min.css" />
-	<link rel="stylesheet" href="css/framework7.keypad.min" />
+	<link rel="stylesheet" href="css/framework7.keypad.min.css" />
+	<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
     <!-- Path to your custom app styles-->
     <link rel="stylesheet" href="css/my-app.css" />
   </head>
@@ -81,39 +82,29 @@
                   <p>Various controls for the Hertz Home Automation</p>
                 </div>
               </div>
-              <div class="content-block-title">Photon Settings:</div>
+              <div class="content-block-title">Functions:</div>
               <div class="list-block">
                 <ul>
-                  <li>
-                    <a href="about.html" class="item-link">
-                      <div class="item-content">
-                        <div class="item-inner">
-                          <div class="item-title">Set Photon Details</div>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="form.html" class="item-link">
-                      <div class="item-content">
-                        <div class="item-inner">
-                          <div class="item-title">Set Access Code</div>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
+                 
                   <li>
                     <a href="camera.html" class="item-link">
                       <div class="item-content">
+					    <div class="item-media">
+							<i class="fa  fa-video-camera fa-fw fa-2x"></i>
+						</div>
                         <div class="item-inner">
                           <div class="item-title">View camera</div>
                         </div>
                       </div>
                     </a>
                   </li>
+				  
 				  <li>
                     <a href="lights.html" class="item-link">
                       <div class="item-content">
+						<div class="item-media">
+							<i class="fa fa-lightbulb-o fa-fw fa-2x" style="color:blue"></i>
+						</div>
                         <div class="item-inner">
                           <div class="item-title">Lights</div>
                         </div>
@@ -138,8 +129,17 @@
           </div>
         </div>
         <!-- Bottom Toolbar-->
-        <div class="toolbar">
-          <div class="toolbar-inner"></div>
+        <div class="toolbar tabbar tabbar-labels">
+          <div class="toolbar-inner">
+			  <a href="form.html" class="link">
+				  <i class="fa fa-cog fa-2x"></i>
+				  <span class="tabbar-label">Access Tokens</span>
+			  </a>
+			  <a href="about.html" class="link">
+				  <i class="icon icon-form-settings"></i>
+				  <span class="tabbar-label">Photon Details</span>
+			  </a>
+		  </div>
         </div>
       </div>
     </div>
@@ -165,6 +165,7 @@
     <div class="dynForm" 			id='dynForm' 			style='display:none'>
       <div class="page-content">
         <div class="content-block-title" id="photon-name">Photon Settings</div>
+		
         <form id="my-form3" class="list-block store-data">
           <div class="list-block">
             <ul>
@@ -174,7 +175,7 @@
                   <div class="item-inner">
                     <div class="item-title label">DeviceID</div>
                     <div class="item-input">
-                      <input type="text" placeholder="asdfasdf54734asfdsd" id="ParticleID" name="DeviceID" />
+                      <input type="text" placeholder="29382342342342349473738" readonly="readonly" id="ParticleID" name="DeviceID" />
                     </div>
                   </div>
                 </div>
@@ -198,7 +199,7 @@
                       <input type="text" placeholder="LToggle" id="LToggle" name="LToggle" />
                     </div>
                     <div class="item-input">
-                      <input type="number" placeholder="1" id="Lpin" name="Lpin" />
+                      <input type="text" placeholder="1" id="Lpin" name="Lpin" readonly="readonly"/>
                     </div>
                     <div class="item-input">
                       <input type="checkbox" id="LpinVis" name="LpinVis" />
@@ -215,7 +216,7 @@
                       <input type="text" placeholder="RToggle" id="RToggle" name="RToggle" />
                     </div>
                     <div class="item-input">
-                      <input type="number" placeholder="2" id="Rpin" name="Rpin" />
+                      <input type="text" placeholder="2" id="Rpin" name="Rpin"readonly="readonly" />
                     </div>
                     <div class="item-input">
                       <input type="checkbox" id="RpinVis" name="RpinVis" />
@@ -248,7 +249,7 @@
                   </div>
                   <div class="col-33">
                     <div class="item-input">
-                      <input type="number" placeholder="2" id="S1pin" name="S1pin" />
+                      <input type="text" placeholder="1" id="S1pin" name="S1pin" readonly="readonly" />
                     </div>
                   </div>
                   <div class="col-33">
@@ -264,7 +265,7 @@
                   </div>
                   <div class="col-33">
                     <div class="item-input">
-                      <input type="number" placeholder="2" id="S2pin" name="S2pin" />
+                      <input type="text" placeholder="2" id="S2pin" name="S2pin" readonly="readonly"/>
                     </div>
                   </div>
                   <div class="col-33">
@@ -280,7 +281,7 @@
                   </div>
                   <div class="col-33">
                     <div class="item-input">
-                      <input type="number" placeholder="2" id="S3pin" name="S3pin" />
+                      <input type="text" placeholder="3" id="S3pin" name="S3pin" readonly="readonly" />
                     </div>
                   </div>
                   <div class="col-33">
@@ -296,7 +297,7 @@
                   </div>
                   <div class="col-33">
                     <div class="item-input">
-                      <input type="number" placeholder="2" id="S4pin" name="S4pin" />
+                      <input type="text" placeholder="4" id="S4pin" name="S4pin" readonly="readonly"/>
                     </div>
                   </div>
                   <div class="col-33">
@@ -312,7 +313,7 @@
                   </div>
                   <div class="col-33">
                     <div class="item-input">
-                      <input type="number" placeholder="2" id="S5pin" name="S5pin" />
+                      <input type="text" placeholder="5" id="S5pin" name="S5pin" readonly="readonly"/>
                     </div>
                   </div>
                   <div class="col-33">
@@ -341,7 +342,9 @@
       <ul>
         <li>
           <div class="item-content">
-            <div class="item-media"></div>
+            <div class="item-media">
+				<i class="fa fa-gears fa-fw fa-2x" style="color:green"></i>
+			</div>
             <div class="item-inner">
               <div class="item-title label" id="dynamicPhoton">
                 <a href="#" id="dynamicPhotonLink" data-val="test">Photon Name</a>
@@ -349,6 +352,7 @@
             </div>
           </div>
         </li>
+		
       </ul>
     </div>
 	<div class="TempPanel" 		id='TempPanel' 		style='display:none'>
@@ -386,16 +390,16 @@
     </div>
     <div class="GarageDetail" 		id='GarageDetail' 		style='display:none'>
     <div class="content-block">
-      <div class="row">
+      <div class="row"  line-height="150px">
         <div class="col-33" id="dynacol1">
-          <a href="#" class="button button-big button-fill color-green garageDoorButton" id="dynacol1Button" data-device="deviceID"
-          data-pinnum="0">Left Door</a>
+          <a href="#" class="button button-huge button-fill color-green garageDoorButton" id="dynacol1Button" data-device="deviceID"
+          data-pinnum="0" >Left Door</a>
         </div>
         <div class="leftdoor garage-closed" id="dynaleft">
           <img src="img/Closed_Garage.gif" alt="closed" height="45" width="45" />
         </div>
         <div class="col-33" id="dynacol2">
-          <a href="#" class="button button-big button-fill color-green garageDoorButton" id="dynacol2Button" data-device="deviceID"
+          <a href="#" class="button button-huge button-fill color-green garageDoorButton" id="dynacol2Button" data-device="deviceID"
           data-pinnum="0">Right Door</a>
         </div>
         <div class="rightdoor garage-closed" id="dynaright" data-device="deviceID">
@@ -528,7 +532,7 @@
     <!-- Path to xml-js-->	
 	<script type="text/javascript" src="js/xml2json.js"></script> 
 	 <!-- Path to keypad keypad js-->
-	 <script type="text/javascript" src="js/framework7.keypad.min.js"></script></div>
+	 <script type="text/javascript" src="js/framework7.keypad.min.js"></script>
 	<!-- Path to your app js-->
      
     <script type="text/javascript" src="js/my-app.js"></script></div>

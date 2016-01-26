@@ -17,6 +17,7 @@ var videoTimer;
 var FPS=10000;
 var storedData = myApp.formGetData('my-form2');
 
+
 if (storedData) {
 	getPhotons();
 
@@ -82,16 +83,56 @@ myApp.onPageInit('about', function (page) {
 	} catch (err) {
 		console.log('error on drawPhotons function call');
 	}
-	var numpad = myApp.keypad({
-        input: '#demo-numpad'
-      });
+  ;
 
 	$$('.dynamicForm').on('click', function () {
+		
+	
 		var formname = $$(this).data('val');
 		var id = $$(this).data('id');
 		$$('.formSpot').html('');
 		appendForm(formname, id);
-
+		var numpad_ParticleID = myApp.keypad({
+			input: '#ParticleID',
+			valueMaxLength: 24,
+			dotButton: false
+		})
+		var numpad_Rpin = myApp.keypad({
+			input: '#Rpin',
+			valueMaxLength: 1,
+			dotButton: false
+		})
+		var numpad_Lpin = myApp.keypad({
+			input: '#Lpin',
+			valueMaxLength: 1,
+			dotButton: false
+		})
+		var numpad_S1pin = myApp.keypad({
+			input: '#S1pin',
+			valueMaxLength: 1,
+			dotButton: false
+		})
+		var numpad_S2pin = myApp.keypad({
+			input: '#S2pin',
+			valueMaxLength: 1,
+			dotButton: false
+		})
+		var numpad_S3pin = myApp.keypad({
+			input: '#S3pin',
+			valueMaxLength: 1,
+			dotButton: false
+		})
+		var numpad_S4pin = myApp.keypad({
+			input: '#S4pin',
+			valueMaxLength: 1,
+			dotButton: false
+		})
+		var numpad_S5pin = myApp.keypad({
+			input: '#S5pin',
+			valueMaxLength: 1,
+			dotButton: false
+		})
+	
 		$$('.save-storage-data-dynamic').on('click', function () {
 			var text = '{' +
 				'"DeviceID_' + formname + '":"' + $$('#ParticleID').val() + '",' +

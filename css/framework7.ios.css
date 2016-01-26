@@ -2895,6 +2895,7 @@ html:not(.watch-active-state) .button:active,
   height: 44px;
   line-height: 42px;
 }
+
 .button.button-fill {
   color: #fff;
   background: #007aff;
