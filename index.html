@@ -168,19 +168,22 @@
           <div class="list-block">
             <ul>
               <li>
+			  <div class="row">
                 <div class="item-content">
-                  <div class="item-media"></div>
-                  <div class="item-inner">
-                    <div class="item-title label">DeviceID</div>
-                    <div class="item-input">
+                  <div class="item-media"><a href="#"  data-popup=".popup-DeviceID" class="open-popup fa fa-question-circle fa-fw"></a></div>
+                  <div class="item-inner">                    
+					<div class="item-title label">DeviceID</div>
+					<div class="item-input">
                       <input type="text" placeholder="29382342342342349473738" readonly="readonly" id="ParticleID" name="DeviceID" />
                     </div>
                   </div>
                 </div>
+				</div>
               </li>
               <li>
+			  <div class="row">
                 <div class="item-content">
-                  <div class="item-media"></div>
+                  <div class="item-media"><a href="#"  data-popup=".popup-Access_Token" class="open-popup fa fa-question-circle fa-fw"></a></div>
                   <div class="item-inner">
                     <div class="item-title label">Access Token</div>
                     <div class="item-input">
@@ -188,10 +191,12 @@
                     </div>
                   </div>
                 </div>
+				</div>
               </li>
               <li>
+			  <div class="row">
                 <div class="item-content">
-                  <div class="item-media"></div>
+                  <div class="item-media"><a href="#"  data-popup=".popup-LToggle" class="open-popup fa fa-question-circle fa-fw"></a></div>
                   <div class="item-inner">
                     <div class="item-title label">
                       <input type="text" placeholder="LToggle" id="LToggle" name="LToggle" />
@@ -199,7 +204,7 @@
                     <div class="item-input">
                       <input type="text" placeholder="1" id="Lpin" name="Lpin" readonly="readonly"/>
                     </div>
-                    
+                 
 					<label class="label-checkbox item-content text-center">
                       <input type="checkbox" id="LpinVis" name="LpinVis" />
                       <div class="item-media"> <i class="icon icon-form-checkbox"></i></div>
@@ -207,10 +212,13 @@
                   
 				  </div>
                 </div>
+				</div>
               </li>
-              <li>
-                <div class="item-content">
-                  <div class="item-media"></div>
+			 
+              <li >
+                 <div class="row">
+				<div class="item-content">
+                  <div class="item-media"><a href="#"  data-popup=".popup-RToggle" class="open-popup fa fa-question-circle fa-fw"></a></div>
                   <div class="item-inner">
                     <div class="item-title label">
                       <input type="text" placeholder="RToggle" id="RToggle" name="RToggle" />
@@ -219,27 +227,28 @@
                       <input type="text" placeholder="2" id="Rpin" name="Rpin"readonly="readonly" />
                     </div>
 					
-                     <label class="label-checkbox item-content text-center" >
+                     <label class="label-checkbox item-content item-center" >
                       <input type="checkbox" id="RpinVis" name="RpinVis" />
                       <div class="item-media"> <i class="icon icon-form-checkbox"></i></div>
                     </label>
 					
                   </div>
                 </div>
+				</div>
               </li>
               <li>
                 <div class="row">
                   <div class="col-33">
-                    <p>Display Name</p>
+                    <p>Display Name <a href="#"  data-popup=".popup-DisplayName" class="open-popup fa fa-question-circle fa-fw"></a></p>
                   </div>
                   <div class="col-33">
                     <div class="item-input">
-                      <p>Output Pin</p>
+                      <p>Output Pin <a href="#"  data-popup=".popup-OutputPin" class="open-popup fa fa-question-circle fa-fw"></a></p>
                     </div>
                   </div>
                   <div class="col-33">
                     <div class="item-input">
-                      <p>Visible</p>
+                      <p>Visible <a href="#"  data-popup=".popup-Visible" class="open-popup fa fa-question-circle fa-fw"></a></p>
                     </div>
                   </div>
                 </div>
@@ -407,16 +416,12 @@
           <a href="#" class="button button-huge button-fill color-green garageDoorButton" id="dynacol1Button" data-device="deviceID"
           data-pinnum="0" >Left Door</a>
         </div>
-        <div class="leftdoor garage-closed" id="dynaleft">
-          <img src="img/Closed_Garage.gif" alt="closed" height="45" width="45" />
-        </div>
+        
         <div class="col-33" id="dynacol2">
           <a href="#" class="button button-huge button-fill color-green garageDoorButton" id="dynacol2Button" data-device="deviceID"
           data-pinnum="0">Right Door</a>
         </div>
-        <div class="rightdoor garage-closed" id="dynaright" data-device="deviceID">
-          <img src="img/Closed_Garage.gif" alt="closed" height="45" width="45" />
-        </div>
+        
       </div>
     </div>
     </div>
@@ -531,6 +536,121 @@
 	      </div>
 	  </div>
 	</div>
+	 <!-- DeviceID Popup -->
+	  <div class="popup popup-DeviceID">
+		<div class="content-block">
+		  <p>About</p>
+		  <p><a href="#" class="close-popup">Close Device ID Help</a></p>
+		  <p>The device ID is the unique ID used by the Particle Photon.  The device id is obtained automatically once the appropriate access code is provided. There is no reason to change the ID.</p>
+		</div>
+	  </div>
+	  <!-- Access Token Popup -->
+	  <div class="popup popup-Access_Token">
+		<div class="content-block">
+		  <p>About</p>
+		  <p><a href="#" class="close-popup">Close Access Token Help</a></p>
+		  <p>The access token is accessible from the build.particle.io website. After you log into the Particle Photon development suite, you can cut and paste the access token.  Once the token is stored, the rest of the Particle Photon data is retrieved automatatically
+		  </p>
+		</div>
+	  </div>
+	  <!-- LToggle Popup -->
+	  <div class="popup popup-LToggle">
+		<div class="content-block">
+		  <p>About</p>
+		  <p><a href="#" class="close-popup">Close Left Toggle Help</a></p>
+		  <p>The two garage toggle buttons are used to quickly open and then close a relay connected to the garage door and particle photon.  Each Photon can have up to two toggle buttons assigned. They are displayed on the application home screen if the checkbox is clicked.</p>
+		</div>
+	  </div>
+	  <!-- RToggle Popup -->
+	  <div class="popup popup-RToggle">
+		<div class="content-block">
+		  <p>About</p>
+		  <p><a href="#" class="close-popup">Close Right Toggle Help</a></p>
+		  <p>The two garage toggle buttons are used to quickly open and then close a relay connected to the garage door and particle photon.  Each Photon can have up to two toggle buttons assigned. They are displayed on the application home screen if the checkbox is clicked.</p>
+		</div>
+	  </div>
+	  <!-- DisplayName Popup -->
+	  <div class="popup popup-DisplayName">
+		<div class="content-block">
+		  <p>About</p>
+		  <p><a href="#" class="close-popup">Close Display Name Help</a></p>
+		  <p>The content stored in the display name is what shows up in the button.</p>
+		</div>
+	  </div>
+	  <!-- OutputPin Popup -->
+	  <div class="popup popup-OutputPin">
+		<div class="content-block">
+		  <p>About</p>
+		  <p><a href="#" class="close-popup">Close Output Pin Help</a></p>
+		  <p>If there are additioal relays, or functions connected to the particle photon output pins, they can be turned on or off via swiping right on the main screen.  The output pin sets the pin on the photon that is toggled.</p>
+		</div>
+	  </div>
+	  <!-- Visible Popup -->
+	  <div class="popup popup-Visible">
+		<div class="content-block">
+		  <p>About</p>
+		  <p><a href="#" class="close-popup">Close Visible Help</a></p>
+		  <p>The checkbox hides or makes visible the various buttons for each Particle Photon connected.</p>
+		</div>
+	  </div>
+	    <!-- Camera Port Popup -->
+	  <div class="popup popup-CameraPort">
+		<div class="content-block">
+		  <p>About</p>
+		  <p><a href="#" class="close-popup">Close Camera Port Help</a></p>
+		  <p>The Foscam IP camera has the ability to set a port so that a user can remotely access the camera feed.  Input that port number here</p>
+		</div>
+	  </div>
+	    <!-- Foscam User Popup -->
+	  <div class="popup popup-FoscamUser">
+		<div class="content-block">
+		  <p>About</p>
+		  <p><a href="#" class="close-popup">Close Foscam User Help</a></p>
+		  <p>The Foscam IP camera username for authentication</p>
+		</div>
+	  </div>
+	    <!-- Foscam Pass Popup -->
+	  <div class="popup popup-FoscamPass">
+		<div class="content-block">
+		  <p>About</p>
+		  <p><a href="#" class="close-popup">Close Foscam Password Help</a></p>
+		  <p>The Foscam IP camera password for authentication</p>
+		</div>
+	  </div>
+	    <!-- WemoIP Popup -->
+	  <div class="popup popup-WemoIP">
+		<div class="content-block">
+		  <p>About</p>
+		  <p><a href="#" class="close-popup">Close WemoIP Help</a></p>
+		  <p>This is unused at the momment</p>
+		</div>
+	  </div>
+	    <!-- WemoPort Popup -->
+	  <div class="popup popup-WemoPort">
+		<div class="content-block">
+		  <p>About</p>
+		  <p><a href="#" class="close-popup">Close Wemo Port Help</a></p>
+		  <p>The wemo hub utilize an IP address to allow for remote connectivity.  The default IP is 49153, though it could also be 49152, or 49154</p>
+		</div>
+	  </div>
+	    <!-- WemoUDN Popup -->
+	  <div class="popup popup-WemoUDN">
+		<div class="content-block">
+		  <p>About</p>
+		  <p><a href="#" class="close-popup">Close WemoUDN Help</a></p>
+		  <p>This is the unique ID for the wemo hub.  To determine the wemo's unique id, go navigate to the wemo port and load the setup.xml file (for example: 49153/setup.xml) </p>
+		</div>
+	  </div>
+	    <!-- DDNSurl Popup -->
+	  <div class="popup popup-DDNSurl">
+		<div class="content-block">
+		  <p>About</p>
+		  <p><a href="#" class="close-popup">Close DDNSurl Help</a></p>
+		  <p>By using a DDNS and port forwarding on the home router, you are able to connect to the various applications while not on the home network.</p>
+		</div>
+	  </div>
+	 	  
+	  
     <!-- Path to Framework7 Library JS-->
     <script src="js/jquery-2.1.4.min.js"></script>
 	<script> jQuery(document).bind( "mobileinit", function(){

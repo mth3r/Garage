@@ -16,7 +16,9 @@ var cameraTimer;
 var videoTimer;
 var FPS=10000;
 var storedData = myApp.formGetData('my-form2');
-
+$$('.create-popup').on('click', function () {
+			myApp.alert('test');
+		});
 
 if (storedData) {
 	getPhotons();
@@ -90,8 +92,10 @@ myApp.onPageInit('about', function (page) {
 		console.log('error on drawPhotons function call');
 	}
   ;
+  
 
 	$$('.dynamicForm').on('click', function () {
+	
 		
 	
 		var formname = $$(this).data('val');
@@ -644,5 +648,7 @@ function drawCamera(timeInterval) {
 			}
 		
 	});
+	
+	
 }
 
