@@ -167,8 +167,8 @@
         <form id="my-form3" class="list-block store-data">
           <div class="list-block">
             <ul>
-              <li>
-			  <div class="row">
+              <li style='display:none'>
+			  <div class="row" >
                 <div class="item-content">
                   <div class="item-media"><a href="#"  data-popup=".popup-DeviceID" class="open-popup fa fa-question-circle fa-fw"></a></div>
                   <div class="item-inner">                    
@@ -180,7 +180,7 @@
                 </div>
 				</div>
               </li>
-              <li>
+              <li style='display:none'>
 			  <div class="row">
                 <div class="item-content">
                   <div class="item-media"><a href="#"  data-popup=".popup-Access_Token" class="open-popup fa fa-question-circle fa-fw"></a></div>
@@ -242,26 +242,20 @@
                     <p>Display Name <a href="#"  data-popup=".popup-DisplayName" class="open-popup fa fa-question-circle fa-fw"></a></p>
                   </div>
                   <div class="col-33">
-                    <div class="item-input">
-                      <p>Output Pin <a href="#"  data-popup=".popup-OutputPin" class="open-popup fa fa-question-circle fa-fw"></a></p>
-                    </div>
-                  </div>
+                    <p>Output Pin <a href="#"  data-popup=".popup-OutputPin" class="open-popup fa fa-question-circle fa-fw"></a></p>
+                   </div>
                   <div class="col-33">
-                    <div class="item-input">
                       <p>Visible <a href="#"  data-popup=".popup-Visible" class="open-popup fa fa-question-circle fa-fw"></a></p>
                     </div>
-                  </div>
                 </div>
               </li>
-              <li style="list-style: none; display: inline">
+              <li >
                 <div class="row">
-                  <div class="col-33">
-                    <input type="text" placeholder="PinName" id="S1pinName" name="S1pinName" />
+                  <div class="col-33" style="margin-left: auto; margin-right: auto;text-align: center;">
+                    <input type="text" placeholder="PinName" id="S1pinName" name="S1pinName" style=""/>
                   </div>
-                  <div class="col-33">
-                    <div class="item-input">
-                      <input type="text" placeholder="1" id="S1pin" name="S1pin" readonly="readonly" />
-                    </div>
+                  <div class="col-33" >
+                    <input type="text" placeholder="1" id="S1pin" name="S1pin" readonly="readonly" />
                   </div>
                   <div class="col-33">
 				   <label class="label-checkbox item-content">
@@ -277,10 +271,8 @@
                     <input type="text" placeholder="PinName" id="S2pinName" name="S2pinName" />
                   </div>
                   <div class="col-33">
-                    <div class="item-input">
-                      <input type="text" placeholder="2" id="S2pin" name="S2pin" readonly="readonly"/>
+                     <input type="text" placeholder="2" id="S2pin" name="S2pin" readonly="readonly"/>
                     </div>
-                  </div>
                   <div class="col-33">
 				  <label class="label-checkbox item-content">
                     <input type="checkbox" id="S2pinVis" name="S1pinVis" />
@@ -295,10 +287,8 @@
                     <input type="text" placeholder="PinName" id="S3pinName" name="S3pinName" />
                   </div>
                   <div class="col-33">
-                    <div class="item-input">
                       <input type="text" placeholder="3" id="S3pin" name="S3pin" readonly="readonly" />
                     </div>
-                  </div>
                   <div class="col-33" >
 				  <label class="label-checkbox item-content">
                     <input type="checkbox" id="S3pinVis" name="S3pinVis" />
@@ -313,10 +303,8 @@
                     <input type="text" placeholder="PinName" id="S4pinName" name="S4pinName" />
                   </div>
                   <div class="col-33">
-                    <div class="item-input">
                       <input type="text" placeholder="4" id="S4pin" name="S4pin" readonly="readonly"/>
                     </div>
-                  </div>
                   <div class="col-33">
 				  <label class="label-checkbox item-content">
                     <input type="checkbox" id="S4pinVis" name="S4pinVis" />
@@ -331,10 +319,8 @@
                     <input type="text" placeholder="PinName" id="S5pinName" name="S5pinName" />
                   </div>
                   <div class="col-33">
-                    <div class="item-input">
                       <input type="text" placeholder="5" id="S5pin" name="S5pin" readonly="readonly"/>
                     </div>
-                  </div>
                   <div class="col-33">
 				  <label class="label-checkbox item-content">
                     <input type="checkbox" id="S5pinVis" name="S5pinVis" />
