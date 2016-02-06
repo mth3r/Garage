@@ -175,14 +175,18 @@ myApp.onPageInit('about', function (page) {
 });
 myApp.onPageInit('form', function (page) {
 	// run createContentPage func after link was clicked
-	if (storedData) {
+	try {
+	if (storedData.DeviceID) {
+		try{
 		var q = 'https://api.particle.io/v1/devices/' + storedData.DeviceID + '/?access_token=' + storedData.token;
 		$$.get(q, function (results) {
 			results = JSON.parse(results);
 			$$('#photon-name').html('Device Name: ' + results.name);
 		});
-
+		}catch(e){}
 	}
+	}
+	catch(e){}
 
 	$$('.save-storage-data').on('click', function () {
 
@@ -200,9 +204,12 @@ myApp.onPageInit('lights', function (page) {
 	var HostPort=storedData.wemoPort;
 	var DDNS=storedData.DDNSurl
 	var URL= 'http://' + DDNS + ':' + HostPort;
+	
+	console.log(URL);
 	var postbodyheader= '<?xml version="1.0" encoding="utf-8"?><s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/" s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><s:Body>';
 	var postbodyfooter= '</s:Body></s:Envelope>';
-	var URL= 'http://mth3r.ddns.net:49153';
+	//var URL= 'http://mth3r.ddns.net:49153';
+	//URL='192.168.1.24:49153';
 	var postbodyheader= '<?xml version="1.0" encoding="utf-8"?><s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/" s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><s:Body>';
 	var postbodyfooter= '</s:Body></s:Envelope>';
     var body = [
@@ -245,7 +252,12 @@ myApp.onPageInit('lights', function (page) {
 	
 	}catch(e){console.log(e)}
 	function setStatus(light, capability, value) {
-		var URL= 'http://mth3r.ddns.net:49153';
+		//var URL= 'http://mth3r.ddns.net:49153';
+		//URL='192.168.1.24:49153';
+			var HostIP=storedData.wemoIP;
+	var HostPort=storedData.wemoPort;
+	var DDNS=storedData.DDNSurl
+	var URL= 'http://' + DDNS + ':' + HostPort;
 		var postbodyheader= '<?xml version="1.0" encoding="utf-8"?><s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/" s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><s:Body>';
 		var postbodyfooter= '</s:Body></s:Envelope>';
 		var xmlhttp;
@@ -349,12 +361,13 @@ function drawPhotons() {
 	}
 }
 function drawGarage(a) {
+	
 	try {
 		var DynData = myApp.formGetData(a);
 	} catch (err) {
 		var DynData = 'false';
 	}
-
+    checkDoor(eval('DynData.DeviceID_' + a));
 	if (eval(eval('DynData.LpinVis_' + a)) || eval(eval('DynData.RpinVis_' + a))) {
 
 		$$('#dynacol1').hide();
@@ -386,6 +399,27 @@ function drawGarage(a) {
 		$$('#GarageControls').append(newDiv);
 
 	}
+
+}
+function checkDoor(deviceID){
+	try{
+	var q = 'https://api.particle.io/v1/devices/' + deviceID + '/getReeds/?access_token=' + storedData.token;
+	console.log(q);
+	$$.get(q, function (results) {
+	results = JSON.parse(results);
+	status=results.result.split(",");
+	console.log(status[0]);
+	if(status[1]==0){
+	$$('#Garage_Lbut').removeClass('color-green');
+	$$('#Garage_Lbut').addClass('color-red')
+	}
+	if(status[0]==0){
+	$$('#Garage_Rbut').removeClass('color-green');
+	$$('#Garage_Rbut').addClass('color-red')
+	}
+	
+	});
+	}catch(e){}
 
 }
 function appendLocation(a) {
