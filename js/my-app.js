@@ -408,12 +408,12 @@ function checkDoor(deviceID){
 	$$.get(q, function (results) {
 	results = JSON.parse(results);
 	status=results.result.split(",");
-	console.log(status[0]);
-	if(status[1]==0){
+	
+	if(status[2]=="0"){
 	$$('#Garage_Lbut').removeClass('color-green');
 	$$('#Garage_Lbut').addClass('color-red')
 	}
-	if(status[0]==0){
+	if(status[0]=="0"){
 	$$('#Garage_Rbut').removeClass('color-green');
 	$$('#Garage_Rbut').addClass('color-red')
 	}
