@@ -378,7 +378,7 @@ function drawGarage(a) {
 				}
 				catch(err){console.log('error: ' + err);}
 				
-			}, 10000, 'CheckDoorTimer');
+			}, 2000, 'CheckDoorTimer');
     
 	
 	if (eval(eval('DynData.LpinVis_' + a)) || eval(eval('DynData.RpinVis_' + a))) {
@@ -417,28 +417,35 @@ function drawGarage(a) {
 }
 function checkDoor(deviceID){
 	try{
-	var q = 'https://api.particle.io/v1/devices/' + deviceID + '/getReeds/?access_token=' + storedData.token;
-	//console.log(q);
-	$$.get(q, function (results) {
-	results = JSON.parse(results);
-	status=results.result.split(",");
-	//console.log(status[0] + status[1] + status[2]);
-	if(status[2]=="0"){
-	$$('#Garage_Lbut').removeClass('color-green');
-	$$('#Garage_Lbut').addClass('color-red')
-	}
-	if(status[0]=="0"){
-	$$('#Garage_Rbut').removeClass('color-green');
-	$$('#Garage_Rbut').addClass('color-red')
-	}
-	if(status[2]=="1"){
-	$$('#Garage_Lbut').removeClass('color-red');
-	$$('#Garage_Lbut').addClass('color-green')
-	}
-	if(status[0]=="1"){
-	$$('#Garage_Rbut').removeClass('color-red');
-	$$('#Garage_Rbut').addClass('color-green')
-	}
+	var q = 'https://api.particle.io/v1/devices/' + deviceID + '/checkReed/';
+			$$.post(q, {
+				access_token : storedData.token
+			}, function (data) {
+				console.log('reeds checked:');
+				var new_q = 'https://api.particle.io/v1/devices/' + deviceID + '/getReeds/?access_token=' + storedData.token;
+					$$.get(new_q , function (results) {
+						results = JSON.parse(results);
+						status=results.result.split(",");
+						console.log( deviceID + ": " + status[0] + status[1] + status[2]);
+						if(status[2]=="0"){
+						$$('#Garage_Rbut').removeClass('color-green');
+						$$('#Garage_Rbut').addClass('color-red')
+						}
+						if(status[0]=="0"){
+						$$('#Garage_Lbut').removeClass('color-green');
+						$$('#Garage_Lbut').addClass('color-red')
+						}
+						if(status[2]=="1"){
+						$$('#Garage_Rbut').removeClass('color-red');
+						$$('#Garage_Rbut').addClass('color-green')
+						}
+						if(status[0]=="1"){
+						$$('#Garage_Lbut').removeClass('color-red');
+						$$('#Garage_Lbut').addClass('color-green')
+						}
+
+			});
+	
 	
 	
 	
