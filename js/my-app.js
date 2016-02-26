@@ -320,11 +320,12 @@ function getPhotons() {
 	$$.get(q, function (results) {
 		results = JSON.parse(results);
 		photons = results;
-		console.log(photons);
+		//console.log("GetPhotons" + photons);
 		drawRightPanel();
 		try{
 		for (i = 0; i < photons.length; i++) {
-			drawGarage(photons[i].name);
+			
+           drawGarage(photons[i].name);
 
 		}
 		}catch(e){}
@@ -361,11 +362,11 @@ function drawPhotons() {
 	}
 }
 function drawGarage(a) {
-	
+    console.log("draw Garage");
 	try {
 		var DynData = myApp.formGetData(a);
 	} catch (err) {
-		var DynData = 'false';
+		//var DynData = 'false';
 	}
     CheckDoorTimer = set_interval(function () {
 				try{
@@ -380,7 +381,7 @@ function drawGarage(a) {
 				
 			}, 2000, 'CheckDoorTimer');
     
-	
+	try{
 	if (eval(eval('DynData.LpinVis_' + a)) || eval(eval('DynData.RpinVis_' + a))) {
 
 		$$('#dynacol1').hide();
@@ -413,6 +414,7 @@ function drawGarage(a) {
 		
 
 	}
+	}catch(e){}
 
 }
 function checkDoor(deviceID){
