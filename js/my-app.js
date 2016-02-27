@@ -430,18 +430,22 @@ function checkDoor(deviceID){
 						status=results.result.split(",");
 						console.log( deviceID + ": " + status[0] + status[1] + status[2]);
 						if(status[2]=="0"){
+						$$('#Garage_Rbut').removeClass('color-grey');
 						$$('#Garage_Rbut').removeClass('color-green');
 						$$('#Garage_Rbut').addClass('color-red')
 						}
 						if(status[0]=="0"){
+						$$('#Garage_Lbut').removeClass('color-grey');
 						$$('#Garage_Lbut').removeClass('color-green');
 						$$('#Garage_Lbut').addClass('color-red')
 						}
 						if(status[2]=="1"){
+						$$('#Garage_Rbut').removeClass('color-grey');
 						$$('#Garage_Rbut').removeClass('color-red');
 						$$('#Garage_Rbut').addClass('color-green')
 						}
 						if(status[0]=="1"){
+						$$('#Garage_Lbut').removeClass('color-grey');
 						$$('#Garage_Lbut').removeClass('color-red');
 						$$('#Garage_Lbut').addClass('color-green')
 						}
